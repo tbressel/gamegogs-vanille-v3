@@ -1,0 +1,64 @@
+.profilarrow {
+    .down {
+        transition: 100ms ease-in-out;
+        rotate: 180deg;
+    }
+}
+
+.submenu__container {
+    height: 90px;
+
+    .menu__ul {
+        position: fixed;
+        z-index: -1;
+        top: -50px;
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        &.active {
+            top: 98px;
+        }
+    }
+}
+
+.menu__ul--profil {
+    position: fixed;
+    z-index: 0;
+    width: 100%;
+    top: -200px;
+
+    &.active {
+        top: 98px;
+    }
+
+    .collection {
+        cursor: pointer;
+    }
+    .menu__icon p {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid $cream;
+    }
+}
+
+
+@media screen and (min-width:744px) {
+    
+    .menu__ul--profil {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        &.active {
+            top: 55px;
+            padding-top: 20px;
+        }
+
+        .menu__icon p {
+            border-bottom: 0;
+        }
+    }
+}

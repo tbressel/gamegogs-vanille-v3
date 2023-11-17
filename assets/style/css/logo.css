@@ -1,0 +1,24 @@
+.footer__container--brandname {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  order: 3;
+}
+.footer__container--brandname .brandname__copyright p {
+  font-size: 12px;
+  padding: 12px;
+}
+
+@media screen and (min-width: 744px) {
+  .footer__container--brandname {
+    padding-top: 30px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .footer__container--brandname {
+    width: 30%;
+    padding-top: 0px;
+  }
+}

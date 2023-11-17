@@ -1,0 +1,10 @@
+body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
+    background-color :
+  #fff;
+    font-family :Serif;
+    font-size :15pt;
+  }
+
+  img {
+    width :50%;
+  }

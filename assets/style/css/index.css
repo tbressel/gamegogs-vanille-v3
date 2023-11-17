@@ -1,0 +1,2016 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: middle;
+  text-decoration: none;
+  color: black;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url(../../fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+}
+body {
+  position: relative;
+  z-index: -10;
+  min-width: 360px;
+  color: #FBF4A1;
+  overflow-x: hidden;
+}
+
+header {
+  position: fixed;
+}
+
+p {
+  color: #FBF4A1;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+input {
+  height: 30px;
+  background-color: #EEEEEE;
+  border-radius: 5px;
+  transition: 300ms ease-in-out;
+  margin-bottom: 10px;
+}
+input:focus-visible {
+  height: 35px;
+  font-size: 1.2rem;
+  transition: 300ms ease-in-out;
+  border-color: #FBF4A1;
+}
+
+h3 {
+  margin-top: 10px;
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5rem;
+}
+
+h4 {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 16px;
+}
+
+h6 {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 10px;
+  font-style: italic;
+}
+
+.black-bg {
+  background-color: #222222;
+}
+
+.white-bg {
+  background-color: #EEEEEE;
+}
+
+.whiteFF-bg {
+  background-color: #FFFFFF;
+}
+
+.cream-alpha-color {
+  color: rgba(251, 243, 161, 0.3882352941);
+}
+
+.bluedark-color {
+  color: #2400ff;
+}
+
+.green-color {
+  color: #289800 !important;
+}
+
+.main__container {
+  position: relative;
+  z-index: -3;
+}
+
+.underline {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1280px) {
+  .header__container--burger,
+  .profilarrow,
+  .collection {
+    cursor: pointer;
+  }
+}
+.header__container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.header__container .header__container--top,
+.header__container .header__container--bot {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.header__container .header__container--top .header__container--brandname,
+.header__container .header__container--bot .header__container--brandname {
+  display: flex;
+  flex-direction: column;
+}
+.header__container .header__container--top .header__container--brandname .brandname__top,
+.header__container .header__container--top .header__container--brandname .brandname__bot,
+.header__container .header__container--bot .header__container--brandname .brandname__top,
+.header__container .header__container--bot .header__container--brandname .brandname__bot {
+  display: flex;
+  flex-direction: row;
+}
+.header__container .header__container--top .header__container--brandname .brandname__top .brandname__top--joystick,
+.header__container .header__container--top .header__container--brandname .brandname__top .brandname__top--title,
+.header__container .header__container--top .header__container--brandname .brandname__top .brandname__bot--hook,
+.header__container .header__container--top .header__container--brandname .brandname__bot .brandname__top--joystick,
+.header__container .header__container--top .header__container--brandname .brandname__bot .brandname__top--title,
+.header__container .header__container--top .header__container--brandname .brandname__bot .brandname__bot--hook,
+.header__container .header__container--bot .header__container--brandname .brandname__top .brandname__top--joystick,
+.header__container .header__container--bot .header__container--brandname .brandname__top .brandname__top--title,
+.header__container .header__container--bot .header__container--brandname .brandname__top .brandname__bot--hook,
+.header__container .header__container--bot .header__container--brandname .brandname__bot .brandname__top--joystick,
+.header__container .header__container--bot .header__container--brandname .brandname__bot .brandname__top--title,
+.header__container .header__container--bot .header__container--brandname .brandname__bot .brandname__bot--hook {
+  margin: 10px;
+}
+.header__container .header__container--top .header__container--brandname .brandname__top .brandname__bot--hook,
+.header__container .header__container--top .header__container--brandname .brandname__bot .brandname__bot--hook,
+.header__container .header__container--bot .header__container--brandname .brandname__top .brandname__bot--hook,
+.header__container .header__container--bot .header__container--brandname .brandname__bot .brandname__bot--hook {
+  margin-top: -10px;
+}
+.header__container .header__container--top .header__container--burger,
+.header__container .header__container--bot .header__container--burger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+  margin-right: 12px;
+}
+.header__container .header__container--searchfield {
+  width: 300px;
+  transition: 100ms ease-in-out;
+}
+.header__container .header__container--searchfield .field-search {
+  width: -webkit-fill-available;
+  height: 30px;
+  border-radius: 5px;
+  transition: 300ms ease-in-out;
+}
+.header__container .header__container--zoom {
+  margin-left: -35px;
+}
+.header__container .header__container--zoom img {
+  height: 25px;
+  padding: 4px;
+  margin-bottom: 10px;
+}
+.header__container .header__container--menu {
+  display: none;
+}
+
+@media screen and (min-width: 744px) {
+  .header__container {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .header__container .header__container--top .header__container--burger {
+    display: none;
+  }
+  .header__container .header__container--top .header__container--brandname .brandname__top img {
+    height: 20px;
+  }
+  .header__container .header__container--top .header__container--brandname .brandname__bot .brandname__bot--hook img {
+    height: 8px;
+    width: 176px;
+  }
+  .header__container .header__container--searchfield {
+    width: 270px;
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: 100ms ease-in-out;
+  }
+  .header__container .header__container--searchfield .field-search:focus-visible {
+    font-size: 1rem;
+  }
+  .header__container .header__container--zoom {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .header__container .header__container--menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .header__container .header__container--menu .menu__ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .header__container .header__container--menu .menu__ul .menu__icon img {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .header__container--searchfield {
+    width: 670px !important;
+    transition: 100ms ease-in-out;
+  }
+}
+.profilarrow .down {
+  transition: 100ms ease-in-out;
+  rotate: 180deg;
+}
+
+.submenu__container {
+  height: 90px;
+}
+.submenu__container .menu__ul {
+  position: fixed;
+  z-index: -1;
+  top: -50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.submenu__container .menu__ul.active {
+  top: 98px;
+}
+
+.menu__ul--profil {
+  position: fixed;
+  z-index: 0;
+  width: 100%;
+  top: -200px;
+}
+.menu__ul--profil.active {
+  top: 98px;
+}
+.menu__ul--profil .collection {
+  cursor: pointer;
+}
+.menu__ul--profil .menu__icon p {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #FBF4A1;
+}
+
+@media screen and (min-width: 744px) {
+  .menu__ul--profil {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .menu__ul--profil.active {
+    top: 55px;
+    padding-top: 20px;
+  }
+  .menu__ul--profil .menu__icon p {
+    border-bottom: 0;
+  }
+}
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+@media screen and (min-width: 1280px) {
+  .footer__container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+.footer__container--gamegogsmenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.footer__container--gamegogsmenu .gamegogs__block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.footer__container--gamegogsmenu .gamegogsmenu__about,
+.footer__container--gamegogsmenu .gamegogsmenu__help,
+.footer__container--gamegogsmenu .gamegogsmenu__join {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+.footer__container--gamegogsmenu .gamegogsmenu__about.active,
+.footer__container--gamegogsmenu .gamegogsmenu__help.active,
+.footer__container--gamegogsmenu .gamegogsmenu__join.active {
+  display: flex;
+}
+.footer__container--gamegogsmenu .gamegogs__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+.footer__container--gamegogsmenu .gamegogs__title img {
+  width: 20px;
+  height: 20px;
+}
+.footer__container--gamegogsmenu .gamegogs__title > p {
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+.footer__container--gamegogsmenu .gamegogs__title .down {
+  rotate: 180deg;
+  transition: 100ms ease-in-out;
+}
+.footer__container--gamegogsmenu .gamegogsmenu__li {
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(251, 243, 161, 0.3882352941);
+}
+.footer__container--gamegogsmenu .gamegogsmenu__li > p {
+  font-size: 12px;
+}
+
+@media screen and (min-width: 744px) {
+  .footer__container--gamegogsmenu {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+  .footer__container--gamegogsmenu .gamegogsmenu__about,
+  .footer__container--gamegogsmenu .gamegogsmenu__help,
+  .footer__container--gamegogsmenu .gamegogsmenu__join {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 15px;
+  }
+  .footer__container--gamegogsmenu .gamegogsmenu__li {
+    border-bottom: 0px;
+  }
+  .footer__container--gamegogsmenu .gamegogs__title {
+    justify-content: flex-start;
+  }
+  .footer__container--gamegogsmenu .gamegogs__title img {
+    display: none;
+  }
+  .footer__container--gamegogsmenu .gamegogs__title > p {
+    padding-bottom: 0px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .footer__container--gamegogsmenu {
+    width: 75%;
+  }
+}
+.socialnetworks__container {
+  order: 0;
+}
+.socialnetworks__container .socialnetwork__block {
+  display: flex;
+  flex-direction: column;
+}
+.socialnetworks__container .socialnetwork__block .socialnetwork__title {
+  display: none;
+}
+.socialnetworks__container .socialnetwork__block .socialnetworkmenu__follow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 0 20px 0;
+}
+.socialnetworks__container .socialnetwork__block .socialnetworkmenu__text {
+  display: none;
+}
+.socialnetworks__container .socialnetwork__block .socialnetworkmenu__li img {
+  width: 25px;
+  height: 25px;
+}
+
+@media screen and (min-width: 744px) {
+  .socialnetworks__container {
+    order: 1;
+  }
+  .socialnetworks__container .socialnetworkmenu__text {
+    display: inline-block !important;
+    color: white;
+    text-transform: uppercase;
+    padding-left: 15px;
+    font-weight: 400;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .socialnetworks__container {
+    width: 20%;
+    margin-left: 50px;
+  }
+  .socialnetwork__title {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+  }
+  .socialnetwork__title > p {
+    font-weight: 400;
+  }
+  .socialnetworkmenu__follow {
+    flex-direction: column !important;
+    align-items: flex-start;
+    margin: 10px;
+  }
+  .socialnetworkmenu__li {
+    margin-bottom: 20px;
+  }
+}
+.rgpd__container {
+  display: flex;
+  order: 4;
+}
+.rgpd__container .rgpd__block {
+  width: 100%;
+}
+.rgpd__container .rgpd__block .rgpdmenu__rgpd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+.rgpd__container .rgpd__block .rgpdmenu__rgpd .rgpdmenu__li {
+  margin-bottom: 20px;
+}
+.rgpd__container .rgpd__block .rgpdmenu__rgpd .rgpdmenu__li .rgpdmenu__text > a {
+  color: #FBF4A1;
+  font-weight: 400;
+  font-size: 12px;
+}
+.rgpd__container .rgpd__block .rgpdmenu__rgpd .rgpdmenu__li .rgpdmenu__text a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1280px) {
+  .rgpd__container {
+    width: 70%;
+  }
+  .rgpd__container .rgpd__block {
+    width: 100%;
+  }
+  .rgpd__container .rgpd__block .rgpdmenu__rgpd {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .rgpd__container .rgpd__block .rgpdmenu__rgpd .rgpdmenu__li {
+    margin-bottom: 20px;
+  }
+}
+.footer__container--brandname {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  order: 3;
+}
+.footer__container--brandname .brandname__copyright p {
+  font-size: 12px;
+  padding: 12px;
+}
+
+@media screen and (min-width: 744px) {
+  .footer__container--brandname {
+    padding-top: 30px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .footer__container--brandname {
+    width: 30%;
+    padding-top: 0px;
+  }
+}
+.filter__navigation {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 0 10px 0;
+}
+.filter__navigation.show {
+  top: 110px;
+}
+.filter__navigation .filter__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #FBF4A1;
+  border-radius: 5px;
+}
+.filter__navigation .filter__container .filter__button {
+  cursor: pointer;
+}
+.filter__navigation .filter__container .filter__button > img {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+}
+.filter__navigation .filter__container .filter__button > span {
+  color: #FBF4A1;
+  font-size: 16px;
+  font-family: Inter;
+  margin: 4px;
+}
+.filter__navigation .views__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 140px;
+  margin-left: 80px;
+}
+.filter__navigation .views__buttons .view1,
+.filter__navigation .views__buttons .view2,
+.filter__navigation .views__buttons .view3 {
+  cursor: pointer;
+  padding: 4px 12px 4px 12px;
+}
+.filter__navigation .views__buttons .view1 > img,
+.filter__navigation .views__buttons .view2 > img,
+.filter__navigation .views__buttons .view3 > img {
+  width: 35px;
+  height: 35px;
+}
+
+@media screen and (min-width: 744px) {
+  .filter__navigation.show {
+    top: 50px;
+  }
+}
+.lastarticles__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.lastarticles__container .article__container {
+  height: 245px;
+  width: 180px;
+  margin: 20px 0;
+}
+.lastarticles__container .article__container .image__article {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 2px 10px 0px;
+}
+.lastarticles__container .article__container .title__container {
+  text-align: center;
+}
+.lastarticles__container .article__container .title__container .title__article {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: -70px;
+  height: 70px;
+  width: 180px;
+  max-width: 180px;
+  max-height: 70px;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(90deg, #a79300, #FFFFFF, #b87700);
+}
+.lastarticles__container .article__container .title__container .title__article > p {
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+}
+
+@media screen and (min-width: 744px) {
+  .lastarticles__container .article__container {
+    width: 340px;
+  }
+  .lastarticles__container .article__container .image__article img {
+    width: 100%;
+    height: 260px;
+  }
+  .lastarticles__container .article__container .title__container .title__article {
+    width: 340px;
+    max-width: 340px;
+  }
+  .lastarticles__container .article__container .title__container .title__article p {
+    width: 100%;
+  }
+}
+.newsletter__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 100px;
+  padding: 12px;
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 0px;
+}
+.newsletter__container .newsletter__text {
+  text-align: center;
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 18px;
+}
+.newsletter__container .newsletter__text > p {
+  font-weight: 400;
+  color: #EEEEEE;
+}
+.newsletter__container .newsletter__subcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+}
+.newsletter__container .newsletter__subcontainer > label {
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.newsletter__container .newsletter__subcontainer > input {
+  margin: 15px auto 15px auto;
+  width: 80%;
+}
+.newsletter__container .newsletter__subcontainer > .btn {
+  border: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 10px;
+  background: linear-gradient(90deg, #a79300, #FFFFFF, #b87700);
+}
+
+.lastgames-items__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: var(--clr__whiteFF-alpha);
+}
+.lastgames-items__container .lastgames-items__maintitle {
+  text-align: center;
+  margin: 20px;
+  font-size: 24px;
+  font-family: "Inter";
+}
+
+.lastgames-items__last-items-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.lastgames-items__last-items-container .lastgames-items__last-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.lastgames-items__last-items-container .lastgames-items__last-items .lastgames-items__coverimage {
+  overflow: hidden;
+  border-radius: 5px;
+  width: 140px;
+  height: 140px;
+  text-align: center;
+  box-shadow: 2px 2px 10px 0px;
+  transition: 500ms ease-in-out;
+  transform: rotate(0deg);
+}
+.lastgames-items__last-items-container .lastgames-items__last-items .lastgames-items__coverimage:hover {
+  transform: rotate(2deg);
+  transition: 500ms ease-in-out;
+  cursor: pointer;
+}
+.lastgames-items__last-items-container .lastgames-items__last-items .lastgames-items__coverimage img {
+  width: 150px;
+  height: auto;
+  min-height: 150px;
+}
+.lastgames-items__last-items-container .lastgames-items__last-items .lastgames-items__title,
+.lastgames-items__last-items-container .lastgames-items__last-items .collection-items__title {
+  text-align: left;
+  margin-top: 10px;
+  font-family: "Inter";
+  font-weight: 600;
+}
+.lastgames-items__last-items-container .lastgames-items__last-items .lastgames-items__subtitle,
+.lastgames-items__last-items-container .lastgames-items__last-items .collection-items__subtitle {
+  text-align: left;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.lastgames-items__last-items-container .lastgames-items__last-items .lastgames-items__plateform {
+  text-align: left;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.lastgames-items__last-items-container .lastgames-items__last-items .lastgames-items__plateform > img {
+  position: relative;
+  height: 21px;
+  top: -230px;
+  left: -20px;
+  padding: 3px 12px !important;
+  border: 1px solid #cacaca;
+  border-radius: 10px;
+  background-color: #EEEEEE;
+}
+
+.lastgames-items__footer-list {
+  text-align: right;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.lastgames-items__footer-list p {
+  color: #222222;
+  font-weight: 400;
+}
+
+.hidden__field {
+  display: none;
+}
+.hidden__field .lastgames-maxitem__title {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 24px;
+}
+.hidden__field .lastgames-maxitem__subtitle {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 20px;
+}
+.hidden__field .lastgames-maxitem__plateform {
+  text-align: left;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 16px;
+  margin-top: 5px;
+}
+.hidden__field .lastgames-maxitem__year {
+  text-align: left;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 16px;
+  margin-top: 5px;
+}
+.hidden__field .lastgames-maxitem__coverimage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5px;
+}
+.hidden__field .lastgames-maxitem__coverimage img {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.577);
+  max-width: 80%;
+  min-width: 80%;
+}
+.hidden__field .lastgames-maxitem__editor {
+  margin-top: 5px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 16px;
+}
+.hidden__field .lastgames-maxitem__genre {
+  margin-top: 30px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.hidden__field .lastgames-maxitem__subcontainer {
+  margin-top: 5px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 12px;
+}
+.hidden__field .lastgames-maxitem__subcontainer .lastgames-maxitem__country {
+  color: var(--clr__grey6D);
+}
+.hidden__field .lastgames-maxitem__subcontainer .lastgames-maxitem__ref {
+  color: var(--clr__grey6D);
+}
+.hidden__field .lastgames-maxitem__subcontainer .lastgames-maxitem__support {
+  color: var(--clr__grey6D);
+}
+.hidden__field .lastgames-maxitem__price {
+  margin-top: 15px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 9.5px;
+  color: var(--clr__grey6D);
+}
+
+.myitems-items__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  margin-bottom: 100px;
+  padding: 5px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: var(--clr__whiteFF-alpha);
+}
+.myitems-items__container .myitems-items__maintitle {
+  text-align: center;
+  margin: 20px;
+  font-size: 24px;
+  font-family: "PTSans-Bold";
+}
+.myitems-items__container .myitems-items__last-items-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.myitems-items__container .myitems-items__last-items-container p {
+  color: #222222;
+  font-weight: 400;
+}
+
+/*
+----------------
+ollection view 1
+----------------
+*/
+.collection__view1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.collection__view1 .view1-items__maincontainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 10px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: var(--clr__whiteFF-alpha);
+}
+.collection__view1 .view1-items__maincontainer .view1-items__maintitle {
+  text-align: center;
+  margin: 20px;
+  font-size: 24px;
+  font-family: "Inter";
+}
+.collection__view1 .view1-items__maincontainer .view1-items__coverimage {
+  overflow: hidden;
+  border-radius: 5px;
+  width: 140px;
+  height: 140px;
+  text-align: center;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.577);
+  transition: 500ms ease-in-out;
+  transform: rotate(0deg);
+}
+.collection__view1 .view1-items__maincontainer .view1-items__coverimage > img {
+  width: 150px;
+  height: auto;
+  min-height: 150px;
+}
+.collection__view1 .view1-items__maincontainer .view1-items__coverimage > :hover {
+  cursor: pointer;
+  transform: rotate(2deg);
+  transition: 500ms ease-in-out;
+}
+.collection__view1 .view1-items__maincontainer .view1-items__title {
+  text-align: left;
+}
+.collection__view1 .view1-items__maincontainer .view1-items__subtitle {
+  text-align: left;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.collection__view1 .view1-items__maincontainer .view1-items__plateform {
+  text-align: left;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.collection__view1 .view1-items__maincontainer .view1-items__plateform > img {
+  position: relative;
+  height: 21px;
+  top: -180px;
+  left: -20px;
+  padding: 3px 12px !important;
+  border: 1px solid #cacaca;
+  border-radius: 10px;
+  background-color: #EEEEEE;
+}
+.collection__view1 .view1-items__last-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 140px;
+}
+.collection__view1 .view1-items__footer-list {
+  text-align: right;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.collection__view1 .display__maxitem {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr__whiteFF);
+  width: 0vw;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  line-height: 15px;
+  animation: maxify 10ms forwards;
+}
+@keyframes maxify {
+  0% {
+    width: 0vw;
+  }
+  100% {
+    width: 100vw;
+  }
+}
+.collection__view1 .view1-maxitem__title {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10%;
+  font-family: "Inter-BoldI";
+  font-size: 24px;
+}
+.collection__view1 .view1-maxitem__subtitle {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 20px;
+}
+.collection__view1 .view1-maxitem__plateform {
+  text-align: left;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 16px;
+  margin-top: 5px;
+}
+.collection__view1 .view1-maxitem__year {
+  text-align: left;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 16px;
+  margin-top: 5px;
+}
+.collection__view1 .view1-maxitem__coverimage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5px;
+}
+.collection__view1 .view1-maxitem__coverimage > img {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.577);
+  max-width: 80%;
+  min-width: 80%;
+}
+.collection__view1 .view1-maxitem__editor {
+  margin-top: 5px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 16px;
+}
+.collection__view1 .view1-maxitem__genre {
+  margin-top: 30px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 14px;
+}
+.collection__view1 .view1-maxitem__subcontainer {
+  margin-top: 5px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 12px;
+}
+.collection__view1 .view1-maxitem__subcontainer .view1-maxitem__country {
+  color: var(--clr__grey6D);
+}
+.collection__view1 .view1-maxitem__subcontainer .view1-maxitem__ref {
+  color: var(--clr__grey6D);
+}
+.collection__view1 .view1-maxitem__subcontainer .view1-maxitem__support {
+  color: var(--clr__grey6D);
+}
+.collection__view1 .view1-maxitem__price {
+  margin-top: 15px;
+  margin-left: 10%;
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 9.5px;
+  color: var(--clr__grey6D);
+}
+
+/*
+-----------------
+collection view 2
+-----------------
+*/
+.collection__view2 .view2-item__maincontainer,
+.collection__view2 .view3-item__maincontainer,
+.collection__view3 .view2-item__maincontainer,
+.collection__view3 .view3-item__maincontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #EEEEEE;
+  border-bottom: 1px solid #222222;
+}
+.collection__view2 .view2-item__maincontainer .top-informations,
+.collection__view2 .view2-item__maincontainer .bot-informations,
+.collection__view2 .view3-item__maincontainer .top-informations,
+.collection__view2 .view3-item__maincontainer .bot-informations,
+.collection__view3 .view2-item__maincontainer .top-informations,
+.collection__view3 .view2-item__maincontainer .bot-informations,
+.collection__view3 .view3-item__maincontainer .top-informations,
+.collection__view3 .view3-item__maincontainer .bot-informations {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100vw;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: aliceblue;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .select__bar,
+.collection__view2 .view2-item__maincontainer .bot-informations .select__bar,
+.collection__view2 .view3-item__maincontainer .top-informations .select__bar,
+.collection__view2 .view3-item__maincontainer .bot-informations .select__bar,
+.collection__view3 .view2-item__maincontainer .top-informations .select__bar,
+.collection__view3 .view2-item__maincontainer .bot-informations .select__bar,
+.collection__view3 .view3-item__maincontainer .top-informations .select__bar,
+.collection__view3 .view3-item__maincontainer .bot-informations .select__bar {
+  display: flex;
+  justify-content: center;
+  width: 36px;
+  background-color: #222222;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .select__bar .checkbox,
+.collection__view2 .view2-item__maincontainer .bot-informations .select__bar .checkbox,
+.collection__view2 .view3-item__maincontainer .top-informations .select__bar .checkbox,
+.collection__view2 .view3-item__maincontainer .bot-informations .select__bar .checkbox,
+.collection__view3 .view2-item__maincontainer .top-informations .select__bar .checkbox,
+.collection__view3 .view2-item__maincontainer .bot-informations .select__bar .checkbox,
+.collection__view3 .view3-item__maincontainer .top-informations .select__bar .checkbox,
+.collection__view3 .view3-item__maincontainer .bot-informations .select__bar .checkbox {
+  cursor: pointer;
+  border-color: #a79300;
+  width: 25px;
+  height: 25px;
+  margin-top: 10px;
+  margin-left: 4px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-items__coverimage,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-items__coverimage,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-items__coverimage,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-items__coverimage,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-items__coverimage,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-items__coverimage,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-items__coverimage,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-items__coverimage,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-items__coverimage,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-items__coverimage,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-items__coverimage,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-items__coverimage,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-items__coverimage,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-items__coverimage,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-items__coverimage,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-items__coverimage {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 140px;
+  height: 140px;
+  text-align: center;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-items__coverimage > img,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-items__coverimage > img,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-items__coverimage > img,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-items__coverimage > img,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-items__coverimage > img,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-items__coverimage > img,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-items__coverimage > img,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-items__coverimage > img,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-items__coverimage > img,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-items__coverimage > img,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-items__coverimage > img,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-items__coverimage > img,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-items__coverimage > img,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-items__coverimage > img,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-items__coverimage > img,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-items__coverimage > img {
+  box-shadow: 5px 5px 5px var(--clr__grey6D);
+  min-width: 140px;
+  min-height: 140px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-items__coverimage > :hover,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-items__coverimage > :hover,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-items__coverimage > :hover,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-items__coverimage > :hover,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-items__coverimage > :hover,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-items__coverimage > :hover,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-items__coverimage > :hover,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-items__coverimage > :hover,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-items__coverimage > :hover,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-items__coverimage > :hover,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-items__coverimage > :hover,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-items__coverimage > :hover,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-items__coverimage > :hover,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-items__coverimage > :hover,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-items__coverimage > :hover,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-items__coverimage > :hover {
+  cursor: pointer;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__container,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__container,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__container,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__container,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__container,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__container,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__container,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__container,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  width: 60%;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title {
+  border-radius: 5px;
+  word-break: break-word;
+  font-size: 12px;
+  margin: 0 6px;
+  background-color: #FFFFFF;
+  text-align: left;
+  font-family: "PTSans-Bold";
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title h3,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title h3,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title h3,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title h3,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title h3,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title h3,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__title h3,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__title h3,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__title h3,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__title h3,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__title h3 {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 5px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__container .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container .view3-items__subtitle {
+  text-align: left;
+  font-family: "PTSans-Regular";
+  font-size: 14px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__container,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__container,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__container,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__container,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__container {
+  width: 100%;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer.view3,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer.view3,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer.view3,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer.view3,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer.view3,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer.view3,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer.view3,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer.view3,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer.view3,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer.view3,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer.view3,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer.view3,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer.view3,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer.view3,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer.view3,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer.view3 {
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 5px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__plateform,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__plateform,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__plateform,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-basicinfos__subcontainer .view3-items__plateform,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__subtitle,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__editor,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__editor,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__year,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__year,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view2-items__plateform,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-basicinfos__subcontainer .view3-items__plateform {
+  padding: 2px;
+  margin-right: 5%;
+  font-size: 12px;
+  font-family: "PTSans-Italic";
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  padding: 5px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state {
+  margin-bottom: 4px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state span,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view3-items__state span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__state span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__prices span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state span {
+  font-weight: 600;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > h4 {
+  padding: 5px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__prices > span,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__prices > span {
+  float: right;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > p,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > p {
+  margin: 5px;
+  font-size: 12px;
+  font-family: "PTSans-Italic";
+}
+.collection__view2 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view2 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view2 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view2 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view2 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view2 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view2 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view2 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view2-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view2-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view2-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view2-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view3-item__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view3-item__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view3-item__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
+.collection__view3 .view3-item__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5 {
+  margin: 5px;
+  font-size: 12px;
+  font-family: "PTSans-Bold";
+}
+.collection__view2 .view2-item__maincontainer .top-informations .bot-informations,
+.collection__view2 .view2-item__maincontainer .bot-informations .bot-informations,
+.collection__view2 .view3-item__maincontainer .top-informations .bot-informations,
+.collection__view2 .view3-item__maincontainer .bot-informations .bot-informations,
+.collection__view3 .view2-item__maincontainer .top-informations .bot-informations,
+.collection__view3 .view2-item__maincontainer .bot-informations .bot-informations,
+.collection__view3 .view3-item__maincontainer .top-informations .bot-informations,
+.collection__view3 .view3-item__maincontainer .bot-informations .bot-informations {
+  padding: 0px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .arrow,
+.collection__view2 .view2-item__maincontainer .bot-informations .arrow,
+.collection__view2 .view3-item__maincontainer .top-informations .arrow,
+.collection__view2 .view3-item__maincontainer .bot-informations .arrow,
+.collection__view3 .view2-item__maincontainer .top-informations .arrow,
+.collection__view3 .view2-item__maincontainer .bot-informations .arrow,
+.collection__view3 .view3-item__maincontainer .top-informations .arrow,
+.collection__view3 .view3-item__maincontainer .bot-informations .arrow {
+  position: absolute;
+  right: 0px;
+}
+.collection__view2 .view2-item__maincontainer .top-informations .arrow > img,
+.collection__view2 .view2-item__maincontainer .bot-informations .arrow > img,
+.collection__view2 .view3-item__maincontainer .top-informations .arrow > img,
+.collection__view2 .view3-item__maincontainer .bot-informations .arrow > img,
+.collection__view3 .view2-item__maincontainer .top-informations .arrow > img,
+.collection__view3 .view2-item__maincontainer .bot-informations .arrow > img,
+.collection__view3 .view3-item__maincontainer .top-informations .arrow > img,
+.collection__view3 .view3-item__maincontainer .bot-informations .arrow > img {
+  cursor: pointer;
+  width: 35px;
+  height: 25px;
+}
+.collection__view2 .view2-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes:hover,
+.collection__view2 .view2-item__maincontainer .view2-statesinfos__subcontainer .edit-notes:hover,
+.collection__view2 .view3-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes:hover,
+.collection__view2 .view3-item__maincontainer .view2-statesinfos__subcontainer .edit-notes:hover,
+.collection__view3 .view2-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes:hover,
+.collection__view3 .view2-item__maincontainer .view2-statesinfos__subcontainer .edit-notes:hover,
+.collection__view3 .view3-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes:hover,
+.collection__view3 .view3-item__maincontainer .view2-statesinfos__subcontainer .edit-notes:hover {
+  cursor: pointer;
+}
+.collection__view2 .view2-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes,
+.collection__view2 .view3-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes,
+.collection__view3 .view2-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes,
+.collection__view3 .view3-item__maincontainer .view2-statesinfos__subcontainer .view2-items__notes {
+  margin: 5px;
+}
+.collection__view2 .view2-item__maincontainer .note-informations,
+.collection__view2 .view3-item__maincontainer .note-informations,
+.collection__view3 .view2-item__maincontainer .note-informations,
+.collection__view3 .view3-item__maincontainer .note-informations {
+  display: flex;
+  justify-content: flex-start;
+}
+.collection__view2 .view2-item__maincontainer .note-informations .form-notes,
+.collection__view2 .view3-item__maincontainer .note-informations .form-notes,
+.collection__view3 .view2-item__maincontainer .note-informations .form-notes,
+.collection__view3 .view3-item__maincontainer .note-informations .form-notes {
+  text-align: center;
+}
+.collection__view2 .view2-item__maincontainer .note-informations .form-notes .input-notes,
+.collection__view2 .view3-item__maincontainer .note-informations .form-notes .input-notes,
+.collection__view3 .view2-item__maincontainer .note-informations .form-notes .input-notes,
+.collection__view3 .view3-item__maincontainer .note-informations .form-notes .input-notes {
+  border-radius: 5px;
+  border: solid 1px black;
+  padding: 5px;
+  width: 95%;
+}
+.collection__view2 .note-informations.hidden,
+.collection__view2 .bot-informations.hidden,
+.collection__view3 .note-informations.hidden,
+.collection__view3 .bot-informations.hidden {
+  display: none;
+}
+
+.hidden__view {
+  display: none;
+}
+
+.overlay__maincontainer {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  width: 99%;
+  height: -moz-fit-content;
+  height: fit-content;
+  top: -14px;
+  left: -1000px;
+  border: 1px solid #222222;
+  margin: 2px 0;
+  transition: 300ms ease-in-out;
+}
+.overlay__maincontainer.show {
+  left: 0px;
+  transition: 300ms ease-in-out;
+}
+
+.overlay__box--filter {
+  margin-bottom: 40px;
+  padding: 10px;
+}
+.overlay__box--filter .title__filter {
+  margin-bottom: 5px;
+  background-color: #222222;
+  border-radius: 5px;
+  padding: 4px;
+}
+.overlay__box--filter .title__filter > h2 {
+  font-family: "Inter";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 27px;
+  color: #a79300;
+}
+.overlay__box--filter .list__filter--box .filters-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.overlay__box--filter .list__filter--box .filters-box .name_filter > p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 27px;
+  color: #222222;
+}
+.overlay__box--filter .list__filter--box .filters-box .quantity_filter > p {
+  font-size: 12px;
+  color: #222222;
+}
+
+@media screen and (min-width: 744px) {
+  .overlay__maincontainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    top: -78px;
+    left: -2160px;
+  }
+  .overlay__maincontainer .overlay__box--filter {
+    width: 30%;
+  }
+}
+.breadcrumb__nav {
+  margin-top: 30px;
+  margin-left: 10px;
+  font-family: "Inter";
+}
+.breadcrumb__nav.filter-bar {
+  margin-top: 100px;
+}
+.breadcrumb__nav .breadcrumb__list {
+  display: flex;
+  align-items: center;
+}
+.breadcrumb__nav .breadcrumb__arrow:before {
+  content: "→";
+  font-size: 20px;
+}
+
+.collection__page {
+  margin-top: 100px;
+}

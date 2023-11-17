@@ -1,0 +1,23 @@
+// import des fichiers de settings
+@import './reset.scss';
+@import './variables.scss';
+@import './global.scss';
+
+// import des styles d'éléments principaux header et footer
+@import '../../../components/header/header.scss';
+@import '../../../components/header/nagivation/navigation.scss';
+@import '../../../components/footer/footer.scss';
+@import '../../../components/footer/about/about.scss';
+@import '../../../components/footer/social-networks/social-networks.scss';
+@import '../../../components/footer/rgpd/rgpd.scss';
+@import '../../../components/footer/logo/logo.scss';
+ 
+
+// import style components
+@import '../../../components/filter/filter-nav.scss';
+@import '../../../components/lastarticles/lastarticles.scss';
+@import '../../../components/newsletter/newsletter.scss';
+@import '../../../components/lastgames/lastgames.scss';
+@import '../../../components/view-1/view-1.scss';
+@import '../../../components/filter/filter-overlay.scss';
+@import '../../../components/breadcrumb/breadcrumb.scss';

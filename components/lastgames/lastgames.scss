@@ -1,0 +1,327 @@
+// Last Items section - START
+.lastgames-items__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    height: fit-content;
+    background-color: var(--clr__whiteFF-alpha);
+
+    .lastgames-items__maintitle {
+        text-align: center;
+        margin: 20px;
+        font-size: 24px;
+        font-family: 'Inter';
+    }
+}
+
+// Items subcontainer - START
+.lastgames-items__last-items-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .lastgames-items__last-items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        // width: 145px;
+
+        .lastgames-items__coverimage {
+            overflow: hidden;
+            border-radius: 5px;
+            width: 140px;
+            height: 140px;
+            text-align: center;
+            box-shadow: 2px 2px 10px 0px;
+            transition: 500ms ease-in-out;
+            transform: rotate(0deg);
+
+            &:hover {
+                transform: rotate(2deg);
+                transition: 500ms ease-in-out;
+                cursor: pointer;
+            }
+
+            img {
+                width: 150px;
+                height: auto;
+                min-height: 150px;
+            }
+        }
+
+        .lastgames-items__title,
+        .collection-items__title {
+            text-align: left;
+            margin-top: 10px;
+            font-family: 'Inter';
+            font-weight: 600;
+        }
+
+        .lastgames-items__subtitle,
+        .collection-items__subtitle {
+            text-align: left;
+            font-family: 'Inter';
+            font-size: 14px;
+        }
+
+        .lastgames-items__plateform {
+            text-align: left;
+            font-family: 'Inter';
+            font-size: 14px;
+
+            &>img {
+                position: relative;
+                height: 21px;
+                top: -230px;
+                left: -20px;
+                padding: 3px 12px !important;
+                border: 1px solid $grey;
+                border-radius: 10px;
+                background-color: $white;
+            }
+        }
+    }
+}
+
+// Items subcontainer - END
+.lastgames-items__footer-list {
+    text-align: right;
+    font-family: 'Inter';
+    font-size: 14px;
+
+    p {
+        color: $black;
+        font-weight: 400;
+    }
+}
+
+// Last Items section - START
+
+
+
+
+// Last Items hidden fields - START
+.hidden__field {
+    display: none;
+
+
+    .lastgames-maxitem__title {
+        text-align: left;
+        margin-top: 10px;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 24px;
+    }
+
+    .lastgames-maxitem__subtitle {
+        text-align: left;
+        margin-top: 10px;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 20px;
+    }
+
+    .lastgames-maxitem__plateform {
+        text-align: left;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    .lastgames-maxitem__year {
+        text-align: left;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    .lastgames-maxitem__coverimage {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 5px;
+
+        img {
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.577);
+            max-width: 80%;
+            min-width: 80%;
+        }
+    }
+
+    .lastgames-maxitem__editor {
+        margin-top: 5px;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 16px;
+    }
+
+    .lastgames-maxitem__genre {
+        margin-top: 30px;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 14px;
+    }
+
+    .lastgames-maxitem__subcontainer {
+        margin-top: 5px;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 12px;
+
+        .lastgames-maxitem__country {
+            color: var(--clr__grey6D);
+        }
+
+        .lastgames-maxitem__ref {
+            color: var(--clr__grey6D);
+        }
+
+        .lastgames-maxitem__support {
+            color: var(--clr__grey6D);
+        }
+    }
+
+    .lastgames-maxitem__price {
+        margin-top: 15px;
+        margin-left: 10%;
+        font-family: 'Inter';
+        font-size: 13px;
+        line-height: 9.5px;
+        color: var(--clr__grey6D);
+    }
+}
+// Last Items hidden fields - END
+
+
+
+
+
+// .note-informations.hidden,
+// .bot-informations.hidden {
+//     display: none;
+// }
+
+// .bit-items__subcontainer {
+//     display: flex;
+//     flex-direction: columns;
+//     align-items: flex-start;
+// }
+
+// .note-informations {
+//     display: flex;
+//     justify-content: flex-start;
+// }
+
+// .input-notes {
+//     border-radius: 5px;
+//     border: solid 1px black;
+//     padding: 5px;
+// }
+
+// .top-informations,
+// .bot-informations {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: flex-start;
+//     width: 100vw;
+//     height: fit-content;
+//     background-color: aliceblue;
+//     /* padding: 5px; */
+// }
+
+// .bot-informations {
+//     padding: 0px;
+// }
+
+// .collection-basicinfos__subcontainer {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+// }
+
+
+// .select__bar {
+//     display: flex;
+//     width: 22px;
+//     background-color: rgb(220, 220, 245);
+// }
+
+// .collection-basicinfos__container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     width: 50%;
+//     padding: 5px;
+// }
+
+// .arrow img {
+//     width: 35px;
+//     height: 25px;
+// }
+
+// .collection-items__coverimage:hover {
+//     cursor: pointer;
+// }
+
+// .collection-items__coverimage img {
+//     box-shadow: 5px 5px 5px var(--clr__grey6D);
+//     width: 100px;
+//     height: auto;
+//     min-height: 80px;
+// }
+
+// .collection-items__coverimage {
+//     display: flex;
+//     justify-content: center;
+//     overflow: hidden;
+//     width: 80px;
+//     height: 80px;
+//     text-align: center;
+// }
+
+
+// .collection-items__title {
+//     font-size: 12px;
+//     margin-top: 0px;
+// }
+
+// .collection-items__subtitle,
+// .collection-items__editor,
+// .collection-items__year,
+// .collection-items__plateform {
+//     font-size: 12px;
+//     font-family: 'Inter';
+
+    // .selected__item {
+    //     border: red 4px solid;
+    // }
+    // .display__maxitem {
+    //     display: flex;
+    //     flex-direction: column;
+    //     background-color: var(--clr__whiteFF);
+    //     width: 0vw;
+    //     height: fit-content;
+    //     border-radius: 10px;
+    //     line-height: 15px;
+    //     animation: maxify 10ms forwards;
+    // }
+
+    // @keyframes maxify {
+    //     0% {
+    //         width: 0vw;
+    //     }
+
+    //     100% {
+    //         width: 100vw;
+    //     }
+    // }
+// }
