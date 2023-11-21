@@ -258,8 +258,8 @@ collection view 2
 .collection__view2,
 .collection__view3 {
 
-    .view2-item__maincontainer,
-    .view3-item__maincontainer {
+    .view2-items__maincontainer,
+    .view3-items__maincontainer {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -381,6 +381,10 @@ collection view 2
                     margin-right: 5%;
                     font-size: 12px;
                     font-family: 'PTSans-Italic';
+
+                    p {
+                        color: $black;
+                    }
                 }
             }
 
@@ -500,7 +504,8 @@ collection view 2
     }
 }
 
-.hidden__view {
+.hidden__view,
+.hidden__form {
     display: none;
 }
 

@@ -1,6 +1,5 @@
-<?php 
-echo('<ul class="menu__ul--profil black-bg">
-            <li id="collection" class="menu__icon collection">
+<ul id="submenu" class="menu__ul--profil black-bg">
+            <li data-id="collection" class="menu__icon collection">
                 <!-- <img src="./assets/svg/collection-icon.svg" alt="my collection"> -->
                 <p>Ma collection</p>
             </li>
@@ -12,8 +11,8 @@ echo('<ul class="menu__ul--profil black-bg">
                 <!-- <img src="./assets/svg/settings-icon.svg" alt="settings"> -->
                 <p class="cream-alpha-color">Paramètres</p>
             </li>
-            <li class="menu__icon log">
+            <li data-id="logout" class="menu__icon collection">
                 <!-- <img src="./assets/svg/log-icon.svg" alt="log"> -->
-                <p class="cream-alpha-color">Déconnexion</p>
+                <p>Déconnexion</p>
             </li>
-        </ul>');
+        </ul>

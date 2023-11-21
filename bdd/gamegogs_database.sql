@@ -12,15 +12,18 @@ CREATE TABLE countries(
    PRIMARY KEY(id_country)
 );
 
-CREATE TABLE users(
-   id_user INT AUTO_INCREMENT,
-   user_nikename VARCHAR(50) NOT NULL,
-   user_birthdate DATE,
-   user_email VARCHAR(50) NOT NULL,
-   user_signin_date DATETIME NOT NULL,
-   PRIMARY KEY(id_user),
-   UNIQUE(user_nikename)
+CREATE TABLE users (
+    id_user INT AUTO_INCREMENT,
+    user_nikename VARCHAR(50) NOT NULL,
+    user_birthdate DATE,
+    user_email VARCHAR(50) NOT NULL,
+    user_signin_date DATETIME NOT NULL,
+    user_password_salt VARCHAR(64) NOT NULL,
+    user_password_hash VARCHAR(64) NOT NULL,
+    PRIMARY KEY (id_user),
+    UNIQUE (user_nikename)
 );
+
 
 CREATE TABLE categories(
    id_categorie INT AUTO_INCREMENT,
@@ -126,11 +129,18 @@ INSERT INTO countries (country_name) VALUES
 ('USA'),
 ('Japon');
 -- Users
-INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date) VALUES
-('Zisquier', '1993-09-25', 'zisquier@email.com', '2023-11-01 11:11:11'),
-('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12'),
-('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13'),
-('Wisauier', '1996-07-15', 'wisauier@email.com', '2023-11-04 14:14:14');
+-- pass1
+-- pass2
+-- pass3
+-- pass4
+
+
+
+INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date, user_password_salt, user_password_hash) VALUES
+('Zisquier', '1993-09-25', 'zisquier@email.com', '2023-11-01 11:11:11','111111111111','e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'),
+('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12','222222222222', '1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'),
+('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13','333333333333', '3acb59306ef6e660cf832d1d34c4fba3d88d616f0bb5c2a9e0f82d18ef6fc167'),
+('Wisauier', '1996-07-15', 'wisauier@email.com', '2023-11-04 14:14:14','444444444444', 'a417b5dc3d06d15d91c6687e27fc1705ebc56b3b2d813abe03066e5643fe4e74');
 -- Manufacturers
 INSERT INTO manufacturers (manufacturer_name) VALUES
 ('Amstrad'),
@@ -249,7 +259,9 @@ VALUES
 ('Endommagé', 'Besoin de réparation', 3, '2023-03-20 05:40:10', 1, 4, 3),
 ('Correct', 'État correct', 2, '2021-06-26 18:10:55', 4, 5, 7),
 ('Correct', 'État correct', 2, '2021-04-28 14:05:40', 4, 5, 7),
-('Correct', 'État correct', 2, '2001-04-28 14:05:40', 4, 4, 3);
+('Correct', 'État correct', 2, '2001-04-28 14:05:40', 4, 4, 3),
+('Correct', 'État correct', 2, '2024-04-28 14:05:40', 4, 3, 4),
+('Comme neuf', 'Presque neuf', 1, '2024-06-28 14:05:40', 4, 3, 4);
 -- Association User / Copie  (copie qui possède l'id_game de cette copie de cet user)
 INSERT INTO to_possess (id_user, id_copie) VALUES
 (1, 2),
@@ -263,6 +275,8 @@ INSERT INTO to_possess (id_user, id_copie) VALUES
 (4, 8),
 (4, 9),
 (4, 10),
+(1, 13),
+(1, 14),
 (4, 11);
 
 SELECT

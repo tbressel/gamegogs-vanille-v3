@@ -12,6 +12,7 @@ function toggleSubMenu(event) {
     document.querySelector(`.submenu__container .${event.target.getAttribute('data-set')}`).classList.toggle('active');
     reverseProfilArrow();
 }
+
 /**
  *
  * Forcing the closure of the submenu
@@ -63,9 +64,15 @@ function reverseFooterArrow(event) {
 function setFilterBar(pageName) {
     if(currentPage === pageName) return
     document.getElementById("filter-nav").classList.toggle("show")
-
 }
-
+/**
+ *
+ * Forcing the closure of the filterbar
+ *  
+ */
+function closeFilterBar() {
+    document.getElementById("filter-nav").classList.remove("show")
+}
 /**
  * Closing all collection Views
  */
@@ -74,61 +81,47 @@ function closeAllView() {
     document.querySelector('.collection__view2').className = 'collection__view2 hidden__view';
     document.querySelector('.collection__view3').className = 'collection__view3 hidden__view';
 }
-// --------------------------------------------------------------------------------------------
-// ------------------------------------ API CALLS  --------------------------------------------
-// --------------------------------------------------------------------------------------------
+
+
+
+
 /**
  * 
- * Fetch Api datas which need action and method
+ * Fetching a main page and waiting for the response to send it to the destination node
  * 
- * @param {*} data 
- * @param {*} action 
- * @param {*} method 
- * @returns 
+ * @param {*} fileName 
+ * @param {*} path 
+ * @param {*} id 
  */
-async function fetchFormApi(data, action, method) {
+async function insertPageContent(fileName, path, id) {
     try {
-        const response = await fetch('api.php?action=' + action, {
-            method: method,
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
+        const response = await fetch(path + fileName);
         if (!response.ok) {
-            throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+            throw new Error(`Erreur de chargement de ${fileName}`);
         }
-
-        return response; // Renvoie la réponse complète
-
+        const content = await response.text();
+        // send of content to destination node
+        document.getElementById(id).innerHTML = content;
     } catch (error) {
-        console.error("Erreur lors de la requête API :", error);
-        throw new Error(error);
+        console.error(error.message);
     }
 }
 
 
+function updateSubmenuLogUser(bool) {
+    // Sélectionner l'élément li avec l'attribut data-id="logout"
+    let logoutMenuItem = document.querySelector('[data-id="logout"]');
 
+    if (logoutMenuItem) {
+        // Sélectionner le paragraphe (p) à l'intérieur de l'élément li
+        let textElement = logoutMenuItem.querySelector('p');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if (textElement) {
+            // Mettre à jour le texte en fonction de la valeur de bool
+            textElement.textContent = bool ? "Connexion" : "Déconnexion";
+        }
+    }
+}
 
 
 
@@ -169,30 +162,6 @@ async function fetchFormApi(data, action, method) {
         let token = bodyElement.getAttribute('data-token');
         return token
     }
-/**
- * 
- * fetch api file 
- * 
- * @param {*} action 
- * @param {*} id 
- * @param {*} token 
- */
-function fetchApi(action, id, token) {
-    fetch('api.php?action=' + action + '&id=' + id + '&token=' + token)
-        .then(response => response.json())
-        .then(data => {
-           
-
-            if (action !== 'delete') {
-                console.log('le jeu à été effacé de la base de donnée');
-                
-                deleteGame(id)
-
-            }
-
- 
-        });
-}
 
 
 
@@ -200,27 +169,7 @@ function deleteGame(id) {
     document.getElementById('collection__views')
 }
 
-/**
- * 
- * Fetching a main page and waiting for the response to send it to the destination node
- * 
- * @param {*} fileName 
- * @param {*} path 
- * @param {*} id 
- */
-async function insertPageContent(fileName, path, id) {
-    try {
-        const response = await fetch(path + fileName);
-        if (!response.ok) {
-            throw new Error(`Erreur de chargement de ${fileName}`);
-        }
-        const content = await response.text();
-        // send of content to destination node
-        document.getElementById(id).innerHTML = content;
-    } catch (error) {
-        console.error(error.message);
-    }
-}
+
 
 /**
  * 
