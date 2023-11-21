@@ -52,19 +52,35 @@ ORDER BY
 
 $query->execute();
 $myCollectionList = $query->fetchAll();
-?>
 
+
+$queryManufacturer = $connexion->prepare('SELECT manufacturer_name FROM manufacturers ORDER BY manufacturer_name');
+$queryManufacturer->execute();
+$manufacturersList = $queryManufacturer->fetchAll();
+
+$queryMachine = $connexion->prepare('SELECT machine_name FROM machines ORDER BY machine_name');
+$queryMachine->execute();
+$machinesList = $queryMachine->fetchAll();
+
+$queryModel = $connexion->prepare('SELECT machine_model FROM machines ORDER BY machine_model');
+$queryModel->execute();
+$modelsList = $queryModel->fetchAll();
+
+$queryDate = $connexion->prepare('SELECT date_year FROM dates ORDER BY date_year DESC');
+$queryDate->execute();
+$datesList = $queryDate->fetchAll();
+
+
+?>
 
 <section class="myitems-items__container">
     <!-- <div class="myitems-items__maintitle">
         <h2>Jeux que je possède</h2>
     </div> -->
     <div id="list-items" class="myitems-items__last-items-container">
-
-
         <section class="collection__view1">
             <?php foreach ($myCollectionList as $game) { ?>
-                <div id="<?= $game['id_copie'] ?>" class="view1-items__maincontainer">
+                <div data-id-copie="<?= $game['id_copie'] ?>" class="view1-items__maincontainer">
                     <div class="view1-items__coverimage">
                         <img id="js-maxclic" src="./assets/<?= $game['game_cover'] ?>" alt="artwork cover">
                     </div>
@@ -122,15 +138,23 @@ $myCollectionList = $query->fetchAll();
                 </div>
             <?php } ?>
         </section>
+
+
+
+
+
+
         <section class="collection__view2 hidden__view">
             <?php foreach ($myCollectionList as $game) { ?>
-                <div id="<?= $game['id_copie'] ?>" class="view2-item__maincontainer">
+                <div data-id-copie="<?= $game['id_copie'] ?>" class="view2-item__maincontainer">
                     <div class="top-informations">
                         <div class="select__bar">
-                            <input class="checkbox" type="checkbox" name="selected" id="">
+                            <button type="button" class="delete__btn btn" data-set="bin" data-id="<?= $game['id_copie'] ?>">🗑️</button>
+
+                            <button type="button" class="modify__btn btn" data-set="pen" data-id="pen<?= $game['id_copie'] ?>">✒️</button>
                         </div>
                         <div class="view2-items__coverimage">
-                            <img src="./assets/<?= $game['game_cover'] ?>" alt="">
+                            <img src="./assets/<?= $game['game_cover'] ?>" alt="<?= $game['game_title'] ?> artwork cover">
                         </div>
 
                         <div class="view2-basicinfos__container">
@@ -153,9 +177,10 @@ $myCollectionList = $query->fetchAll();
                             </div>
                         </div>
                         <div class="arrow view2-arrow">
-                            <img id="arrow-img" src="./assets/svg/chevron-up-solid.svg" alt="">
+                            <img data-id="arrow-img" src="./assets/svg/chevron-up-solid.svg" alt="">
                         </div>
                     </div>
+                    <!-- Hidden drawer part-->
                     <div id="view2-items-bot" class="bot-informations hidden">
                         <div class="select__bar"></div>
                         <div class="view2-statesinfos__subcontainer">
@@ -184,6 +209,67 @@ $myCollectionList = $query->fetchAll();
                             <button id="textarea-erase" class="btn__view2 btn__color-empty">Annuler</button>
                         </form>
                     </div>
+
+                    <section id="pen<?= $game['id_copie'] ?>" class="collection__modify hidden">
+
+                        <form id="pen<?= $game['id_copie'] ?>" class="formModify"  method="POST">
+                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                            <input type="hidden" name="id_copie" value="<?= $game['id_copie'] ?>">
+                            <input type="hidden" name="action" value="modify">
+
+                            <label for="new_copie_title"></label>
+                            <input type="text" id="new_copie_title" name="new_copie_title" value="<?= $game['game_title'] ?>">
+
+                            <label for="new_copie_subtitle"></label>
+                            <input type="text" id="new_copie_subtitle" name="new_copie_subtitle" value="<?= $game['game_subtitle'] ?>">
+
+                            <label for="new_manufacturer_name"></label>
+                            <select id="new_manufacturer_name" name="new_manufacturer_name[]">
+                                <?php foreach ($manufacturersList as $manufacturer) { ?>
+                                    <option value="<?= $manufacturer['manufacturer_name'] ?>" <?= ($manufacturer['manufacturer_name'] === $game['manufacturer_name']) ? 'selected' : '' ?>>
+                                        <?= $manufacturer['manufacturer_name'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
+                            <label for="new_machine_name"></label>
+                            <select id="new_machine_name" name="new_machine_name[]">
+                                <?php foreach ($machinesList as $machine) { ?>
+                                    <option value="<?= $machine['machine_name'] ?>" <?= ($machine['machine_name'] === $game['machine_name']) ? 'selected' : '' ?>>
+                                        <?= $machine['machine_name'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
+                            <label for="new_machine_model"></label>
+                            
+                            <select id="new_machine_model" name="new_machine_model[]">
+                                <?php foreach ($modelsList as $model) { ?>
+                                    <option value="<?= $model['machine_model'] ?>" <?= ($model['machine_model'] === $game['machine_model']) ? 'selected' : '' ?>>
+                                        <?= $model['machine_model'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
+                            <label for="new_editor"></label>
+                            <input type="text" id="new_editor" name="new_editor" value="<?= $game['editor_name'] ?>">
+
+                            <label for="new_date"></label>
+                           <select id="new_date" name="new_date[]">
+                                <?php foreach ($datesList as $date) { ?>
+                                    <option value="<?= $date['date_year'] ?>" <?= ($date['date_year'] === $game['date_year']) ? 'selected' : '' ?>>
+                                        <?= $date['date_year'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+
+                            <input type="submit" data-id-form="<?= $game['id_copie'] ?>" value="✒️">
+                        </form>
+
+                     
+                        </form>
+                    </section>
+
                 </div>
             <?php } ?>
         </section>
@@ -195,7 +281,7 @@ $myCollectionList = $query->fetchAll();
 
         <section class="collection__view3 hidden__view">
             <?php foreach ($myCollectionList as $game) { ?>
-                <div id="<?= $game['id_copie'] ?>" class="view3-item__maincontainer">
+                <div data-id-copie="<?= $game['id_copie'] ?>" class="view3-item__maincontainer">
                     <div class="top-informations">
                         <div class="select__bar">
                             <input class="checkbox" type="checkbox" name="selected" id="">

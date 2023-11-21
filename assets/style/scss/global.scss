@@ -87,6 +87,19 @@ h6 {
     text-decoration: underline;
 }
 
+.btn {
+    cursor: pointer;
+    margin: 4px;
+    padding: 8px;
+    background-color: #383838;
+    height: fit-content;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #4a4a4a;
+    }
+}
+
 
 @media screen and (min-width:1280px) {
 

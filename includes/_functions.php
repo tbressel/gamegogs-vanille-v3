@@ -80,7 +80,7 @@ function generateToken():void {
  */
 function checkCSRFAsync(): void
 {
-    if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], 'http://localhost/')) {
+    if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], 'http://localhost/gamegogs-v3/')) {
         $error = 'error_referer';
     } else if (
         !isset($_SESSION['token']) || !isset($_REQUEST['token'])

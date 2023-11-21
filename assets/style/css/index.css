@@ -147,6 +147,19 @@ h6 {
   text-decoration: underline;
 }
 
+.btn {
+  cursor: pointer;
+  margin: 4px;
+  padding: 8px;
+  background-color: #383838;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 5px;
+}
+.btn:hover {
+  background-color: #4a4a4a;
+}
+
 @media screen and (min-width: 1280px) {
   .header__container--burger,
   .profilarrow,
@@ -1135,8 +1148,8 @@ collection view 2
 .collection__view3 .view3-item__maincontainer .top-informations .select__bar,
 .collection__view3 .view3-item__maincontainer .bot-informations .select__bar {
   display: flex;
-  justify-content: center;
-  width: 36px;
+  flex-direction: column;
+  justify-content: flex-start;
   background-color: #222222;
 }
 .collection__view2 .view2-item__maincontainer .top-informations .select__bar .checkbox,
@@ -1171,9 +1184,9 @@ collection view 2
 .collection__view3 .view3-item__maincontainer .bot-informations .view2-items__coverimage,
 .collection__view3 .view3-item__maincontainer .bot-informations .view3-items__coverimage {
   display: flex;
-  justify-content: center;
   overflow: hidden;
   min-width: 140px;
+  width: 150px;
   height: 140px;
   text-align: center;
 }
@@ -1925,6 +1938,18 @@ collection view 2
 }
 
 .hidden__view {
+  display: none;
+}
+
+/*
+-----------------
+collection modify
+-----------------
+*/
+.collection__modify {
+  display: flex;
+}
+.collection__modify.hidden {
   display: none;
 }
 

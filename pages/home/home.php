@@ -6,8 +6,6 @@
     </ul>
 </nav>
 
-
-
 <?php
 include('./components/lastgames/lastgames.php');
 include('./components/lastarticles/lastarticles.php');

@@ -1,9 +1,5 @@
 <?php
 
-// var_dump($_SERVER);
-
-// exit;
-
 include_once 'includes/_config.php';
 require_once 'includes/_functions.php';
 
@@ -14,15 +10,12 @@ include 'includes/_dbconnect.php';
 session_start();
 generateToken();
 
-// var_dump($_SESSION);
 
-// var_dump($_SERVER['HTTP_REFERER']);
 
-// checkCSRFAsync();
 include_once 'includes/_head.php';
 ?>    
 
-    <body>
+    <body data-token=<?=$_SESSION['token']?>>
 
     <header class="black-bg">
         <?php
@@ -38,7 +31,7 @@ include_once 'includes/_head.php';
         ?>
     </nav>
 
-    <main id="main" class="main__container">
+    <main id="main" class="main__container" >
         <?php
         include('./pages/home/home.php');
         ?>

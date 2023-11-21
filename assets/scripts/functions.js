@@ -75,8 +75,130 @@ function closeAllView() {
     document.querySelector('.collection__view3').className = 'collection__view3 hidden__view';
 }
 // --------------------------------------------------------------------------------------------
-// ------------------------------- COMPONENTS CALLING FUNCTIONS  ------------------------------
+// ------------------------------------ API CALLS  --------------------------------------------
 // --------------------------------------------------------------------------------------------
+/**
+ * 
+ * Fetch Api datas which need action and method
+ * 
+ * @param {*} data 
+ * @param {*} action 
+ * @param {*} method 
+ * @returns 
+ */
+async function fetchFormApi(data, action, method) {
+    try {
+        const response = await fetch('api.php?action=' + action, {
+            method: method,
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+        }
+
+        return response; // Renvoie la réponse complète
+
+    } catch (error) {
+        console.error("Erreur lors de la requête API :", error);
+        throw new Error(error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     /**
+    * 
+    * get the actual token
+    * 
+    * @returns 
+    */
+     function getToken() {
+        let bodyElement = document.querySelector('body');
+        let token = bodyElement.getAttribute('data-token');
+        return token
+    }
+/**
+ * 
+ * fetch api file 
+ * 
+ * @param {*} action 
+ * @param {*} id 
+ * @param {*} token 
+ */
+function fetchApi(action, id, token) {
+    fetch('api.php?action=' + action + '&id=' + id + '&token=' + token)
+        .then(response => response.json())
+        .then(data => {
+           
+
+            if (action !== 'delete') {
+                console.log('le jeu à été effacé de la base de donnée');
+                
+                deleteGame(id)
+
+            }
+
+ 
+        });
+}
+
+
+
+function deleteGame(id) {
+    document.getElementById('collection__views')
+}
 
 /**
  * 
@@ -204,7 +326,6 @@ function displayGenre() {
         genreFilterItem.querySelector('.quantity_filter p').textContent = genreCount[genre] + ' jeux possédé(s) sur ' + (totalGamesByGenre[genre] || 0);
         genreFilterElement.appendChild(genreFilterItem);
     }
-
 }
 function displaySupport() {
 
@@ -268,7 +389,6 @@ function displaySupport() {
         supportFilterItem.querySelector('.quantity_filter p').textContent = supportCount[support] + ' jeux possédé(s) sur ' + (totalGamesBySupport[support] || 0 );
         supportFilterElement.appendChild(supportFilterItem);
     }
-
 }
 function displayPlateform() {
     // get JSON in array

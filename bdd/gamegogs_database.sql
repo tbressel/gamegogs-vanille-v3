@@ -144,9 +144,9 @@ INSERT INTO machines (machine_name, machine_releasedate, machine_model, machine_
 ('CPC', '2024-01', '6128', 'img/plateforms/webp/amstrad-cpc.webp', 1),
 ('STe', '2024-04', '1040', 'img/plateforms/webp/atari-st.webp', 2),
 ('Playstation', '2024-07', '4', 'img/plateforms/webp/sony-playstation4.webp', 3),
-('Nintendo', '1987-07', 'Switch', 'img/plateforms/webp/nintendo-switch.webp', 4),
-('Nintendo', '1992-07', 'SNES', 'img/plateforms/webp/nintendo-supernintendo.webp', 4),
-('Sega', '1992-07', 'Master System', 'img/plateforms/webp/sega-megadrive.webp', 5),
+('Switch', '1987-07', '(classic)', 'img/plateforms/webp/nintendo-switch.webp', 4),
+('Super Nintendo', '1992-07', '(EU)', 'img/plateforms/webp/nintendo-supernintendo.webp', 4),
+('Master System', '1992-07', '(EU)', 'img/plateforms/webp/sega-megadrive.webp', 5),
 ('PC', '2012-07', 'Windows', 'img/plateforms/webp/microsoft-windows.webp', 6);
 -- Dates
 INSERT INTO dates (date_year) VALUES
@@ -250,9 +250,6 @@ VALUES
 ('Correct', 'État correct', 2, '2021-06-26 18:10:55', 4, 5, 7),
 ('Correct', 'État correct', 2, '2021-04-28 14:05:40', 4, 5, 7),
 ('Correct', 'État correct', 2, '2001-04-28 14:05:40', 4, 4, 3);
-
-
-
 -- Association User / Copie  (copie qui possède l'id_game de cette copie de cet user)
 INSERT INTO to_possess (id_user, id_copie) VALUES
 (1, 2),
