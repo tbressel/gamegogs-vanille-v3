@@ -128,14 +128,7 @@ INSERT INTO countries (country_name) VALUES
 ('USA'),
 ('Japon');
 -- Users
--- pass1
--- pass2
--- pass3
--- pass4
-
-
-
-INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date, user_password_salt, user_password_hash) VALUES
+INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date, user_password_hash) VALUES
 ('Zisquier', '1993-09-25', 'zisquier@email.com', '2023-11-01 11:11:11','e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'),
 ('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12','1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'),
 ('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13','3acb59306ef6e660cf832d1d34c4fba3d88d616f0bb5c2a9e0f82d18ef6fc167'),

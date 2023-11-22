@@ -30,67 +30,67 @@ $inputData = json_decode($inputJSON, true);
 
 if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['action']))) {
     
-    // ------------------------------------------------------------------------------
-    // ---------------     SHOW OR DISPLAY LOGIN FORM & LOGIN     -------------------
-    // ------------------------------------------------------------------------------
-    if (isset($inputData['action']) && $inputData['action'] === "login") {
-        
-        if (!isset($inputData['pseudo']) || !isset($_SESSION['userId']) || !isset($_SESSION['pseudo']) || !isset($_SESSION['password']))  {
-            
-            $user_nikename = htmlspecialchars($inputData['pseudo']);
-            $user_password = htmlspecialchars($inputData['password']);
-            $user_password = hash('sha256', $user_password);
+// ------------------------------------------------------------------------------
+// ---------------     SHOW OR DISPLAY LOGIN FORM & LOGIN     -------------------
+// ------------------------------------------------------------------------------
+if (isset($inputData['action']) && $inputData['action'] === "login") {
 
-            $queryUser = $connexion->prepare('SELECT 
-                id_user, 
-                user_nikename,
-                user_password_hash 
-                FROM users 
-                WHERE user_nikename = :user_nikename
-                AND user_password_hash = :user_password');
+    if (
+        !isset($inputData['pseudo'])
+        || !isset($inputData['password'])
+        || !isset($_SESSION['userId'])
+        || !isset($_SESSION['pseudo'])
+    ) {
 
-            $queryUser->bindValue(':user_nikename', $user_nikename, PDO::PARAM_STR);
-            $queryUser->bindValue(':user_password', $user_password, PDO::PARAM_STR);
-            $isUserOK = $queryUser->execute();
-            
-            if ($isUserOK) {
-                // get query result
-                $userResult = $queryUser->fetch(PDO::FETCH_ASSOC);
-                ob_clean();
-    
-                // is user exists ?
-                if ($userResult && $userResult['user_password_hash'] === $user_password) {
-                    // YES the user exists
-                    $_SESSION['pseudo'] = $user_nikename;
-                    $_SESSION['userId'] = $userResult['id_user'];
+        $user_nikename = htmlspecialchars($inputData['pseudo']);
+        $user_password = htmlspecialchars($inputData['password']);
 
-                    echo json_encode([
-                        'result' => true,
-                        'message' => 'Connecté avec succès',                      
-                    ]);
-                } else {
-                    // NO the user don't
-                    echo json_encode([
-                        'result' => false,
-                        'message' => 'Pseudo ou mot de passe invalide',
-                       
-                       
-                    ]);
-                }
+        $queryUser = $connexion->prepare('SELECT 
+            id_user, 
+            user_nikename,
+            user_password_hash 
+            FROM users 
+            WHERE user_nikename = :user_nikename');
+
+        $queryUser->bindValue(':user_nikename', $user_nikename, PDO::PARAM_STR);
+        $isUserOK = $queryUser->execute();
+
+        if ($isUserOK) {
+            // get query result
+            $userResult = $queryUser->fetch(PDO::FETCH_ASSOC);
+            ob_clean();
+
+            // is user exists ?
+            if ($userResult && password_verify($user_password, $userResult['user_password_hash'])) {
+                // YES the user exists
+                $_SESSION['pseudo'] = $user_nikename;
+                $_SESSION['userId'] = $userResult['id_user'];
+
+                echo json_encode([
+                    'result' => true,
+                    'message' => 'Connecté avec succès',
+                ]);
             } else {
+                // NO the user doesn't
                 echo json_encode([
                     'result' => false,
-                    'message' => 'request error',       
+                    'message' => 'Pseudo ou mot de passe invalide',
                 ]);
             }
         } else {
             echo json_encode([
                 'result' => false,
-                'message' => 'Pseudo ou mot de passe obligatoir !',          
+                'message' => 'request error',
             ]);
         }
-    } 
-    
+    } else {
+        echo json_encode([
+            'result' => false,
+            'message' => 'Pseudo ou mot de passe obligatoires !',
+        ]);
+    }
+}
+
 // ------------------------------------------------------------------------------
 // --------------------------     LOGOUT      -----------------------------------
 // ------------------------------------------------------------------------------
@@ -122,8 +122,11 @@ else if (isset($inputData['action']) && $inputData['action'] === 'signin') {
     $nickname = htmlspecialchars($inputData['nickname']);
     $birthdate = $inputData['birthdate'];
     $email= $inputData['email'];
+    
     $user_password = htmlspecialchars($inputData['password']);
-    $user_password = hash('sha256', $user_password);
+    // $user_password = hash('sha256', $user_password);
+    $user_password = password_hash($user_password, PASSWORD_BCRYPT);
+
     $signin_date = new DateTime();
     $signin_date_string = $signin_date->format('Y-m-d H:i:s');
 
@@ -145,7 +148,7 @@ else if (isset($inputData['action']) && $inputData['action'] === 'signin') {
         'message' => 'inscription réalisée avec succès',        
         // 'nickname' => $nickname,
         // 'email' => $email,
-        // 'password' => $user_password,
+         'password' => $user_password,
     ]);
     
 }
