@@ -9,7 +9,7 @@ let lastIdElementClicked = "";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    getLastGamesJson();
+    getLastGamesJson('display-last-games', 'POST', 'Game List OK:','games',displayLastGames,false);
 
     // Listen to burger button
     document.getElementById('burger-btn').addEventListener('click', (event) => {

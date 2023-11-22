@@ -66,38 +66,67 @@ function fetchApi(action, id, token) {
  * Get Last games information from the database in a Json format
  * 
  */
-function getLastGamesJson() {
 
-    const dataLastGame = {
-        action: 'display-last-games',
-    };
 
-    fetchFormApi(dataLastGame, 'display-last-games', 'POST')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP! Statut: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-            // console.log('Full JSON Response:', JSON.stringify(jsonData));
 
-            if (jsonData.result === true) {
-                console.log('Game List OK:', jsonData.games);
+/**
+ * Retrieves the latest games in JSON format.
+ *
+ * @param {string} action - The action to perform.
+ * @param {string} method - The method to use.
+ * @param {string} consoleMsg - The message to display in the console.
+ * @param {object} jsonkey1 - The JSON data to use.
+ * @param {boolean} redirect - Indicates whether a redirection should be performed.
+ */
+// function getLastGamesJson(action, method, consoleMsg, jsonkey1, callback, redirect) {
+//     const data = {
+//         action: action,
+//     };
+//     fetchFormApi(data, action, method)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then(jsonData => {
+//             if (jsonData.result === true) {
+//                 console.log(consoleMsg, jsonData[jsonkey1]);
 
-                // Assuming jsonData.games is an array of games
-                const lastGames = jsonData.games;
+//                 if (callback !== false) callback(jsonData[jsonkey1]);
 
-                // Continue with your logic to display recent games
-                displayLastGames(lastGames);
-            } else {
-                console.error('API returned an error:', jsonData.message);
-            }
-        })
-        .catch(error => {
-            console.error('Some errors during the JSON data response:', error);
-        });
-}
+//                 if (redirect !== false)  window.location.href = 'index.php';
+
+//             } else {
+//                 console.error('API returned an error:', jsonData.message);
+//             }
+//         })
+//   }
+
+ function getLastGamesJson() {
+     const dataLastGame = {
+         action: 'display-last-games',
+     };
+     fetchFormApi(dataLastGame, 'display-last-games', 'POST')
+         .then(response => {
+             if (!response.ok) {
+                 throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+             }
+             return response.json();
+         })
+         .then(jsonData => {
+             // console.log('Full JSON Response:', JSON.stringify(jsonData));
+             if (jsonData.result === true) {
+                 console.log('Game List OK:', jsonData['games']);
+                 displayLastGames(jsonData['games']);
+             } else {
+                 console.error('API returned an error:', jsonData.message);
+             }
+         })
+         .catch(error => {
+             console.error('Some errors during the JSON data response:', error);
+         });
+ }
 /**
  * 
  * Get Last games information from the database in a Json format
@@ -121,7 +150,7 @@ function logoutSession() {
 
             if (jsonData.result === true) {
                 console.log('Déconnexion OK:');
-                updateSubmenuLogUser(false)
+                
                 window.location.href = 'index.php';
 
             } else {
@@ -174,7 +203,7 @@ function getCollectionJson() {
                 console.log('on affiche lemodule de connexion');
                 // awaiting for the page content
                 insertPageContent("connexion.php", "./pages/connexion/", "main");
-                toggleConnexionForms();
+                // toggleConnexionForms();
 
 
             } else {
@@ -197,7 +226,7 @@ document.addEventListener('submit', (event) => {
         event.preventDefault();
       
 
-        toggleConnexionForms ();
+        // toggleConnexionForms ();
 
 
         const data = {
@@ -234,3 +263,53 @@ document.addEventListener('submit', (event) => {
             });
     }
 });
+
+
+
+document.addEventListener('submit', (event) => {
+    if (event.target.id === 'registration-form') {
+
+        event.preventDefault();
+      
+        console.log('ok');
+
+        const signInData = {
+            action: 'signin',
+            token: getToken(),
+            nickname: event.target.querySelector('input[name="nickname"]').value,
+            birthdate: event.target.querySelector('input[name="birthdate"]').value,
+            email: event.target.querySelector('input[name="email"]').value,
+            password: event.target.querySelector('input[name="password"]').value
+        };
+        console.log(signInData);
+
+        fetchFormApi(signInData, "signin", "POST")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(jsonData => {
+            // console.log('Full JSON Response:', JSON.stringify(jsonData));
+
+            if (jsonData.result === true) {
+                console.log('Enregistrement OK:', jsonData.games);
+
+                // Assuming jsonData.games is an array of games
+                const myGames = jsonData.message;
+                // updateSubmenuLogUser(true);
+                // window.location.href = 'index.php';
+
+            } else {
+                console.error('API returned an error:', jsonData.message);
+            }
+        })
+        .catch(error => {
+            console.error('Some errors during the JSON data response:', error);
+        });
+}
+
+
+
+    });

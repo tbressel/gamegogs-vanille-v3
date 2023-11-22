@@ -1,5 +1,4 @@
-<?php
-echo (' <div class="header__container black-bg">
+<div class="header__container black-bg">
             <div class="header__container--top">
                 <div class="header__container--brandname">
 
@@ -8,7 +7,7 @@ echo (' <div class="header__container black-bg">
                             <img src="./assets/svg/joystick.svg" alt="joystick icon">
                         </div>
                         <div class="brandname__top--title">
-                            <a href="./includes/dbconnect.php"><img src="./assets/svg/gamegog-logo.svg" alt="gamegog logo"></a>
+                            <a href="index.php"><img src="./assets/svg/gamegog-logo.svg" alt="gamegog logo"></a>
                         </div>
                     </div>
 
@@ -55,4 +54,4 @@ echo (' <div class="header__container black-bg">
                     </li>
                 </ul>
             </div>
-        </div>');
+        </div>

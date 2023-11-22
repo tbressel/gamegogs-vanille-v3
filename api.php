@@ -112,6 +112,43 @@ else if (isset($inputData['action']) && $inputData['action'] === "logout") {
  
     exit;
 }
+ // ------------------------------------------------------------------------------
+ // ----------------------------    SIGN IN   ------------------------------------
+ // ------------------------------------------------------------------------------
+
+
+else if (isset($inputData['action']) && $inputData['action'] === 'signin') {
+
+    $nickname = htmlspecialchars($inputData['nickname']);
+    $birthdate = $inputData['birthdate'];
+    $email= $inputData['email'];
+    $user_password = htmlspecialchars($inputData['password']);
+    $user_password = hash('sha256', $user_password);
+    $signin_date = new DateTime();
+    $signin_date_string = $signin_date->format('Y-m-d H:i:s');
+
+    $queryUser = $connexion->prepare('INSERT INTO users 
+    (user_nikename, user_birthdate, user_email, user_signin_date, user_password_hash) VALUES
+    (:nickname, :birthdate, :email, :signin_date, :user_password)');
+
+    $queryUser->bindValue(':nickname', $nickname, PDO::PARAM_STR);
+     $queryUser->bindValue(':birthdate', $birthdate, PDO::PARAM_STR);
+     $queryUser->bindValue(':email', $email, PDO::PARAM_STR);
+     $queryUser->bindValue(':signin_date', $signin_date_string, PDO::PARAM_STR);
+     $queryUser->bindValue(':user_password', $user_password, PDO::PARAM_STR);
+     
+     $isUserOK = $queryUser->execute();
+    
+
+    echo json_encode([
+        'result' => true,
+        'message' => 'inscription réalisée avec succès',        
+        // 'nickname' => $nickname,
+        // 'email' => $email,
+        // 'password' => $user_password,
+    ]);
+    
+}
 
     
      // ------------------------------------------------------------------------------

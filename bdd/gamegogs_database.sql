@@ -18,7 +18,6 @@ CREATE TABLE users (
     user_birthdate DATE,
     user_email VARCHAR(50) NOT NULL,
     user_signin_date DATETIME NOT NULL,
-    user_password_salt VARCHAR(64) NOT NULL,
     user_password_hash VARCHAR(64) NOT NULL,
     PRIMARY KEY (id_user),
     UNIQUE (user_nikename)
@@ -137,10 +136,10 @@ INSERT INTO countries (country_name) VALUES
 
 
 INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date, user_password_salt, user_password_hash) VALUES
-('Zisquier', '1993-09-25', 'zisquier@email.com', '2023-11-01 11:11:11','111111111111','e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'),
-('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12','222222222222', '1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'),
-('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13','333333333333', '3acb59306ef6e660cf832d1d34c4fba3d88d616f0bb5c2a9e0f82d18ef6fc167'),
-('Wisauier', '1996-07-15', 'wisauier@email.com', '2023-11-04 14:14:14','444444444444', 'a417b5dc3d06d15d91c6687e27fc1705ebc56b3b2d813abe03066e5643fe4e74');
+('Zisquier', '1993-09-25', 'zisquier@email.com', '2023-11-01 11:11:11','e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'),
+('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12','1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'),
+('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13','3acb59306ef6e660cf832d1d34c4fba3d88d616f0bb5c2a9e0f82d18ef6fc167'),
+('Wisauier', '1996-07-15', 'wisauier@email.com', '2023-11-04 14:14:14','a417b5dc3d06d15d91c6687e27fc1705ebc56b3b2d813abe03066e5643fe4e74');
 -- Manufacturers
 INSERT INTO manufacturers (manufacturer_name) VALUES
 ('Amstrad'),

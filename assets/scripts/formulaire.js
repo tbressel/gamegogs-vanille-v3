@@ -15,18 +15,22 @@ document.getElementById('main').addEventListener('click', function (event) {
         }
     });
     
-    function toggleConnexionForms() {
+
         
-        const mainContainer = document.getElementById('main');
-        mainContainer.addEventListener('click', function(event) {
+            const mainContainer = document.getElementById('main');
+
+            mainContainer.addEventListener('click', function(event) {
+            
             const loginFormContainer = document.getElementById('login-form-container');
             const registrationFormContainer = document.getElementById('registration-form-container');
-          const target = event.target;
+            const target = event.target;
           
           if (target.id === 'signup-button') {
             toggleFormVisibility(loginFormContainer, registrationFormContainer);
+
           } else if (target.id === 'login-button') {
             toggleFormVisibility(registrationFormContainer, loginFormContainer);
+
           }
         });
         
@@ -34,4 +38,6 @@ document.getElementById('main').addEventListener('click', function (event) {
           formToShow.classList.toggle('hidden__form');
           formToHide.classList.toggle('hidden__form');
         }
-      }
+    
+
+        

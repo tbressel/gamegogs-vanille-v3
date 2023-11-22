@@ -39,9 +39,9 @@ include_once 'includes/_head.php';
         include('./pages/home/home.php');
         ?>
     </main>
-        <!-- <?php
+       <?php
         var_dump($_SESSION);
-        ?> -->
+        ?> 
 
     <?php
 

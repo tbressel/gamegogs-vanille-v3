@@ -2171,14 +2171,6 @@ collection modify
   margin-top: 100px;
 }
 
-.myitems-items__container {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 .myitems-items__container .login__text {
   margin-bottom: 20px;
 }
