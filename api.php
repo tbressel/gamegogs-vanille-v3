@@ -116,7 +116,6 @@ else if (isset($inputData['action']) && $inputData['action'] === "logout") {
  // ----------------------------    SIGN IN   ------------------------------------
  // ------------------------------------------------------------------------------
 
-
 else if (isset($inputData['action']) && $inputData['action'] === 'signin') {
 
     $nickname = htmlspecialchars($inputData['nickname']);

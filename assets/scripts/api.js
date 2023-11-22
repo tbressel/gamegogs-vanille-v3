@@ -33,7 +33,7 @@ async function fetchFormApi(data, action, method) {
 }
 /**
  * 
- * fetch api file 
+ * Fetching API for delete action
  * 
  * @param {*} action 
  * @param {*} id 
@@ -43,18 +43,15 @@ function fetchApi(action, id, token) {
     fetch('api.php?action=' + action + '&id=' + id + '&token=' + token)
         .then(response => response.json())
         .then(data => {
-
-
-            if (action !== 'delete') {
+            if (action === 'delete') {
                 console.log('le jeu à été effacé de la base de donnée');
-
-                deleteGame(id)
-
+                deleteCopieNodes(id)
             }
-
-
         });
 }
+
+
+
 
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------

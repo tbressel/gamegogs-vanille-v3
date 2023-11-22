@@ -1,4 +1,15 @@
 <?php
+// Récupérer le chemin à partir du paramètre GET "url"
+if (isset($_GET['url'])) {
+    $url = $_GET['url'];
+
+    // Vous pouvez maintenant traiter l'URL comme vous le souhaitez, par exemple, charger la page correspondante
+    // Vous devrez peut-être faire correspondre l'URL à un contrôleur ou à une action spécifique dans votre application
+    // Par exemple, vous pourriez utiliser une table de routage pour cela.
+} else {
+    // Aucun paramètre "url" n'a été fourni, vous pouvez traiter la page d'accueil ici
+}
+
 
 include_once 'includes/_config.php';
 require_once 'includes/_functions.php';
@@ -34,10 +45,18 @@ include_once 'includes/_head.php';
 
         ?>
     </nav>
+
+    <section id="logState">
+  <?php
+  if (isset($_SESSION['pseudo'])) {
+    echo "<p class='connected'>connecté en tant que " .  $_SESSION['pseudo'] . "</p>";
+  } else {
+    echo "<p class='not-connected'>Vous n'êtes pas connecté</p>";
+  }
+  ?>
+</section>
     <main id="main" class="main__container" >
-        <?php
-        include('./pages/home/home.php');
-        ?>
+        <?php  include('./pages/home/home.php');?>
     </main>
        <?php
         var_dump($_SESSION);

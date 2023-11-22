@@ -125,6 +125,14 @@ function updateSubmenuLogUser(bool) {
 
 
 
+function deleteCopieNodes(id) {
+    const elements = document.querySelectorAll('[data-id-copie="'+id+'"]');
+    
+    elements.forEach(element => {
+        element.remove();
+    });
+}
+
 
 
 
@@ -164,10 +172,6 @@ function updateSubmenuLogUser(bool) {
     }
 
 
-
-function deleteGame(id) {
-    document.getElementById('collection__views')
-}
 
 
 

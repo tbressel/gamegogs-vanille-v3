@@ -160,6 +160,28 @@ h6 {
   background-color: #4a4a4a;
 }
 
+#logState {
+  background-color: rgb(148, 137, 137);
+  padding: 10px;
+  border: 1px solid #b4a2a2;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+#logState p {
+  margin: 0;
+}
+
+#logState .connected {
+  color: green !important;
+}
+
+#logState .not-connected {
+  color: red !important;
+}
+
 @media screen and (min-width: 1280px) {
   .header__container--burger,
   .profilarrow,
@@ -2175,7 +2197,7 @@ collection modify
   margin-bottom: 20px;
 }
 .myitems-items__container .login__text p {
-  color: #000000;
+  color: #222222;
 }
 .myitems-items__container #login-form {
   display: flex;
@@ -2203,7 +2225,7 @@ collection modify
 .myitems-items__container #login-form .btn {
   padding: 10px 20px;
   background-color: #4caf50;
-  color: #ffffff;
+  color: #FFFFFF;
   border: none;
   border-radius: 4px;
   cursor: pointer;
