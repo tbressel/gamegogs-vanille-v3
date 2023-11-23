@@ -5,9 +5,12 @@ let currentPage = "accueil";
 let globalbotInfoContainer = null;
 let globalNotesInfoContainer = null;
 let lastIdElementClicked = "";
+let msgType;
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  
 
     getLastGamesJson('display-last-games', 'POST', 'Game List OK:','games',displayLastGames,false);
 
@@ -31,35 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-     // Listen to Collection menu in main menu
-     document.querySelector('[data-id="collection"]').addEventListener('click', () => {
-         // close submenu
-         closeSubMenu();
-         // delete main container
-         deleteContainer('main');
-         // enable filter bar
-         setFilterBar("collection");
-         // awaiting for the page content
-         insertPageContent("collection.php", "pages/collection/", "main");
-         // get Json content
-         getCollectionJson();
-     });
-
-    // Listen to Deconnexion menu in main menu
-    document.querySelector('[data-id="logout"]').addEventListener('click', () => {
-        // close submenu
-        closeSubMenu();
-        // delete main container
-        deleteContainer('main');
-        // close filter bar
-        closeFilterBar();
-        // awaiting for the page content
-        logoutSession();
-    });
-
-
-
-
 
 
     /**
@@ -81,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else if (event.target.getAttribute('data-btn-filter') === "") {
             document.getElementById('overlay-filter').classList.toggle('show');
-        }
+        } 
     })
 
 
@@ -91,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Listen to buttons inside each container
      */
     document.getElementById("main").addEventListener('click', (event) => {
+        console.log(event.target)
 
         if (event.target.getAttribute("data-id") === "arrow-img") {
 
@@ -110,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lastIdElementClicked = event.target.getAttribute("data-id");
             document.getElementById(lastIdElementClicked).classList.toggle('hidden');
 
+        } else if (event.target.getAttribute('data-id') === "notif-btn") {
+            document.querySelector('.notif__container').classList.add('hidden__notif');
         }
 
 
@@ -131,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
- 
+
 });
 
 

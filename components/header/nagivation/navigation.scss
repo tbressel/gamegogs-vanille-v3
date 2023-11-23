@@ -26,11 +26,13 @@
 
 .menu__ul--profil {
     position: fixed;
-    z-index: 0;
+    z-index: -1;
     width: 100%;
     top: -200px;
-
+    transition: 200ms ease-in-out;
+    
     &.active {
+        transition: 200ms ease-in-out;
         top: 98px;
     }
 

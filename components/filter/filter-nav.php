@@ -1,4 +1,3 @@
-<?php echo('
 <nav id="filter-nav" class="filter__navigation black-bg">
                 <div class="filter__container">
                     <div class="filter__button" data-btn-filter>
@@ -16,8 +15,8 @@
                     <div id="view3-btn" class="view3">
                         <img src="./assets/svg/view3.svg" alt="view3">
                     </div>
-
+                    <div id="addgame-btn" class="addgame">
+                        <img src="./assets/svg/addgame.svg" alt="add-game">
+                    </div>
                 </div>
-            </nav>')
-
-            ?>
+            </nav>

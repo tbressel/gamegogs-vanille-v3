@@ -1,43 +1,51 @@
 document.getElementById('main').addEventListener('click', function (event) {
+  console.log(event.target)
+  if (event.target.id === 'togglePassword') {
+    const passwordInput = document.getElementById('passwordField');
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
+  }
+});
 
-    console.log(event.target)
-    
-        if (event.target.id === 'togglePassword') {
-          
-    
-        const passwordInput = document.getElementById('passwordField');
-         if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-          } else {
-            passwordInput.type = 'password';
-          }
-    
-        }
-    });
-    
 
-        
-            const mainContainer = document.getElementById('main');
+const mainContainer = document.getElementById('main');
 
-            mainContainer.addEventListener('click', function(event) {
-            
-            const loginFormContainer = document.getElementById('login-form-container');
-            const registrationFormContainer = document.getElementById('registration-form-container');
-            const target = event.target;
-          
-          if (target.id === 'signup-button') {
-            toggleFormVisibility(loginFormContainer, registrationFormContainer);
+mainContainer.addEventListener('click', function (event) {
 
-          } else if (target.id === 'login-button') {
-            toggleFormVisibility(registrationFormContainer, loginFormContainer);
+  const loginFormContainer = document.getElementById('login-form-container');
+  const registrationFormContainer = document.getElementById('registration-form-container');
+  const target = event.target;
 
-          }
-        });
-        
-        function toggleFormVisibility(formToShow, formToHide) {
-          formToShow.classList.toggle('hidden__form');
-          formToHide.classList.toggle('hidden__form');
-        }
-    
+  if (target.id === 'signup-button') {
+    toggleFormVisibility(loginFormContainer, registrationFormContainer);
 
-        
+  } else if (target.id === 'login-button') {
+    toggleFormVisibility(registrationFormContainer, loginFormContainer);
+
+  }
+});
+
+function toggleFormVisibility(formToShow, formToHide) {
+  formToShow.classList.toggle('hidden__form');
+  formToHide.classList.toggle('hidden__form');
+}
+
+
+function validatePassword() {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirmPassword");
+  var confirmPasswordValue = confirmPassword.value;
+
+  if (password !== confirmPasswordValue) {
+    confirmPassword.classList.add("invalid-password");
+    alert("Les mots de passe ne correspondent pas.");
+    return false;
+  } else {
+    confirmPassword.classList.remove("invalid-password");
+  }
+
+  return true;
+}

@@ -75,67 +75,11 @@ function fetchApi(action, id, token) {
  * @param {object} jsonkey1 - The JSON data to use.
  * @param {boolean} redirect - Indicates whether a redirection should be performed.
  */
-// function getLastGamesJson(action, method, consoleMsg, jsonkey1, callback, redirect) {
-//     const data = {
-//         action: action,
-//     };
-//     fetchFormApi(data, action, method)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(`Erreur HTTP! Statut: ${response.status}`);
-//             }
-//             return response.json();
-//         })
-//         .then(jsonData => {
-//             if (jsonData.result === true) {
-//                 console.log(consoleMsg, jsonData[jsonkey1]);
-
-//                 if (callback !== false) callback(jsonData[jsonkey1]);
-
-//                 if (redirect !== false)  window.location.href = 'index.php';
-
-//             } else {
-//                 console.error('API returned an error:', jsonData.message);
-//             }
-//         })
-//   }
-
- function getLastGamesJson() {
-     const dataLastGame = {
-         action: 'display-last-games',
-     };
-     fetchFormApi(dataLastGame, 'display-last-games', 'POST')
-         .then(response => {
-             if (!response.ok) {
-                 throw new Error(`Erreur HTTP! Statut: ${response.status}`);
-             }
-             return response.json();
-         })
-         .then(jsonData => {
-             // console.log('Full JSON Response:', JSON.stringify(jsonData));
-             if (jsonData.result === true) {
-                 console.log('Game List OK:', jsonData['games']);
-                 displayLastGames(jsonData['games']);
-             } else {
-                 console.error('API returned an error:', jsonData.message);
-             }
-         })
-         .catch(error => {
-             console.error('Some errors during the JSON data response:', error);
-         });
- }
-/**
- * 
- * Get Last games information from the database in a Json format
- * 
- */
-function logoutSession() {
-
-    const dataLogout = {
-        action: 'logout',
+function getLastGamesJson() {
+    const dataLastGame = {
+        action: 'display-last-games',
     };
-
-    fetchFormApi(dataLogout, 'logout', 'POST')
+    fetchFormApi(dataLastGame, 'display-last-games', 'POST')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erreur HTTP! Statut: ${response.status}`);
@@ -144,20 +88,17 @@ function logoutSession() {
         })
         .then(jsonData => {
             // console.log('Full JSON Response:', JSON.stringify(jsonData));
-
             if (jsonData.result === true) {
-                console.log('Déconnexion OK:');
-                
-                window.location.href = 'index.php';
-
+                console.log('Game List OK:', jsonData['games']);
+                displayLastGames(jsonData['games']);
             } else {
                 console.error('API returned an error:', jsonData.message);
             }
         })
         .catch(error => {
-            console.error('Oupss ! Y\'a eu de la casse pendant la réponse du JSON:', error);
+            console.error('Some errors during the JSON data response:', error);
         });
-}
+
 
 /**
  * 
@@ -209,22 +150,48 @@ function getCollectionJson() {
             }
         })
         .catch(error => {
-            console.error('Some errors during the JSON data response:', error);
+            showMessage(error)
         });
 }
 
 
 
+}
+/**
+ * 
+ * Log out from a session
+ * 
+ */
+function logoutSession() {
 
+    const dataLogout = {
+        action: 'logout',
+    };
 
+    fetchFormApi(dataLogout, 'logout', 'POST')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(jsonData => {
+            let userMessage = jsonData.message;
+            msgType = jsonData.type;
+            showMessage(userMessage)
+            
+        })
+        .catch(error => {
+            showMessage(error)
+        });
+}
 
+/**
+ *  Login user session
+ */
 document.addEventListener('submit', (event) => {
     if (event.target.id === 'login-form') {
         event.preventDefault();
-      
-
-        // toggleConnexionForms ();
-
 
         const data = {
             action: 'login',
@@ -240,73 +207,53 @@ document.addEventListener('submit', (event) => {
                 }
                 return response.json();
             })
-            .then(jsonData => {
-                // console.log('Full JSON Response:', JSON.stringify(jsonData));
-
-                if (jsonData.result === true) {
-                    console.log('My Games List OK:', jsonData.games);
-
-                    // Assuming jsonData.games is an array of games
-                    const myGames = jsonData.yaca;
-                    // updateSubmenuLogUser(true);
-                    window.location.href = 'index.php';
-
-                } else {
-                    console.error('API returned an error:', jsonData.message);
-                }
+            .then(jsonData => {               
+                   let userMessage = jsonData.message;
+                    msgType = jsonData.type;
+                   showMessage(userMessage)
             })
             .catch(error => {
-                console.error('Some errors during the JSON data response:', error);
+                showMessage(error)
             });
     }
 });
 
 
-
+/**
+ * Sign in session
+ */
 document.addEventListener('submit', (event) => {
     if (event.target.id === 'registration-form') {
-
         event.preventDefault();
-      
-        console.log('ok');
 
-        const signInData = {
-            action: 'signin',
-            token: getToken(),
-            nickname: event.target.querySelector('input[name="nickname"]').value,
-            birthdate: event.target.querySelector('input[name="birthdate"]').value,
-            email: event.target.querySelector('input[name="email"]').value,
-            password: event.target.querySelector('input[name="password"]').value
-        };
-        console.log(signInData);
+        if (validatePassword()) {
 
-        fetchFormApi(signInData, "signin", "POST")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP! Statut: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-            // console.log('Full JSON Response:', JSON.stringify(jsonData));
+            const signInData = {
+                action: 'signin',
+                token: getToken(),
+                nickname: event.target.querySelector('input[name="nickname"]').value,
+                birthdate: event.target.querySelector('input[name="birthdate"]').value,
+                email: event.target.querySelector('input[name="email"]').value,
+                password: event.target.querySelector('input[name="password"]').value
+            };
+            console.log(signInData);
 
-            if (jsonData.result === true) {
-                console.log('Enregistrement OK:', jsonData.games);
+            fetchFormApi(signInData, "signin", "POST")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+                    }
+                    return response.json();
+                })
 
-                // Assuming jsonData.games is an array of games
-                const myGames = jsonData.message;
-                // updateSubmenuLogUser(true);
-                // window.location.href = 'index.php';
-
-            } else {
-                console.error('API returned an error:', jsonData.message);
-            }
-        })
-        .catch(error => {
-            console.error('Some errors during the JSON data response:', error);
-        });
-}
-
-
-
-    });
+                .then(jsonData => {
+                    let userMessage = jsonData.message;
+                    msgType = jsonData.type;
+                   showMessage(userMessage)
+                })
+                .catch(error => {
+                    showMessage(error)
+                });
+        }
+    }
+});

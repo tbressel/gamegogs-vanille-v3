@@ -1,38 +1,9 @@
-// --------------------------------------------------------------------------------------------
-// ---------------------------------- MAIN NAVIGATION FUNCTIONS -------------------------------
-// --------------------------------------------------------------------------------------------
 
-/**
- * 
- * Toggle submenu in the burger menu
- * 
- * @param {*} event 
- */
-function toggleSubMenu(event) {
-    document.querySelector(`.submenu__container .${event.target.getAttribute('data-set')}`).classList.toggle('active');
-    reverseProfilArrow();
-}
-
-/**
- *
- * Forcing the closure of the submenu
- *  
- */
-function closeSubMenu() {
-    document.querySelector(`.submenu__container .menu__ul--profil`).classList.toggle('active');
-}
-/**
- * 
- * Change arrows orientation  when clicking on main menu in desktop view
- * 
- */
-function reverseProfilArrow() {
-    document.getElementById('arrow-mobile').classList.toggle('down');
-}
 
 // --------------------------------------------------------------------------------------------
 // -------------------------------- FOOTER NAVIGATION FUNCTIONS -------------------------------
 // --------------------------------------------------------------------------------------------
+
 /**
  * 
  * Display footer menu
@@ -42,6 +13,7 @@ function reverseProfilArrow() {
 function displayFooterMenu(event) {
     document.getElementById(event.target.getAttribute("data-set")).classList.toggle('active');
 }
+
 /**
  * 
  * Change arrows orientation when clicking on them
@@ -51,36 +23,11 @@ function displayFooterMenu(event) {
 function reverseFooterArrow(event) {
     event.target.classList.toggle('down');
 }
+
 // --------------------------------------------------------------------------------------------
 // ------------------------------------ COLLECTION MENU BAR  ----------------------------------
 // --------------------------------------------------------------------------------------------
-/**
- * 
- * display filter bar
- * 
- * @param {*} pageName 
- * @returns 
- */
-function setFilterBar(pageName) {
-    if(currentPage === pageName) return
-    document.getElementById("filter-nav").classList.toggle("show")
-}
-/**
- *
- * Forcing the closure of the filterbar
- *  
- */
-function closeFilterBar() {
-    document.getElementById("filter-nav").classList.remove("show")
-}
-/**
- * Closing all collection Views
- */
-function closeAllView() {
-    document.querySelector('.collection__view1').className = 'collection__view1 hidden__view';
-    document.querySelector('.collection__view2').className = 'collection__view2 hidden__view';
-    document.querySelector('.collection__view3').className = 'collection__view3 hidden__view';
-}
+
 
 
 
@@ -132,15 +79,6 @@ function deleteCopieNodes(id) {
         element.remove();
     });
 }
-
-
-
-
-
-
-
-
-
 
 
 

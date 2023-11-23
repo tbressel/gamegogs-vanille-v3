@@ -2,6 +2,7 @@ body {
     position: relative;
     z-index: -10;
     min-width: 360px;
+    // width: fit-content;
     color: $cream;
     overflow-x: hidden;
 }
@@ -123,6 +124,14 @@ h6 {
     color: red !important;
   }
 
+  .hidden__view,
+.hidden__form,
+.hidden__notif {
+    display: none !important;
+}
+
+
+
 
 @media screen and (min-width:1280px) {
 
@@ -132,3 +141,4 @@ h6 {
         cursor: pointer;
     }
 }
+

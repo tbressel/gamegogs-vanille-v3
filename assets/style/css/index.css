@@ -182,6 +182,12 @@ h6 {
   color: red !important;
 }
 
+.hidden__view,
+.hidden__form,
+.hidden__notif {
+  display: none !important;
+}
+
 @media screen and (min-width: 1280px) {
   .header__container--burger,
   .profilarrow,
@@ -338,11 +344,13 @@ h6 {
 
 .menu__ul--profil {
   position: fixed;
-  z-index: 0;
+  z-index: -1;
   width: 100%;
   top: -200px;
+  transition: 200ms ease-in-out;
 }
 .menu__ul--profil.active {
+  transition: 200ms ease-in-out;
   top: 98px;
 }
 .menu__ul--profil .collection {
@@ -630,13 +638,15 @@ h6 {
 }
 .filter__navigation .views__buttons .view1,
 .filter__navigation .views__buttons .view2,
-.filter__navigation .views__buttons .view3 {
+.filter__navigation .views__buttons .view3,
+.filter__navigation .views__buttons .addgame {
   cursor: pointer;
   padding: 4px 12px 4px 12px;
 }
 .filter__navigation .views__buttons .view1 > img,
 .filter__navigation .views__buttons .view2 > img,
-.filter__navigation .views__buttons .view3 > img {
+.filter__navigation .views__buttons .view3 > img,
+.filter__navigation .views__buttons .addgame > img {
   width: 35px;
   height: 35px;
 }
@@ -2089,11 +2099,6 @@ collection view 2
   display: none;
 }
 
-.hidden__view,
-.hidden__form {
-  display: none;
-}
-
 /*
 -----------------
 collection modify
@@ -2193,87 +2198,116 @@ collection modify
   margin-top: 100px;
 }
 
-.myitems-items__container .login__text {
-  margin-bottom: 20px;
-}
-.myitems-items__container .login__text p {
-  color: #222222;
-}
-.myitems-items__container #login-form {
+.login__container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin-bottom: 100px;
+  padding: 12px;
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 0px;
 }
-.myitems-items__container #login-form.form-error #passwordField {
-  border-color: red;
+.login__container .login__text {
+  text-align: center;
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 18px;
 }
-.myitems-items__container #login-form.form-error #passwordField::-moz-placeholder {
-  color: red;
+.login__container .login__text > p {
+  font-weight: 400;
+  color: #EEEEEE;
 }
-.myitems-items__container #login-form.form-error #passwordField::placeholder {
-  color: red;
+.login__container .login__form,
+.login__container .signin__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
 }
-.myitems-items__container #login-form label {
-  margin-bottom: 8px;
-}
-.myitems-items__container #login-form input {
-  padding: 10px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-.myitems-items__container #login-form .btn {
-  padding: 10px 20px;
-  background-color: #4caf50;
+.login__container .login__form > label,
+.login__container .signin__form > label {
   color: #FFFFFF;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login__container .login__form > input,
+.login__container .signin__form > input {
+  margin: 15px auto 15px auto;
+  width: 80%;
+}
+.login__container .login__form ul,
+.login__container .signin__form ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.login__container .login__form ul .btn,
+.login__container .signin__form ul .btn {
+  border: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600;
   font-size: 16px;
-}
-.myitems-items__container #login-form .password-container {
-  position: relative;
-}
-.myitems-items__container #login-form .password-container #togglePassword {
-  position: relative;
-  top: -65px;
-  right: -250px;
-  cursor: pointer;
-  font-size: 48px;
-}
-.myitems-items__container #login-form .password-container #togglePassword:hover {
-  color: blue;
-}
-
-.form-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-container label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.form-container input {
-  width: 100%;
+  border-radius: 10px;
   padding: 10px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  background: linear-gradient(90deg, #a79300, #FFFFFF, #b87700);
+}
+.login__container .login__form .password-container,
+.login__container .signin__form .password-container {
+  position: relative;
+}
+.login__container .login__form .password-container #togglePassword,
+.login__container .signin__form .password-container #togglePassword {
+  position: fixed;
+  cursor: pointer;
+  font-size: 2rem;
+  z-index: 2;
+  padding: 2px;
+  left: 333px;
+  background-color: burlywood;
+  border-radius: 20px;
 }
 
-.form-container button {
-  padding: 10px 20px;
+.rgpd {
+  text-align: center;
+}
+.rgpd p {
+  font-size: 0.7rem;
+  line-height: 1rem;
+}
+
+.invalid-password {
+  border: 2px solid red;
+}
+
+.notif__container {
+  position: fixed;
+  width: 70%;
+  text-align: center;
+  padding: 1rem;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 0px;
+}
+
+/* Pour que le bouton soit centré horizontalement */
+.notif__text {
+  margin-bottom: 1rem; /* Ajustez la marge si nécessaire */
+}
+
+/* Style pour le bouton OK */
+.btn__color-green {
   background-color: #4caf50;
-  color: #ffffff;
+  color: white;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
 }

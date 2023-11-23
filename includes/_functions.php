@@ -3,6 +3,26 @@
 // ----------------------  PAGE CONTENT CONFIGURATION FUNCTIONS ---------------------
 // ----------------------------------------------------------------------------------
 
+
+/**
+ * Get a JSON response
+ *
+ * @param [bool] $result
+ * @param [string] $messageKey
+ * @return void
+ */
+function getJsonResponse($result, $messageKey, $notificationArray)
+{
+
+    $message = isset($notificationArray[$messageKey]) ? $notificationArray[$messageKey] : 'Message non défini';
+    ob_clean();
+    echo json_encode([
+        'result' => $result,
+        'type' => $messageKey,
+        'message' => $message,
+    ]);
+}
+
 /**
  * Return the current page name including its path
  *
