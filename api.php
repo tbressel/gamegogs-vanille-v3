@@ -113,15 +113,15 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
             exit;
         }
 
-            // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
-            $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+             // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
+        $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
         if (!preg_match($regex, $email)) {
-            getJsonResponse(false, 'email_bad_format', $notificationMessages);
-            exit;
+             getJsonResponse(false, 'email_bad_format', $notificationMessages);
+             exit;
         }
-
-
-        $user_password = htmlspecialchars($inputData['password']);
+        
+        
+         $user_password = htmlspecialchars($inputData['password']);
         $user_password = password_hash($user_password, PASSWORD_BCRYPT);
 
 
@@ -152,8 +152,138 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         $queryUser->bindValue(':user_password', $user_password, PDO::PARAM_STR);
 
         $isUserOK = $queryUser->execute();
+        $id_user = $connexion->lastInsertId();
+
+        $browser =  $_SERVER['HTTP_SEC_CH_UA'];
+        $operating_system = $_SERVER['HTTP_SEC_CH_UA_PLATFORM'];
+        
+        $server_adress = $_SERVER['SERVER_ADDR'];
+        $server_name = $_SERVER['SERVER_NAME'];     
+        
+        $remote_adress = $_SERVER['REMOTE_ADDR'];
+        $remote_port = $_SERVER['REMOTE_PORT'];
+  
+
+
+        $queryOs = $connexion->prepare('INSERT INTO configuration (browser, operating_system, server_adress, server_name, remote_adress, remote_port) VALUES (:browser, :operating_system, :server_adress, :server_name, :remote_adress, :remote_port);
+        ');
+        $queryOs->bindValue(':browser', $browser, PDO::PARAM_STR);
+        $queryOs->bindValue(':operating_system', $operating_system, PDO::PARAM_STR);
+        $queryOs->bindValue(':server_adress', $server_adress, PDO::PARAM_STR);
+        $queryOs->bindValue(':server_name', $server_name, PDO::PARAM_STR);
+        $queryOs->bindValue(':remote_adress', $remote_adress, PDO::PARAM_STR);
+        $queryOs->bindValue(':remote_port', $remote_port, PDO::PARAM_STR);
+        $isOsOK = $queryOs->execute();
+        $id_configuration = $connexion->lastInsertId();
+
+        $queryAsso = $connexion->prepare('INSERT INTO to_connect (id_user, id_configuration) VALUES (:id_user, :id_configuration);
+        ');
+        $queryAsso->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        $queryAsso->bindValue(':id_configuration', $id_configuration, PDO::PARAM_INT);
+        $isAssoOK = $queryAsso->execute();
+
+
 
         getJsonResponse(true, 'signin_success', $notificationMessages);
+        exit;
+    } 
+    // ------------------------------------------------------------------------------
+    // ----------------------------    SIGN OUT   ------------------------------------
+    // ------------------------------------------------------------------------------
+
+    else if ((isset($inputData['action']) && $inputData['action'] === 'signout') && (isset($_SESSION['userId']))){
+
+      
+    $id_user = htmlspecialchars(intval($_SESSION['userId']));
+// Suppression des références à l'utilisateur dans la table copie
+$queryDeleteCopieReferences = $connexion->prepare('DELETE FROM copie WHERE id_user = :id_user');
+$queryDeleteCopieReferences->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+$queryDeleteCopieReferences->execute();
+
+// Suppression des références à l'utilisateur dans la table to_connect et configuration
+$queryDeleteToConnectReferences = $connexion->prepare('
+    DELETE to_connect, configuration
+    FROM to_connect
+    LEFT JOIN configuration ON to_connect.id_configuration = configuration.id_configuration
+    WHERE to_connect.id_user = :id_user
+');
+$queryDeleteToConnectReferences->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+$queryDeleteToConnectReferences->execute();
+
+// Suppression de l'utilisateur dans la table users
+$queryDeleteUser = $connexion->prepare('DELETE FROM users WHERE id_user = :id_user');
+$queryDeleteUser->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+$queryDeleteUser->execute();
+
+    // Nettoyer la session
+    unset($_SESSION['pseudo']);
+    unset($_SESSION['userId']);
+    session_destroy();
+    session_unset();
+    session_write_close();
+    
+    getJsonResponse(true, 'signout_success', $notificationMessages);
+    exit;
+    
+    }
+    // ------------------------------------------------------------------------------
+    // ----------------------------  EMAIL NEWSLETTER  ------------------------------------
+    // ------------------------------------------------------------------------------
+
+    if (isset($inputData['action']) && $inputData['action'] === 'newsletter') {
+
+          $email = htmlspecialchars($inputData['email']);
+
+             // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
+        $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+        if (!preg_match($regex, $email)) {
+             getJsonResponse(false, 'email_bad_format', $notificationMessages);
+             exit;
+        }
+
+        $queryCheck = $connexion->prepare('SELECT COUNT(*) FROM emails WHERE email = :email');
+        $queryCheck->bindValue(':email', $email, PDO::PARAM_STR);
+        $queryCheck->execute();
+        // get the sum of founded entires
+        $emailExists = $queryCheck->fetchColumn();
+
+        if ($emailExists) {
+            getJsonResponse(true, 'exist_data', $notificationMessages);
+            exit;
+        }
+
+        $email_date = new DateTime();
+        $email_date_string = $email_date->format('Y-m-d H:i:s');
+
+
+        $browser =  $_SERVER['HTTP_SEC_CH_UA'];
+        $mobile_browser = $_SERVER['HTTP_SEC_CH_UA_MOBILE'];
+        $operating_system = $_SERVER['HTTP_SEC_CH_UA_PLATFORM'];
+        
+        $server_adress = $_SERVER['SERVER_ADDR'];
+        $server_name = $_SERVER['SERVER_NAME'];     
+        
+        $remote_adress = $_SERVER['REMOTE_ADDR'];
+        $remote_port = $_SERVER['REMOTE_PORT'];
+  
+
+
+        $queryMail = $connexion->prepare('INSERT INTO emails (email, email_date, browser, mobile_browser, operating_system, server_adress, server_name, remote_adress, remote_port) VALUES (:email, :email_date, :browser, :mobile_browser, :operating_system, :server_adress, :server_name, :remote_adress, :remote_port);
+        ');
+
+        $queryMail->bindValue(':email', $email, PDO::PARAM_STR);
+        $queryMail->bindValue(':email_date', $email_date_string, PDO::PARAM_STR);
+        $queryMail->bindValue(':browser', $browser, PDO::PARAM_STR);
+        $queryMail->bindValue(':mobile_browser', $mobile_browser, PDO::PARAM_STR);
+        $queryMail->bindValue(':operating_system', $operating_system, PDO::PARAM_STR);
+        $queryMail->bindValue(':server_adress', $server_adress, PDO::PARAM_STR);
+        $queryMail->bindValue(':server_name', $server_name, PDO::PARAM_STR);
+        $queryMail->bindValue(':remote_adress', $remote_adress, PDO::PARAM_STR);
+        $queryMail->bindValue(':remote_port', $remote_port, PDO::PARAM_STR);
+        $isMailOK = $queryMail->execute();
+
+        getJsonResponse(true, 'email_success', $notificationMessages);
+        exit;
     }
 
 
@@ -161,26 +291,40 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
     // ---------------     DISPLAY LAST ADDED COMMUNITY GAMES      -------------------
     // ------------------------------------------------------------------------------
     if (isset($inputData['action']) && $inputData['action'] === 'display-last-games') {
-        $query = $connexion->prepare('SELECT DISTINCT game_title,
-            game_subtitle,
-            game_cover,
-            machine_label_picture,
-            games.id_game,
-            DATE(copie_addition_date) AS copie_addition_date,
-            TIME(copie_addition_date) AS copie_addition_time,
-            copie.id_copie,
-            to_possess.id_user,
-            users.user_nikename
-            FROM to_have
-            JOIN machines USING (id_machine )
-            JOIN games USING (id_game)
-            JOIN (
-                SELECT id_game, copie_addition_date, id_copie
-                FROM copie
-                ORDER BY copie_addition_date DESC LIMIT 6
-            ) AS copie ON games.id_game = copie.id_game
-            JOIN to_possess USING (id_copie)
-            JOIN users USING (id_user)');
+        $query = $connexion->prepare('SELECT DISTINCT
+        games.id_game,
+        game_title,
+        game_subtitle,
+        game_cover,
+        machine_label_picture,
+        copie.id_copie,
+        DATE(copie_addition_date) AS copie_addition_date,
+        TIME(copie_addition_date) AS copie_addition_time,
+        users.id_user,
+        users.user_nikename,
+        machine_releasedate,
+        manufacturer_name,
+        machine_name,
+        machine_model,
+        machine_type
+    FROM
+        to_have
+    JOIN
+        machines USING (id_machine)
+    JOIN
+        manufacturers USING (id_manufacturer)
+    JOIN
+        games USING (id_game)
+    JOIN
+        copie ON games.id_game = copie.id_game
+    JOIN
+        users USING (id_user)
+    ORDER BY
+        copie_addition_date DESC
+    LIMIT
+        6;
+    
+    ');
         $query->execute();
         $gameList = $query->fetchAll();
 
@@ -239,7 +383,6 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
             JOIN manufacturers USING (id_manufacturer)
             JOIN copie USING (id_game)
             JOIN medias USING (id_medias)
-            JOIN to_possess USING (id_copie)
             JOIN users USING (id_user)
             WHERE users.id_user = :id_user
             GROUP BY id_game, id_copie,game_reference, game_title, game_subtitle, date_year, editor_name, country_name,
@@ -299,7 +442,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
             $connexion->beginTransaction();
 
-            $query = $connexion->prepare('DELETE FROM to_possess 
+            $query = $connexion->prepare('DELETE FROM copie 
                                              WHERE id_copie = :id_copie 
                                              AND id_user= :id_user');
             $query->bindValue(':id_copie', $id_copie, PDO::PARAM_INT);

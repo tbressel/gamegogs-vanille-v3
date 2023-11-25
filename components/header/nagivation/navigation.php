@@ -1,5 +1,5 @@
-<ul id="submenu" class="menu__ul--profil black-bg">
-    <li class="menu__icon collection">
+<ul id="submenu" class="menu__ul--profil ">
+    <li class="menu__icon collection <?php echo isset($_SESSION['pseudo']) ? '' : 'hidden__view'; ?>">
         <p data-id="collection">Ma collection</p>
     </li>
     <li class="menu__icon favorites">
@@ -13,5 +13,11 @@
     </li>
     <li class="menu__icon collection <?php echo isset($_SESSION['pseudo']) ? 'hidden__view' : ''; ?>">
         <p data-id="login">Connexion</p>
+    </li>
+    <li class="menu__icon collection <?php echo isset($_SESSION['pseudo']) ? 'hidden__view' : ''; ?>">
+        <p data-id="signin">Inscription</p>
+    </li>
+    <li class="menu__icon collection <?php echo isset($_SESSION['pseudo']) ? '' : 'hidden__view'; ?>">
+        <p data-id="signout">Se désinscrire</p>
     </li>
 </ul>

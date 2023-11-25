@@ -1,5 +1,3 @@
-
-
 // --------------------------------------------------------------------------------------------
 // -------------------------------- FOOTER NAVIGATION FUNCTIONS -------------------------------
 // --------------------------------------------------------------------------------------------
@@ -28,10 +26,6 @@ function reverseFooterArrow(event) {
 // ------------------------------------ COLLECTION MENU BAR  ----------------------------------
 // --------------------------------------------------------------------------------------------
 
-
-
-
-
 /**
  * 
  * Fetching a main page and waiting for the response to send it to the destination node
@@ -46,29 +40,18 @@ async function insertPageContent(fileName, path, id) {
         if (!response.ok) {
             throw new Error(`Erreur de chargement de ${fileName}`);
         }
-        const content = await response.text();
+        const content = await response.text();   
         // send of content to destination node
         document.getElementById(id).innerHTML = content;
+if (fileName ==="collection.php") {
+    currentPage = "collection";
+    // document.querySelector('.menu__ul--profil.active').style.top = '125px';
+}
     } catch (error) {
         console.error(error.message);
     }
 }
 
-
-function updateSubmenuLogUser(bool) {
-    // Sélectionner l'élément li avec l'attribut data-id="logout"
-    let logoutMenuItem = document.querySelector('[data-id="logout"]');
-
-    if (logoutMenuItem) {
-        // Sélectionner le paragraphe (p) à l'intérieur de l'élément li
-        let textElement = logoutMenuItem.querySelector('p');
-
-        if (textElement) {
-            // Mettre à jour le texte en fonction de la valeur de bool
-            textElement.textContent = bool ? "Connexion" : "Déconnexion";
-        }
-    }
-}
 
 
 

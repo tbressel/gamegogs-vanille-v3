@@ -100,18 +100,22 @@ function getLastGamesJson() {
         });
 
 
+
+
+
+}
 /**
  * 
- * Get my collection information from the database in a Json format
+ * sign out from a session
  * 
  */
-function getCollectionJson() {
+function signoutSession() {
 
-    const dataMyGame = {
-        action: 'display-my-games',
+    const dataLogout = {
+        action: 'signout',
     };
 
-    fetchFormApi(dataMyGame, 'display-my-games', 'POST')
+    fetchFormApi(dataLogout, 'signout', 'POST')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erreur HTTP! Statut: ${response.status}`);
@@ -119,43 +123,14 @@ function getCollectionJson() {
             return response.json();
         })
         .then(jsonData => {
-            // console.log('Full JSON Response:', JSON.stringify(jsonData));
-
-            if (jsonData.result === true) {
-                console.log('My Games List OK:', jsonData.games);
-                console.log('Manufacturers List OK:', jsonData.manufacturers);
-                console.log('Machines List OK:', jsonData.machines);
-                console.log('Models List OK:', jsonData.models);
-                console.log('dates List OK:', jsonData.dates);
-
-                // Assuming jsonData.games is an array of games
-                const myGames = jsonData.games;
-
-                // Continue with your logic to display recent games
-                displayMyGames(myGames, 'my-items-template1', 'my-item-view1', 'view1');
-                displayMyGames(myGames, 'my-items-template2', 'my-item-view2', 'view2');
-                displayMyGames(myGames, 'my-items-template3', 'my-item-view3', 'view3');
-
-            } else if (jsonData.logscreen === true) {
-
-                console.log('on affiche lemodule de connexion');
-                // awaiting for the page content
-                insertPageContent("connexion.php", "./pages/connexion/", "main");
-                // toggleConnexionForms();
-
-
-            } else {
-                console.error('API returned an error:', jsonData.message);
-
-            }
+            let userMessage = jsonData.message;
+            msgType = jsonData.type;
+            showMessage(userMessage)
+            
         })
         .catch(error => {
             showMessage(error)
         });
-}
-
-
-
 }
 /**
  * 
@@ -218,6 +193,59 @@ document.addEventListener('submit', (event) => {
     }
 });
 
+/**
+ * 
+ * Get my collection information from the database in a Json format
+ * 
+ */
+function getCollectionJson() {
+
+    const dataMyGame = {
+        action: 'display-my-games',
+    };
+
+    fetchFormApi(dataMyGame, 'display-my-games', 'POST')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(jsonData => {
+            // console.log('Full JSON Response:', JSON.stringify(jsonData));
+
+            if (jsonData.result === true) {
+                console.log('My Games List OK:', jsonData.games);
+                console.log('Manufacturers List OK:', jsonData.manufacturers);
+                console.log('Machines List OK:', jsonData.machines);
+                console.log('Models List OK:', jsonData.models);
+                console.log('dates List OK:', jsonData.dates);
+
+                // Assuming jsonData.games is an array of games
+                const myGames = jsonData.games;
+
+                // Continue with your logic to display recent games
+                displayMyGames(myGames, 'my-items-template1', 'my-item-view1', 'view1');
+                displayMyGames(myGames, 'my-items-template2', 'my-item-view2', 'view2');
+                displayMyGames(myGames, 'my-items-template3', 'my-item-view3', 'view3');
+
+            } else if (jsonData.logscreen === true) {
+
+                console.log('on affiche lemodule de connexion');
+                // awaiting for the page content
+                insertPageContent("connexion.php", "./pages/connexion/", "main");
+                // toggleConnexionForms();
+
+
+            } else {
+                console.error('API returned an error:', jsonData.message);
+
+            }
+        })
+        .catch(error => {
+            showMessage(error)
+        });
+}
 
 /**
  * Sign in session
@@ -227,18 +255,18 @@ document.addEventListener('submit', (event) => {
         event.preventDefault();
 
         if (validatePassword()) {
-
-            const signInData = {
+            const data = {
                 action: 'signin',
                 token: getToken(),
+
                 nickname: event.target.querySelector('input[name="nickname"]').value,
                 birthdate: event.target.querySelector('input[name="birthdate"]').value,
                 email: event.target.querySelector('input[name="email"]').value,
                 password: event.target.querySelector('input[name="password"]').value
             };
-            console.log(signInData);
+            console.log(data);
 
-            fetchFormApi(signInData, "signin", "POST")
+            fetchFormApi(data, "signin", "POST")
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`Erreur HTTP! Statut: ${response.status}`);
@@ -255,5 +283,39 @@ document.addEventListener('submit', (event) => {
                     showMessage(error)
                 });
         }
+    }
+});
+
+/**
+ * Send email for newsletter
+ */
+document.addEventListener('submit', (event) => {
+    if (event.target.id === 'newsletter-form') {
+         event.preventDefault();
+
+            const data = {
+                action: 'newsletter',
+                token: getToken(),
+                email: event.target.querySelector('input[name="email"]').value
+            };
+            console.log(data);
+
+            fetchFormApi(data, "newsletter", "POST")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+                    }
+                    return response.json();
+                })
+
+                .then(jsonData => {
+                    let userMessage = jsonData.message;
+                    msgType = jsonData.type;
+                   showMessage(userMessage)
+                })
+                .catch(error => {
+                    showMessage(error)
+                });
+        
     }
 });

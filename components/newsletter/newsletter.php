@@ -5,10 +5,10 @@
       encore !
    </p>
 </div>
-<form class="newsletter__subcontainer" method="get" action="#">
-   <label htmlFor="emailField">E-mail* :
-      <input id="emailField" name="email" type="email" placeholder="Votre adresse mail" required />
+<form id="newsletter-form" class="newsletter__subcontainer" method="post">
+   <label for="emailField">E-mail* :
+      <input id="emailField" name="email" type="email" placeholder="Votre adresse mail" required autocomplete="email" />
    </label>
-   <button class="btn btn__color-green" type="submit" formAction="#">S'abonner</button>
+   <button id="newsletter-button"  class="btn btn__color-green" type="submit">S'abonner</button>
 </form>
 </section>

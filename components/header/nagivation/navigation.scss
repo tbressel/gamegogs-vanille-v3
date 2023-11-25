@@ -6,7 +6,18 @@
 }
 
 .submenu__container {
-    height: 90px;
+    // height: 90px;
+    position: relative;
+    top: -190px;
+    z-index: -1;
+    background-color: $black;
+    transition: 200ms ease-in-out;
+
+
+    &.active {
+        transition: 200ms ease-in-out;
+        top: 0px;
+    }
 
     .menu__ul {
         position: fixed;
@@ -25,16 +36,13 @@
 }
 
 .menu__ul--profil {
-    position: fixed;
-    z-index: -1;
+    // position: relative;
+    // z-index: -1;
     width: 100%;
-    top: -200px;
+    // top: -200px;
     transition: 200ms ease-in-out;
     
-    &.active {
-        transition: 200ms ease-in-out;
-        top: 98px;
-    }
+
 
     .collection {
         cursor: pointer;

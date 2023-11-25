@@ -11,8 +11,8 @@
  * 
  * @param {*} event 
  */
-function toggleSubMenu(event) {
-    document.querySelector(`.submenu__container .${event.target.getAttribute('data-set')}`).classList.toggle('active');
+ function toggleSubMenu(event) {
+    document.querySelector(`header .${event.target.getAttribute('data-set')}`).classList.toggle('active');
     reverseProfilArrow();
 }
 /**
@@ -33,7 +33,7 @@ function reverseProfilArrow() {
  *  
  */
 function closeSubMenu() {
-    document.querySelector(`.submenu__container .menu__ul--profil`).classList.toggle('active');
+    document.querySelector(`.submenu__container`).classList.toggle('active');
 }
 
 
@@ -47,7 +47,7 @@ function closeSubMenu() {
  * @returns 
  */
 function setFilterBar(pageName) {
-    if(currentPage === pageName) return
+    if (currentPage === pageName) return
     document.getElementById("filter-nav").classList.toggle("show")
 }
 
@@ -77,65 +77,99 @@ function closeAllView() {
 // --------------------------------------------------------------------------------------------
 
 window.addEventListener('DOMContentLoaded', () => {
+    // Listen to burger button
+    document.getElementById('burger-btn').addEventListener('click', (event) => {
+        toggleSubMenu(event);
+    });
 
 
-/**
- *   Listen to submenu links
- */
-document.getElementById('submenu').addEventListener('click',  (event) => {
-    console.log(event.target)
+    // listen to profil bar button
+    document.getElementById('profilarrow-btn-mobile').addEventListener('click', (event) => {
+        toggleSubMenu(event);
+    });
+
+
+    // listen to arrows on footer menu
+    document.getElementById('footer-menu').addEventListener('click', (event) => {
+        if (event.target.getAttribute("alt") !== "arrow") return
+        displayFooterMenu(event);
+        reverseFooterArrow(event);
+    });
+
+
+    /**
+     *   Listen to submenu links
+     */
+    document.getElementById('submenu').addEventListener('click', (event) => {
+        console.log(event.target)
         if (event.target.getAttribute("data-id") === 'collection') {
             console.log('collection');
-    
+
             // close submenu
             closeSubMenu();
-    
+
             // delete main container
             deleteContainer('main');
-    
-            
+
             // awaiting for the page content
             insertPageContent("collection.php", "pages/collection/", "main");
-            
+
             // get Json content
             getCollectionJson();
             // enable filter bar
             setFilterBar("collection");
-    
+
         } else if (event.target.getAttribute("data-id") === 'logout') {
             console.log('deconnexion');
-    
+
             // close submenu
             closeSubMenu();
-    
-   
+
             // close filter bar
             closeFilterBar();
-    
+
             // awaiting for the page content
             logoutSession();
-    
+
         } else if (event.target.getAttribute("data-id") === 'login') {
             console.log('connexion');
-             // close submenu
-             closeSubMenu();
-    
-             // delete main container
-             deleteContainer('main');
-     
-             // close filter bar
-             closeFilterBar();
+            // close submenu
+            closeSubMenu();
 
-              // awaiting for the page content
-             insertPageContent("login.php", "components/login/", "main");
+            // delete main container
+            deleteContainer('main');
+
+            // close filter bar
+            closeFilterBar();
+
+            // awaiting for the page content
+            insertPageContent("login.php", "components/login/", "main");
+        } else if (event.target.getAttribute("data-id") === 'signin') {
+            console.log('inscription');
+            // close submenu
+            closeSubMenu();
+
+            // delete main container
+            deleteContainer('main');
+
+            // close filter bar
+            closeFilterBar();
+
+            // awaiting for the page content
+            insertPageContent("signin.php", "components/login/", "main");
+        } else if (event.target.getAttribute("data-id") === 'signout') {
+            console.log('désinscription');
+            // close submenu
+            closeSubMenu();
+
+            // close filter bar
+            closeFilterBar();
+
+            // awaiting for the page content
+            signoutSession();
+
         } else {
             closeSubMenu();
         }
-
-
-
-
     });
-
-
 })

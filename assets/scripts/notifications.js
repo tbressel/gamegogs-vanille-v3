@@ -43,7 +43,10 @@
         if(event.target.getAttribute('data-id') === 'notif-btn') {
             document.querySelector('.draggable').classList.add('hidden__notif');
             console.log (msgType);
-            msgType === 'login_success' || msgType === 'logout_success' || msgType === 'signin_success' ? window.location.href = 'index.php' : null;
+            msgType === 'login_success' 
+            || msgType === 'logout_success' 
+            || msgType === 'signin_success' 
+            || msgType === 'signout_success' ? window.location.href = 'index.php' : null;
         }
     })
 

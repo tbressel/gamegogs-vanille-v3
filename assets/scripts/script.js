@@ -14,24 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     getLastGamesJson('display-last-games', 'POST', 'Game List OK:','games',displayLastGames,false);
 
-    // Listen to burger button
-    document.getElementById('burger-btn').addEventListener('click', (event) => {
-        toggleSubMenu(event);
-    });
-
-
-    // listen to profil bar button
-    document.getElementById('profilarrow-btn-mobile').addEventListener('click', (event) => {
-        toggleSubMenu(event);
-    });
-
-
-    // listen to arrows on footer menu
-    document.getElementById('footer-menu').addEventListener('click', (event) => {
-        if (event.target.getAttribute("alt") !== "arrow") return
-        displayFooterMenu(event);
-        reverseFooterArrow(event);
-    });
 
 
 

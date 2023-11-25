@@ -1,4 +1,4 @@
-<div class="header__container black-bg">
+<div class="header__container">
             <div class="header__container--top">
                 <div class="header__container--brandname">
 
@@ -19,7 +19,7 @@
 
                 </div>
                 <div id="burger-btn" class="header__container--burger">
-                    <img src="./assets/svg/burger-icon.svg" alt="burger icon" data-set="menu__ul--profil">
+                    <img src="./assets/svg/burger-icon.svg" alt="burger icon" data-set="submenu__container">
                 </div>
             </div>
             <div class="header__container--bot">
@@ -47,10 +47,10 @@
                     <li class="menu__icon cart">
                         <img src="./assets/svg/cart-icon.svg" alt="cart">
                     </li>
-                    <li id="profilarrow-btn-mobile" class="menu__icon profilarrow" data-set="menu__ul--profil">
-                        <img src="./assets/svg/profil_icon.svg" alt="profil" data-set="menu__ul--profil">
+                    <li id="profilarrow-btn-mobile" class="menu__icon profilarrow" data-set="submenu__container">
+                        <img src="./assets/svg/profil_icon.svg" alt="profil" data-set="submenu__container">
                         <img id="arrow-mobile" class="" src="./assets/svg/arrowprofil-icon.svg" alt="arrow"
-                            data-set="menu__ul--profil">
+                            data-set="submenu__container">
                     </li>
                 </ul>
             </div>

@@ -14,37 +14,38 @@ include_once 'includes/_head.php';
 
 <body data-token=<?= $_SESSION['token'] ?>>
 
-    <header class="black-bg">
+    <header class="header">
         <?php include('./components/header/header.php');  ?>
-        <?php include('./components/filter/filter-nav.php'); ?>
+
+        <?php include('./components/header/filter/filter-nav.php'); ?>
+
+        <nav class="submenu__container">
+            <?php include('./components/header/nagivation/navigation.php'); ?>
+        </nav>
+
     </header>
 
 
-    <nav class="submenu__container">
-        <?php include('./components/header/nagivation/navigation.php'); ?>
-    </nav>
 
-    <nav id="breadcrumb" class="breadcrumb__nav">
+
+
+    <section id="notifications">
+        <?php include('./components/notification/notification.php'); ?>
+    </section>
+
+
+    <!-- <div id="breadcrumb" class="breadcrumb__nav">
         <ul id="breadcrumb__list" class="breadcrumb__list">
             <li data-set="accueil">
                 Accueil
             </li>
         </ul>
-    </nav>
-
-
-    <section id="notifications">
-<?php include('./components/notification/notification.php'); ?>
-    </section>
-
-
+</div> -->
     <main id="main" class="main__container">
         <?php include('./pages/home/home.php'); ?>
     </main>
-  <?php
-            var_dump($_SESSION);
-            ?>
 
+    <?php var_dump($_SESSION); ?>
 
     <footer class="black-bg">
         <div class="footer__container">
@@ -59,9 +60,9 @@ include_once 'includes/_head.php';
 
 
     <script src="./assets/scripts/functions.js"></script>
+    <script src="./assets/scripts/api.js"></script>
     <script src="./assets/scripts/script.js"></script>
     <script src="./assets/scripts/navigation.js"></script>
-    <script src="./assets/scripts/api.js"></script>
     <script src="./assets/scripts/formulaire.js"></script>
     <script src="./assets/scripts/display.js"></script>
     <script src="./assets/scripts/notifications.js"></script>

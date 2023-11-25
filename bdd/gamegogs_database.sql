@@ -4,7 +4,33 @@ CREATE DATABASE IF NOT EXISTS gamegogs_database;
 
 USE gamegogs_database;
 
+CREATE TABLE emails(
+   id_emails INT AUTO_INCREMENT,
+   email VARCHAR(50) NOT NULL,
+   email_date DATETIME,
+   browser VARCHAR(50),
+   mobile_browser VARCHAR(50),
+   operating_system VARCHAR(50),
+   server_adress VARCHAR(50),
+   server_name VARCHAR(50),
+   remote_adress VARCHAR(50),
 
+   remote_port VARCHAR(50),
+
+   PRIMARY KEY(id_emails),
+   UNIQUE(email)
+);
+
+CREATE TABLE configuration(
+   id_configuration INT AUTO_INCREMENT,
+   browser VARCHAR(255),
+   operating_system VARCHAR(50),
+   server_adress VARCHAR(50),
+   server_name VARCHAR(128),
+   remote_adress VARCHAR(50),
+   remote_port VARCHAR(50),
+   PRIMARY KEY(id_configuration)
+);
 
 CREATE TABLE countries(
    id_country INT AUTO_INCREMENT,
@@ -18,7 +44,7 @@ CREATE TABLE users(
    user_birthdate DATE,
    user_email VARCHAR(50) NOT NULL,
    user_signin_date DATETIME NOT NULL,
-   user_password VARCHAR(255),
+   user_password_hash VARCHAR(255),
    PRIMARY KEY(id_user),
    UNIQUE(user_nikename),
    UNIQUE(user_email)
@@ -87,6 +113,7 @@ CREATE TABLE games(
    FOREIGN KEY(id_editor) REFERENCES editors(id_editor)
 );
 
+
 CREATE TABLE copie(
    id_copie INT AUTO_INCREMENT,
    copie_state_description VARCHAR(50) NOT NULL,
@@ -94,21 +121,16 @@ CREATE TABLE copie(
    copie_addition_date DATETIME NOT NULL,
    copie_state_rank TINYINT NOT NULL,
    id_machine INT NOT NULL,
+   id_user INT NOT NULL,
    id_medias INT NOT NULL,
    id_game INT NOT NULL,
    PRIMARY KEY(id_copie),
    FOREIGN KEY(id_machine) REFERENCES machines(id_machine),
+   FOREIGN KEY(id_user) REFERENCES users(id_user),
    FOREIGN KEY(id_medias) REFERENCES medias(id_medias),
    FOREIGN KEY(id_game) REFERENCES games(id_game)
 );
 
-CREATE TABLE to_possess(
-   id_user INT,
-   id_copie INT,
-   PRIMARY KEY(id_user, id_copie),
-   FOREIGN KEY(id_user) REFERENCES users(id_user),
-   FOREIGN KEY(id_copie) REFERENCES copie(id_copie)
-);
 
 CREATE TABLE to_have(
    id_game INT,
@@ -121,6 +143,16 @@ CREATE TABLE to_have(
 );
 
 
+CREATE TABLE to_connect(
+   id_user INT,
+   id_configuration INT,
+   PRIMARY KEY(id_user, Id_configuration),
+   FOREIGN KEY(id_user) REFERENCES users(id_user),
+   FOREIGN KEY(Id_configuration) REFERENCES configuration(id_configuration)
+);
+
+
+
 -- Countries
 INSERT INTO countries (country_name) VALUES
 ('Allemagne'),
@@ -129,7 +161,7 @@ INSERT INTO countries (country_name) VALUES
 ('USA'),
 ('Japon');
 -- Users
-INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date, user_password) VALUES
+INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date, user_password_hash) VALUES
 ('Zisquier', '1993-09-25', 'zisquier@email.com', '2023-11-01 11:11:11','e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'),
 ('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12','1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'),
 ('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13','3acb59306ef6e660cf832d1d34c4fba3d88d616f0bb5c2a9e0f82d18ef6fc167'),
@@ -239,72 +271,21 @@ VALUES
 
 
 -- Copie
-INSERT INTO copie (copie_state_description, copie_state_name, copie_state_rank, copie_addition_date, id_machine, id_medias, id_game)
+INSERT INTO copie (copie_state_description, copie_state_name, copie_state_rank, copie_addition_date, id_user, id_machine, id_medias, id_game)
 VALUES
-('Comme neuf', 'Presque neuf', 1, '2023-02-15 20:45:05', 4, 3, 4),
-('Endommagé', 'Besoin de réparation', 3, '2023-03-12 12:30:15', 1, 3, 1),
-('Endommagé', 'Besoin de réparation', 3, '2022-03-25 18:45:30', 1, 4, 2),
-('Endommagé', 'Besoin de réparation', 3, '2020-03-02 08:15:00', 2, 2, 6),
-('Correct', 'État correct', 2, '2023-04-17 22:30:45', 4, 2, 5),
-('Correct', 'État correct', 2, '2022-12-05 10:00:20', 3, 5, 7),
-('Correct', 'État correct', 2, '2022-09-22 15:20:10', 1, 3, 1),
-('Comme neuf', 'Presque neuf', 1, '2023-02-15 23:55:30', 1, 4, 2),
-('Endommagé', 'Besoin de réparation', 3, '2023-03-20 05:40:10', 1, 4, 3),
-('Correct', 'État correct', 2, '2021-06-26 18:10:55', 4, 5, 7),
-('Correct', 'État correct', 2, '2021-04-28 14:05:40', 4, 5, 7),
-('Correct', 'État correct', 2, '2001-04-28 14:05:40', 4, 4, 3),
-('Correct', 'État correct', 2, '2024-04-28 14:05:40', 4, 3, 4),
-('Comme neuf', 'Presque neuf', 1, '2024-06-28 14:05:40', 4, 3, 4);
--- Association User / Copie  (copie qui possède l'id_game de cette copie de cet user)
-INSERT INTO to_possess (id_user, id_copie) VALUES
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 12),
-(2, 1),
-(2, 5),
-(3, 6),
-(4, 7),
-(4, 8),
-(4, 9),
-(4, 10),
-(1, 13),
-(1, 14),
-(4, 11);
+('Comme neuf', 'Presque neuf', 1, '2023-02-15 20:45:05', 4, 2, 3, 4),
+('Endommagé', 'Besoin de réparation', 3, '2023-03-12 12:30:15', 1, 1, 3, 1),
+('Endommagé', 'Besoin de réparation', 3, '2022-03-25 18:45:30', 1, 1, 4, 2),
+('Endommagé', 'Besoin de réparation', 3, '2020-03-02 08:15:00', 2, 1, 2, 6),
+('Correct', 'État correct', 2, '2023-04-17 22:30:45', 4, 2, 2, 5),
+('Correct', 'État correct', 2, '2022-12-05 10:00:20', 3, 3, 5, 7),
+('Correct', 'État correct', 2, '2022-09-22 15:20:10', 1, 4, 3, 1),
+('Comme neuf', 'Presque neuf', 1, '2023-02-15 23:55:30', 1, 4, 4, 2),
+('Endommagé', 'Besoin de réparation', 3, '2023-03-20 05:40:10', 1, 4, 4, 3),
+('Correct', 'État correct', 2, '2021-06-26 18:10:55', 4, 4, 5, 7),
+('Correct', 'État correct', 2, '2021-04-28 14:05:40', 4, 4, 5, 7),
+('Correct', 'État correct', 2, '2001-04-28 14:05:40', 4, 1, 4, 3),
+('Correct', 'État correct', 2, '2024-04-28 14:05:40', 4, 1, 3, 4),
+('Comme neuf', 'Presque neuf', 1, '2024-06-28 14:05:40', 4, 1, 3, 4);
 
-SELECT
-    id_game,
-    id_copie,
-    game_title,
-    game_subtitle,
-    GROUP_CONCAT(category_name) AS categories,
-    date_year,
-    editor_name,
-    country_name,
-    manufacturer_name,
-    machine_name,
-    machine_model,
-    media_type,
-    ROUND(game_price, 2) AS game_price,
-    game_cover,
-    machine_label_picture
-FROM
-    to_have
-JOIN machines USING (id_machine)
-JOIN categories USING (id_categorie)
-JOIN games USING (id_game)
-JOIN dates USING (id_dates)
-JOIN editors USING (id_editor)
-JOIN countries USING (id_country)
-JOIN manufacturers USING (id_manufacturer)
-JOIN copie USING (id_game)
-JOIN medias USING (id_medias)
-JOIN to_possess USING (id_copie)
-JOIN users USING (id_user)
-WHERE
-    users.id_user = 1 AND to_possess.id_user
-GROUP BY
-    id_game, id_copie, game_title, game_subtitle, date_year, editor_name, country_name,
-    manufacturer_name, machine_name, machine_model, media_type, game_cover, machine_label_picture
-ORDER BY
-    id_copie;
+

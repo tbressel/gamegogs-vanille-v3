@@ -69,6 +69,8 @@ body {
 
 header {
   position: fixed;
+  width: 100%;
+  background-color: transparent;
 }
 
 p {
@@ -140,6 +142,7 @@ h6 {
 .main__container {
   position: relative;
   z-index: -3;
+  top: 200px;
 }
 
 .underline {
@@ -196,11 +199,11 @@ h6 {
   }
 }
 .header__container {
-  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  background-color: #222222;
 }
 .header__container .header__container--top,
 .header__container .header__container--bot {
@@ -248,6 +251,7 @@ h6 {
   align-items: center;
   margin: 10px;
   margin-right: 12px;
+  cursor: pointer;
 }
 .header__container .header__container--searchfield {
   width: 300px;
@@ -255,6 +259,7 @@ h6 {
 }
 .header__container .header__container--searchfield .field-search {
   width: -webkit-fill-available;
+  width: 100%;
   height: 30px;
   border-radius: 5px;
   transition: 300ms ease-in-out;
@@ -327,7 +332,15 @@ h6 {
 }
 
 .submenu__container {
-  height: 90px;
+  position: relative;
+  top: -190px;
+  z-index: -1;
+  background-color: #222222;
+  transition: 200ms ease-in-out;
+}
+.submenu__container.active {
+  transition: 200ms ease-in-out;
+  top: 0px;
 }
 .submenu__container .menu__ul {
   position: fixed;
@@ -343,15 +356,8 @@ h6 {
 }
 
 .menu__ul--profil {
-  position: fixed;
-  z-index: -1;
   width: 100%;
-  top: -200px;
   transition: 200ms ease-in-out;
-}
-.menu__ul--profil.active {
-  transition: 200ms ease-in-out;
-  top: 98px;
 }
 .menu__ul--profil .collection {
   cursor: pointer;
@@ -596,16 +602,15 @@ h6 {
   }
 }
 .filter__navigation {
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  z-index: -1;
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
   padding: 10px 0 10px 0;
+  background-color: #222222;
 }
 .filter__navigation.show {
+  display: flex;
   top: 110px;
 }
 .filter__navigation .filter__container {
@@ -2225,6 +2230,7 @@ collection modify
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 15px;
 }
 .login__container .login__form > label,
@@ -2233,17 +2239,19 @@ collection modify
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 70%;
 }
 .login__container .login__form > input,
 .login__container .signin__form > input {
   margin: 15px auto 15px auto;
-  width: 80%;
+  width: 70%;
 }
 .login__container .login__form ul,
 .login__container .signin__form ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  width: 80%;
 }
 .login__container .login__form ul .btn,
 .login__container .signin__form ul .btn {
@@ -2261,6 +2269,17 @@ collection modify
 .login__container .login__form .password-container,
 .login__container .signin__form .password-container {
   position: relative;
+  width: 70%;
+}
+.login__container .login__form .password-container > label,
+.login__container .signin__form .password-container > label {
+  color: #FFFFFF;
+  width: 70%;
+}
+.login__container .login__form .password-container > label > input,
+.login__container .signin__form .password-container > label > input {
+  margin: 15px auto 15px auto;
+  width: 70%;
 }
 .login__container .login__form .password-container #togglePassword,
 .login__container .signin__form .password-container #togglePassword {
@@ -2269,7 +2288,8 @@ collection modify
   font-size: 2rem;
   z-index: 2;
   padding: 2px;
-  left: 333px;
+  left: 485px;
+  top: 319px;
   background-color: burlywood;
   border-radius: 20px;
 }

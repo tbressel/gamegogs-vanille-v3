@@ -9,6 +9,9 @@ body {
 
 header {
     position: fixed;
+    width: 100%;
+    // top: 0px;
+    background-color: transparent;
 }
 
 p {
@@ -81,6 +84,7 @@ h6 {
 .main__container {
     position: relative;
     z-index: -3;
+    top: 200px;
 }
 
 .underline {
