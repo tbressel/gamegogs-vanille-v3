@@ -45,7 +45,7 @@ include_once 'includes/_head.php';
         <?php include('./pages/home/home.php'); ?>
     </main>
 
-    <?php var_dump($_SESSION); ?>
+     <!-- <?php var_dump($_SESSION); ?> -->
 
     <footer class="black-bg">
         <div class="footer__container">

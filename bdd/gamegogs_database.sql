@@ -4,34 +4,6 @@ CREATE DATABASE IF NOT EXISTS gamegogs_database;
 
 USE gamegogs_database;
 
-CREATE TABLE emails(
-   id_emails INT AUTO_INCREMENT,
-   email VARCHAR(50) NOT NULL,
-   email_date DATETIME,
-   browser VARCHAR(50),
-   mobile_browser VARCHAR(50),
-   operating_system VARCHAR(50),
-   server_adress VARCHAR(50),
-   server_name VARCHAR(50),
-   remote_adress VARCHAR(50),
-
-   remote_port VARCHAR(50),
-
-   PRIMARY KEY(id_emails),
-   UNIQUE(email)
-);
-
-CREATE TABLE configuration(
-   id_configuration INT AUTO_INCREMENT,
-   browser VARCHAR(255),
-   operating_system VARCHAR(50),
-   server_adress VARCHAR(50),
-   server_name VARCHAR(128),
-   remote_adress VARCHAR(50),
-   remote_port VARCHAR(50),
-   PRIMARY KEY(id_configuration)
-);
-
 CREATE TABLE countries(
    id_country INT AUTO_INCREMENT,
    country_name VARCHAR(50) NOT NULL,
@@ -49,7 +21,6 @@ CREATE TABLE users(
    UNIQUE(user_nikename),
    UNIQUE(user_email)
 );
-
 
 CREATE TABLE categories(
    id_categorie INT AUTO_INCREMENT,
@@ -75,6 +46,42 @@ CREATE TABLE medias(
    media_type VARCHAR(50) NOT NULL,
    media_storage_capacity DECIMAL(4,1) NOT NULL,
    PRIMARY KEY(id_medias)
+);
+
+CREATE TABLE emails(
+   Id_emails INT AUTO_INCREMENT,
+   email VARCHAR(50) NOT NULL,
+   email_date DATETIME,
+   browser VARCHAR(50),
+   mobile_browser VARCHAR(50),
+   operating_system VARCHAR(50),
+   server_adress VARCHAR(50),
+   server_name VARCHAR(50),
+   remote_adress VARCHAR(50),
+   remote_host VARCHAR(50),
+   remote_port VARCHAR(50),
+   remote_user VARCHAR(50),
+   PRIMARY KEY(Id_emails),
+   UNIQUE(email)
+);
+
+CREATE TABLE configuration(
+   Id_configuration INT AUTO_INCREMENT,
+   browser VARCHAR(50),
+   operating_system VARCHAR(50),
+   server_adress VARCHAR(50),
+   server_name VARCHAR(128),
+   remote_adress VARCHAR(50),
+   remote_port VARCHAR(50),
+   PRIMARY KEY(Id_configuration)
+);
+
+CREATE TABLE state(
+   id_state INT AUTO_INCREMENT,
+   copie_state_rank VARCHAR(10) NOT NULL,
+   copie_state_name VARCHAR(50) NOT NULL,
+   copie_state_description VARCHAR(50) NOT NULL,
+   PRIMARY KEY(id_state)
 );
 
 CREATE TABLE editors(
@@ -104,7 +111,6 @@ CREATE TABLE games(
    game_title VARCHAR(50) NOT NULL,
    game_subtitle VARCHAR(50),
    game_reference VARCHAR(50) NOT NULL,
-   game_price DECIMAL(19,4),
    game_cover VARCHAR(100),
    id_dates INT NOT NULL,
    id_editor INT NOT NULL,
@@ -113,24 +119,22 @@ CREATE TABLE games(
    FOREIGN KEY(id_editor) REFERENCES editors(id_editor)
 );
 
-
 CREATE TABLE copie(
    id_copie INT AUTO_INCREMENT,
-   copie_state_description VARCHAR(50) NOT NULL,
-   copie_state_name VARCHAR(50) NOT NULL,
+   copie_price DECIMAL(19,4),
    copie_addition_date DATETIME NOT NULL,
-   copie_state_rank TINYINT NOT NULL,
    id_machine INT NOT NULL,
    id_user INT NOT NULL,
+   id_state INT NOT NULL,
    id_medias INT NOT NULL,
    id_game INT NOT NULL,
    PRIMARY KEY(id_copie),
    FOREIGN KEY(id_machine) REFERENCES machines(id_machine),
    FOREIGN KEY(id_user) REFERENCES users(id_user),
+   FOREIGN KEY(id_state) REFERENCES state(id_state),
    FOREIGN KEY(id_medias) REFERENCES medias(id_medias),
    FOREIGN KEY(id_game) REFERENCES games(id_game)
 );
-
 
 CREATE TABLE to_have(
    id_game INT,
@@ -142,15 +146,13 @@ CREATE TABLE to_have(
    FOREIGN KEY(id_categorie) REFERENCES categories(id_categorie)
 );
 
-
 CREATE TABLE to_connect(
    id_user INT,
-   id_configuration INT,
+   Id_configuration INT,
    PRIMARY KEY(id_user, Id_configuration),
    FOREIGN KEY(id_user) REFERENCES users(id_user),
-   FOREIGN KEY(Id_configuration) REFERENCES configuration(id_configuration)
+   FOREIGN KEY(Id_configuration) REFERENCES configuration(Id_configuration)
 );
-
 
 
 -- Countries
@@ -161,11 +163,13 @@ INSERT INTO countries (country_name) VALUES
 ('USA'),
 ('Japon');
 -- Users
+-- mot de pass : passPASS14-
+
 INSERT INTO users (user_nikename, user_birthdate, user_email, user_signin_date, user_password_hash) VALUES
-('Zisquier', '1993-09-25', 'zisquier@email.com', '2023-11-01 11:11:11','e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'),
-('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12','1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'),
-('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13','3acb59306ef6e660cf832d1d34c4fba3d88d616f0bb5c2a9e0f82d18ef6fc167'),
-('Wisauier', '1996-07-15', 'wisauier@email.com', '2023-11-04 14:14:14','a417b5dc3d06d15d91c6687e27fc1705ebc56b3b2d813abe03066e5643fe4e74');
+('Zisquier', '1977-06-28', 'tbressel.dev@gmail.com', '2023-11-01 11:11:11','$2y$10$uyWDTkO8Yoyhc5XVWVEDke3yfUyY07SvF0LVhN3lKAnbH9zzVN76C'),
+('Amstariga', '1987-04-18', 'amsta@email.com', '2023-11-02 12:12:12','$2y$10$uyWDTkO8Yoyhc5XVWVEDke3yfUyY07SvF0LVhN3lKAnbH9zzVN76C'),
+('Tbressel', '1999-11-02', 'tbressel@email.com', '2023-11-03 13:13:13','$2y$10$uyWDTkO8Yoyhc5XVWVEDke3yfUyY07SvF0LVhN3lKAnbH9zzVN76C'),
+('Wisauier', '1996-07-15', 'wisauier@email.com', '2023-11-04 14:14:14','$2y$10$uyWDTkO8Yoyhc5XVWVEDke3yfUyY07SvF0LVhN3lKAnbH9zzVN76C');
 -- Manufacturers
 INSERT INTO manufacturers (manufacturer_name) VALUES
 ('Amstrad'),
@@ -214,19 +218,19 @@ INSERT INTO editors (editor_name, id_country) VALUES
 ('Rockstar Games', 4),
 ('Taito', 4);
 -- Games
-INSERT INTO games (game_title, game_subtitle, game_reference, game_price, game_cover, id_dates, id_editor) VALUES
-('Barbarian', '', 'FPS789', 59.99, 'img/covers/cpc-barbarian-cover.jpg', 10, 6),
-('Double Dragon', '', 'FPS789', 59.99, 'img/covers/cpc-doubledragon-cover.jpg', 19, 7),
-('Prehistorik 2', '', 'FPS789', 59.99, 'img/covers/cpc-prehistorik2-cover.jpg', 16, 2),
-('Rick Dangerous', '', 'FPS789', 59.99, 'img/covers/cpc-rickdangerous-cover.jpg', 11, 8),
-('Goat Simulator', '', 'WOM456', 49.99, 'img/covers/pc-goatsimulator-cover.jpg', 37, 5),
-('Grand Theft Auto 5', '', 'FD789', 29.99, 'img/covers/ps4-grandtheftauto5-cover.jpg', 36, 9),
-('Mortal Kombat 2', '', 'RPG456', 44.99, 'img/covers/sms-mortalkombat2-cover.jpg', 13, 10),
-('Earth Worm Jim 2', '', 'SCB123', 54.99, 'img/covers/snes-earthwormjim2-cover.jpg', 15, 4),
-('Energy Breaker', '', 'MJ789', 39.99, 'img/covers/snes-energybreaker-cover.jpg', 15, 4),
-('Mario Kart Delux 8', '', 'MJ789', 39.99, 'img/covers/switch-mariokartdeluxe8-cover.png', 43, 4),
-('Splatton 2', '', 'MJ789', 39.99, 'img/covers/switch-splatoon2-cover.png', 35, 4),
-('The Legend Of Zelda', 'Breath Of The Wild', 'MJ789', 39.99, 'img/covers/switch-thelegendofzelda-breathofthewild-cover.png', 42, 4);
+INSERT INTO games (game_title, game_subtitle, game_reference, game_cover, id_dates, id_editor) VALUES
+('Barbarian', '', 'FPS789', 'img/covers/cpc-barbarian-cover.jpg', 10, 6),
+('Double Dragon', '', 'FPS789', 'img/covers/cpc-doubledragon-cover.jpg', 19, 7),
+('Prehistorik 2', '', 'FPS789', 'img/covers/cpc-prehistorik2-cover.jpg', 16, 2),
+('Rick Dangerous', '', 'FPS789', 'img/covers/cpc-rickdangerous-cover.jpg', 11, 8),
+('Goat Simulator', '', 'WOM456', 'img/covers/pc-goatsimulator-cover.jpg', 37, 5),
+('Grand Theft Auto 5', '', 'FD789', 'img/covers/ps4-grandtheftauto5-cover.jpg', 36, 9),
+('Mortal Kombat 2', '', 'RPG456', 'img/covers/sms-mortalkombat2-cover.jpg', 13, 10),
+('Earth Worm Jim 2', '', 'SCB123','img/covers/snes-earthwormjim2-cover.jpg', 15, 4),
+('Energy Breaker', '', 'MJ789', 'img/covers/snes-energybreaker-cover.jpg', 15, 4),
+('Mario Kart Delux 8', '', 'MJ789',  'img/covers/switch-mariokartdeluxe8-cover.png', 43, 4),
+('Splatton 2', '', 'MJ789',  'img/covers/switch-splatoon2-cover.png', 35, 4),
+('The Legend Of Zelda', 'Breath Of The Wild', 'MJ789', 'img/covers/switch-thelegendofzelda-breathofthewild-cover.png', 42, 4);
 -- Categories
 INSERT INTO categories (category_name) VALUES
 ('Combat'),
@@ -268,24 +272,143 @@ VALUES
 ( 'Disquette', 8.0, 'Ko'),
 ( 'Cartouche', 15.3, 'Mo');
 
-
+INSERT INTO state (copie_state_rank, copie_state_name, copie_state_description) VALUES
+('1 / 10' , 'Méconnaissable !', 'red-color'),
+('2 / 10' , 'Très mauvais état et très sale !', 'red-color'),
+('3 / 10' , 'Très mauvais état', 'red-color'),
+('4 / 10' , 'Mauvais état - il a prit cher !', 'red-color'),
+('4,5 / 10' , 'Mauvais état - pas catastrophique', 'orange-color'),
+('5 / 10', 'Etat moyen - marqué par le temps', 'orange-color'),
+('6 / 10' , 'Etat correct - il a pas mal servit', 'orange-color'),
+('7 / 10' , 'Assez bon état - ila son age', 'orange-color'),
+('8 / 10' , 'Très bon état', 'green-color'),
+('9 / 10' , 'Très bon état - comme neuf', 'green-color'),
+('9,5 / 10' , 'Neuf sous blister - presque mint', 'green-color'),
+('10 / 10' , 'Neuf sous blister - mint', 'green-color');
 
 -- Copie
-INSERT INTO copie (copie_state_description, copie_state_name, copie_state_rank, copie_addition_date, id_user, id_machine, id_medias, id_game)
-VALUES
-('Comme neuf', 'Presque neuf', 1, '2023-02-15 20:45:05', 4, 2, 3, 4),
-('Endommagé', 'Besoin de réparation', 3, '2023-03-12 12:30:15', 1, 1, 3, 1),
-('Endommagé', 'Besoin de réparation', 3, '2022-03-25 18:45:30', 1, 1, 4, 2),
-('Endommagé', 'Besoin de réparation', 3, '2020-03-02 08:15:00', 2, 1, 2, 6),
-('Correct', 'État correct', 2, '2023-04-17 22:30:45', 4, 2, 2, 5),
-('Correct', 'État correct', 2, '2022-12-05 10:00:20', 3, 3, 5, 7),
-('Correct', 'État correct', 2, '2022-09-22 15:20:10', 1, 4, 3, 1),
-('Comme neuf', 'Presque neuf', 1, '2023-02-15 23:55:30', 1, 4, 4, 2),
-('Endommagé', 'Besoin de réparation', 3, '2023-03-20 05:40:10', 1, 4, 4, 3),
-('Correct', 'État correct', 2, '2021-06-26 18:10:55', 4, 4, 5, 7),
-('Correct', 'État correct', 2, '2021-04-28 14:05:40', 4, 4, 5, 7),
-('Correct', 'État correct', 2, '2001-04-28 14:05:40', 4, 1, 4, 3),
-('Correct', 'État correct', 2, '2024-04-28 14:05:40', 4, 1, 3, 4),
-('Comme neuf', 'Presque neuf', 1, '2024-06-28 14:05:40', 4, 1, 3, 4);
+INSERT INTO copie (copie_price, copie_addition_date, id_user, id_machine, id_medias, id_game, id_state)
+VALUES 
+( 12.99,  '2023-02-15 20:45:05', 4, 2, 3, 4, 1),
+( 36.00,  '2023-03-12 12:30:15', 1, 1, 5, 7, 2),
+( 40.50,  '2022-03-25 18:45:30', 1, 1, 4, 2, 2),
+( 2.00, '2020-03-02 08:15:00', 2, 1, 2, 6, 3),
+( 4.99, '2023-04-17 22:30:45', 4, 2, 2, 5, 4),
+( 8.00, '2022-12-05 10:00:20', 3, 3, 5, 7, 3),
+( 50.50,  '2022-09-22 15:20:10', 1, 4, 4, 3, 3),
+( 120.00, '2023-02-15 23:55:30', 1, 4, 3, 4, 6),
+( 12.00,  '2023-03-20 05:40:10', 1, 4, 2, 6, 7),
+( 100.99, '2021-06-26 18:10:55', 4, 4, 5, 7, 8),
+( 24.50,  '2021-04-28 14:05:40', 4, 4, 5, 7, 9),
+( 26.99,  '2001-04-28 14:05:40', 4, 1, 2, 6, 10),
+( 32.00,  '2024-04-28 14:05:40', 4, 1, 2, 5, 0),
+( 9.50, '2024-06-28 14:05:40', 4, 1, 3, 4, 5);
+
+
+-- création d'une vue pour générer des statistiques
+CREATE VIEW game_statistics AS
+SELECT
+    id_game,
+    game_title,
+    AVG(copie_price) AS game_avg_price,
+    MIN(copie_price) AS game_min_price,
+    MAX(copie_price) AS game_max_price,
+    COUNT(id_copie) AS total_copies
+FROM
+    copie
+JOIN
+    games USING (id_game)
+GROUP BY
+    id_game, game_title;
+
+
+-- consulter la vue
+-- SELECT
+--     gs.id_game,
+--     gs.game_title,
+--     gs.game_avg_price,
+--     gs.game_min_price,
+--     gs.game_max_price,
+--     gs.total_copies
+-- FROM
+--     game_statistics gs
+-- JOIN
+--     copie c ON gs.id_game = c.id_game
+-- WHERE
+--     id_user = 1;
+
+
+
+SELECT
+    c.category_name AS filter_name,
+    COUNT(DISTINCT g.id_game) AS total_games,
+    COUNT(DISTINCT CASE WHEN co.id_user = 1 THEN g.id_game END) AS games_owned_user
+FROM
+    categories c
+LEFT JOIN
+    to_have t USING (id_categorie)
+LEFT JOIN
+    copie co USING (id_game)
+LEFT JOIN
+    games g USING (id_game)
+GROUP BY
+    c.id_categorie, c.category_name;
+
+
+
+
+SELECT
+    m.media_type AS filter_name,
+    COUNT(DISTINCT g.id_game) AS total_games,
+    COUNT(DISTINCT CASE WHEN co.id_user = 1 THEN g.id_game END) AS games_owned_user
+FROM
+    medias m
+LEFT JOIN
+    copie co USING (id_medias)
+LEFT JOIN
+    games g USING (id_game)
+GROUP BY
+    m.media_type;
+
+
+-- CREATE VIEW manufacturer_game_statistics AS
+-- SELECT
+--     m.manufacturer_name,
+--     COUNT(DISTINCT th.id_game) AS total_games,
+--     COUNT(DISTINCT CASE WHEN c.id_user = 1 THEN th.id_game END) AS games_owned_by_user_1
+-- FROM
+--     manufacturers m
+-- LEFT JOIN
+--     machines ma ON m.id_manufacturer = ma.id_manufacturer
+-- LEFT JOIN
+--     to_have th ON ma.id_machine = th.id_machine
+-- LEFT JOIN
+--     copie c ON th.id_game = c.id_game AND c.id_user = 1
+-- GROUP BY
+--     m.manufacturer_name
+-- ORDER BY
+--     m.manufacturer_name;
+
+
+
+
+SELECT
+    m.machine_name AS filter_name,
+    COUNT(DISTINCT g.id_game) AS total_games,
+    COUNT(DISTINCT CASE WHEN co.id_user = 1 THEN g.id_game END) AS games_owned_user
+FROM
+    machines m
+LEFT JOIN
+    to_have t USING (id_machine)
+LEFT JOIN
+    games g USING (id_game)
+LEFT JOIN
+    copie co ON g.id_game = co.id_game AND co.id_user = 1
+GROUP BY
+    m.machine_name;
+
+
+
+
 
 

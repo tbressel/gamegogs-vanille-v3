@@ -216,15 +216,25 @@ function getCollectionJson() {
 
             if (jsonData.result === true) {
                 console.log('My Games List OK:', jsonData.games);
-                console.log('Manufacturers List OK:', jsonData.manufacturers);
-                console.log('Machines List OK:', jsonData.machines);
-                console.log('Models List OK:', jsonData.models);
-                console.log('dates List OK:', jsonData.dates);
+                console.log('Category Stat:', jsonData.categoryStat);
+                console.log('media Stat:', jsonData.mediaStat);
+                console.log('Manufacturers Stat:', jsonData.manufacturerStat);
+                console.log('machine Stat:', jsonData.machineStat);
+
 
                 // Assuming jsonData.games is an array of games
                 const myGames = jsonData.games;
+                const categoryStat = jsonData.categoryStat;
+                const mediaStat = jsonData.mediaStat;
+                // const manufacturerStat = jsonData.manufacturerStat;
+                const machineStat = jsonData.machineStat;
+                displayFilter(categoryStat, 'genre_filter_template', 'genre_filter');
+                displayFilter(mediaStat, 'media_filter_template', 'media_filter');
+                displayFilter(machineStat, 'plateform_filter_template', 'plateform_filter');
 
-                // Continue with your logic to display recent games
+
+
+                // Continue display my games
                 displayMyGames(myGames, 'my-items-template1', 'my-item-view1', 'view1');
                 displayMyGames(myGames, 'my-items-template2', 'my-item-view2', 'view2');
                 displayMyGames(myGames, 'my-items-template3', 'my-item-view3', 'view3');

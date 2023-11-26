@@ -47,30 +47,36 @@ document.addEventListener('DOMContentLoaded', () => {
      * Listen to buttons inside each container
      */
     document.getElementById("main").addEventListener('click', (event) => {
-        console.log(event.target)
-
-        if (event.target.getAttribute("data-id") === "arrow-img") {
-
+        const clickedElement = event.target;
+    
+        if (clickedElement.getAttribute("data-id") === "arrow-img") {
             // switch class to change arrow direction
-            event.target.classList.toggle("arrow_change");
-
+            clickedElement.classList.toggle("arrow_change");
+    
             // And sibling top-information and then bot-informations to toggle hidden class
-            let botInfoContainer = event.target.closest(".top-informations").nextElementSibling.classList.toggle('hidden');
+            const botInfoContainer = clickedElement.closest(".top-informations").nextElementSibling;
+            botInfoContainer.classList.toggle('hidden');
             globalbotInfoContainer = botInfoContainer;
             closeNotesContainer(botInfoContainer);
-
-        } else if (event.target.getAttribute("data-set") === "bin") {
-            const id = event.target.getAttribute("data-id")
+    
+        } else if (clickedElement.getAttribute("data-set") === "bin") {
+            const id = clickedElement.getAttribute("data-id")
             fetchApi('delete', id, getToken());
+    
+         }
+        //   else if (clickedElement.getAttribute("data-set") === "pen") {
+        //     const elementValue = clickedElement.getAttribute('data-id');
+        //     document.querySelector('['+`data-id-pen="${elementValue}"`+']').classList.toggle('hidden');
+        //     }
+    
+        else if (clickedElement.getAttribute('data-id') === "notif-btn") {
 
-        } else if (event.target.getAttribute("data-set") === "pen") {
-            lastIdElementClicked = event.target.getAttribute("data-id");
-            document.getElementById(lastIdElementClicked).classList.toggle('hidden');
-
-        } else if (event.target.getAttribute('data-id') === "notif-btn") {
-            document.querySelector('.notif__container').classList.add('hidden__notif');
+            const notifContainer = document.querySelector('.notif__container');
+            if (notifContainer) {
+                notifContainer.classList.add('hidden__notif');
+            }
         }
-
+    
 
         // Lisen if inside this event the element edit-note is clicked
         // if (event.target.getAttribute("id") === "edit-notes") {
@@ -90,18 +96,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

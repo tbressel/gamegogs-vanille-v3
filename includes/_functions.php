@@ -67,7 +67,6 @@ function generateStyleSheetLinks(array $styleSheetFiles): string
 function getLanguageType(array $pages): string 
 {
     return $lang = implode("", array_column($pages,'language'));
-
 };
 
 

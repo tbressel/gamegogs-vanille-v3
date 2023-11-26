@@ -105,23 +105,23 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         // $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}|:;<>,.?~[\]-])/'; 
 
         // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
-        $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:;<>,.?~[\]-])/'; 
-        
-        
+        $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:;<>,.?~[\]-])/';
+
+
         if (!preg_match($regex, $password) || strlen($password) < 8) {
             getJsonResponse(false, 'password_bad_format', $notificationMessages);
             exit;
         }
 
-             // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
+        // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
         $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
         if (!preg_match($regex, $email)) {
-             getJsonResponse(false, 'email_bad_format', $notificationMessages);
-             exit;
+            getJsonResponse(false, 'email_bad_format', $notificationMessages);
+            exit;
         }
-        
-        
-         $user_password = htmlspecialchars($inputData['password']);
+
+
+        $user_password = htmlspecialchars($inputData['password']);
         $user_password = password_hash($user_password, PASSWORD_BCRYPT);
 
 
@@ -156,13 +156,13 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
         $browser =  $_SERVER['HTTP_SEC_CH_UA'];
         $operating_system = $_SERVER['HTTP_SEC_CH_UA_PLATFORM'];
-        
+
         $server_adress = $_SERVER['SERVER_ADDR'];
-        $server_name = $_SERVER['SERVER_NAME'];     
-        
+        $server_name = $_SERVER['SERVER_NAME'];
+
         $remote_adress = $_SERVER['REMOTE_ADDR'];
         $remote_port = $_SERVER['REMOTE_PORT'];
-  
+
 
 
         $queryOs = $connexion->prepare('INSERT INTO configuration (browser, operating_system, server_adress, server_name, remote_adress, remote_port) VALUES (:browser, :operating_system, :server_adress, :server_name, :remote_adress, :remote_port);
@@ -186,45 +186,44 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
         getJsonResponse(true, 'signin_success', $notificationMessages);
         exit;
-    } 
+    }
     // ------------------------------------------------------------------------------
     // ----------------------------    SIGN OUT   ------------------------------------
     // ------------------------------------------------------------------------------
 
-    else if ((isset($inputData['action']) && $inputData['action'] === 'signout') && (isset($_SESSION['userId']))){
+    else if ((isset($inputData['action']) && $inputData['action'] === 'signout') && (isset($_SESSION['userId']))) {
 
-      
-    $id_user = htmlspecialchars(intval($_SESSION['userId']));
-// Suppression des références à l'utilisateur dans la table copie
-$queryDeleteCopieReferences = $connexion->prepare('DELETE FROM copie WHERE id_user = :id_user');
-$queryDeleteCopieReferences->bindValue(':id_user', $id_user, PDO::PARAM_INT);
-$queryDeleteCopieReferences->execute();
 
-// Suppression des références à l'utilisateur dans la table to_connect et configuration
-$queryDeleteToConnectReferences = $connexion->prepare('
+        $id_user = htmlspecialchars(intval($_SESSION['userId']));
+        // Suppression des références à l'utilisateur dans la table copie
+        $queryDeleteCopieReferences = $connexion->prepare('DELETE FROM copie WHERE id_user = :id_user');
+        $queryDeleteCopieReferences->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        $queryDeleteCopieReferences->execute();
+
+        // Suppression des références à l'utilisateur dans la table to_connect et configuration
+        $queryDeleteToConnectReferences = $connexion->prepare('
     DELETE to_connect, configuration
     FROM to_connect
     LEFT JOIN configuration ON to_connect.id_configuration = configuration.id_configuration
     WHERE to_connect.id_user = :id_user
 ');
-$queryDeleteToConnectReferences->bindValue(':id_user', $id_user, PDO::PARAM_INT);
-$queryDeleteToConnectReferences->execute();
+        $queryDeleteToConnectReferences->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        $queryDeleteToConnectReferences->execute();
 
-// Suppression de l'utilisateur dans la table users
-$queryDeleteUser = $connexion->prepare('DELETE FROM users WHERE id_user = :id_user');
-$queryDeleteUser->bindValue(':id_user', $id_user, PDO::PARAM_INT);
-$queryDeleteUser->execute();
+        // Suppression de l'utilisateur dans la table users
+        $queryDeleteUser = $connexion->prepare('DELETE FROM users WHERE id_user = :id_user');
+        $queryDeleteUser->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        $queryDeleteUser->execute();
 
-    // Nettoyer la session
-    unset($_SESSION['pseudo']);
-    unset($_SESSION['userId']);
-    session_destroy();
-    session_unset();
-    session_write_close();
-    
-    getJsonResponse(true, 'signout_success', $notificationMessages);
-    exit;
-    
+        // Nettoyer la session
+        unset($_SESSION['pseudo']);
+        unset($_SESSION['userId']);
+        session_destroy();
+        session_unset();
+        session_write_close();
+
+        getJsonResponse(true, 'signout_success', $notificationMessages);
+        exit;
     }
     // ------------------------------------------------------------------------------
     // ----------------------------  EMAIL NEWSLETTER  ------------------------------------
@@ -232,13 +231,13 @@ $queryDeleteUser->execute();
 
     if (isset($inputData['action']) && $inputData['action'] === 'newsletter') {
 
-          $email = htmlspecialchars($inputData['email']);
+        $email = htmlspecialchars($inputData['email']);
 
-             // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
+        // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
         $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
         if (!preg_match($regex, $email)) {
-             getJsonResponse(false, 'email_bad_format', $notificationMessages);
-             exit;
+            getJsonResponse(false, 'email_bad_format', $notificationMessages);
+            exit;
         }
 
         $queryCheck = $connexion->prepare('SELECT COUNT(*) FROM emails WHERE email = :email');
@@ -259,13 +258,13 @@ $queryDeleteUser->execute();
         $browser =  $_SERVER['HTTP_SEC_CH_UA'];
         $mobile_browser = $_SERVER['HTTP_SEC_CH_UA_MOBILE'];
         $operating_system = $_SERVER['HTTP_SEC_CH_UA_PLATFORM'];
-        
+
         $server_adress = $_SERVER['SERVER_ADDR'];
-        $server_name = $_SERVER['SERVER_NAME'];     
-        
+        $server_name = $_SERVER['SERVER_NAME'];
+
         $remote_adress = $_SERVER['REMOTE_ADDR'];
         $remote_port = $_SERVER['REMOTE_PORT'];
-  
+
 
 
         $queryMail = $connexion->prepare('INSERT INTO emails (email, email_date, browser, mobile_browser, operating_system, server_adress, server_name, remote_adress, remote_port) VALUES (:email, :email_date, :browser, :mobile_browser, :operating_system, :server_adress, :server_name, :remote_adress, :remote_port);
@@ -345,6 +344,7 @@ $queryDeleteUser->execute();
     else if (isset($inputData['action']) && $inputData['action'] === 'display-my-games') {
 
         if (!isset($_SESSION['userId']) || !isset($_SESSION['pseudo'])) {
+            ob_clean();
             echo json_encode([
                 'result' => false,
                 'message' => 'Veuillez vous connecter au site pour gérer votre collection',
@@ -355,70 +355,144 @@ $queryDeleteUser->execute();
 
         $id_user = intval(htmlspecialchars($_SESSION['userId']));
 
+
+        // Query to get all informations games
         $query = $connexion->prepare('SELECT
-            id_game,
-            id_copie,
-            id_user,
-            game_reference,
-            game_title,
-            game_subtitle,
-            GROUP_CONCAT(category_name) AS categories,
-            date_year,
-            editor_name,
-            country_name,
-            manufacturer_name,
-            machine_name,
-            machine_model,
-            media_type,
-            ROUND(game_price, 2) AS game_price,
-            game_cover,
-            machine_label_picture
-            FROM to_have
-            JOIN machines USING (id_machine)
-            JOIN categories USING (id_categorie)
-            JOIN games USING (id_game)
-            JOIN dates USING (id_dates)
-            JOIN editors USING (id_editor)
-            JOIN countries USING (id_country)
-            JOIN manufacturers USING (id_manufacturer)
-            JOIN copie USING (id_game)
-            JOIN medias USING (id_medias)
-            JOIN users USING (id_user)
-            WHERE users.id_user = :id_user
-            GROUP BY id_game, id_copie,game_reference, game_title, game_subtitle, date_year, editor_name, country_name,
-                manufacturer_name, machine_name, machine_model, media_type, game_cover, machine_label_picture
-            ORDER BY id_copie;
+        id_game,
+        id_copie,
+        id_user,
+        id_state,
+        DATE(copie_addition_date) AS copie_addition_date,
+        TIME(copie_addition_date) AS copie_addition_time,
+        game_reference,
+        game_title,
+        game_subtitle,
+        GROUP_CONCAT(category_name) AS categories,
+        date_year,
+        editor_name,
+        country_name,
+        manufacturer_name,
+        machine_name,
+        machine_model,
+        media_type,
+        copie_state_rank,
+        copie_state_name,
+        copie_state_description,
+        ROUND(copie_price, 2) AS copie_price,
+        game_cover,
+        machine_label_picture,
+        (
+            SELECT JSON_ARRAY(
+                ROUND(gs.game_avg_price,2),
+                ROUND(gs.game_min_price,2),
+                ROUND(gs.game_max_price,2),
+                gs.total_copies
+            ) 
+            FROM game_statistics gs 
+            WHERE gs.id_game = games.id_game
+        ) AS statistic
+    FROM
+        to_have
+    JOIN machines USING (id_machine)
+    JOIN categories USING (id_categorie)
+    JOIN games USING (id_game)
+    JOIN dates USING (id_dates)
+    JOIN editors USING (id_editor)
+    JOIN countries USING (id_country)
+    JOIN manufacturers USING (id_manufacturer)
+    JOIN copie USING (id_game)
+    JOIN state USING (id_state)
+    JOIN medias USING (id_medias)
+    JOIN users USING (id_user)
+    WHERE
+        users.id_user = :id_user
+    GROUP BY
+        id_game, id_copie, id_state, game_reference, game_title, game_subtitle, date_year, editor_name, country_name,
+        manufacturer_name, machine_name, machine_model, media_type, game_cover, machine_label_picture
+    ORDER BY
+        id_copie;
     
     ');
         $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
         $query->execute();
         $myCollectionList = $query->fetchAll();
 
-        $queryManufacturer = $connexion->prepare('SELECT manufacturer_name FROM manufacturers ORDER BY manufacturer_name');
-        $queryManufacturer->execute();
-        $manufacturersList = $queryManufacturer->fetchAll();
 
-        $queryMachine = $connexion->prepare('SELECT machine_name FROM machines ORDER BY machine_name');
-        $queryMachine->execute();
-        $machinesList = $queryMachine->fetchAll();
 
-        $queryModel = $connexion->prepare('SELECT machine_model FROM machines ORDER BY machine_model');
-        $queryModel->execute();
-        $modelsList = $queryModel->fetchAll();
+    // Query to get statistic information about category 
+    $query = $connexion->prepare('SELECT
+    m.machine_name AS filter_name,
+    COUNT(DISTINCT g.id_game) AS total_games,
+    COUNT(DISTINCT CASE WHEN co.id_user = :id_user THEN g.id_game END) AS games_owned_user
+FROM
+    machines m
+LEFT JOIN
+    to_have t USING (id_machine)
+LEFT JOIN
+    games g USING (id_game)
+LEFT JOIN
+    copie co ON g.id_game = co.id_game AND co.id_user = :id_user
+GROUP BY
+    m.machine_name;
+');
 
-        $queryDate = $connexion->prepare('SELECT date_year FROM dates ORDER BY date_year DESC');
-        $queryDate->execute();
-        $datesList = $queryDate->fetchAll();
+        $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        $query->execute();
+        $categoryStat = $query->fetchAll();
+
+
+
+// Query to get statistic information about media 
+        $query = $connexion->prepare('SELECT
+        m.media_type AS filter_name,
+        COUNT(DISTINCT g.id_game) AS total_games,
+        COUNT(DISTINCT CASE WHEN co.id_user = :id_user THEN g.id_game END) AS games_owned_user
+    FROM
+        medias m
+    LEFT JOIN
+        copie co USING (id_medias)
+    LEFT JOIN
+        games g USING (id_game)
+    GROUP BY
+        m.media_type;');
+
+        $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        $query->execute();
+        $mediaStat = $query->fetchAll();
+
+
+        // Query to get statistice information about machine type
+         $query = $connexion->prepare('SELECT 
+            m.machine_name AS filter_name,
+            COUNT(DISTINCT g.id_game) AS total_games,
+            COUNT(DISTINCT CASE WHEN co.id_user = :id_user THEN g.id_game END) AS games_owned_user
+         FROM
+             machines m
+         LEFT JOIN
+             to_have t USING (id_machine)
+         LEFT JOIN
+             games g USING (id_game)
+         LEFT JOIN
+             copie co ON g.id_game = co.id_game AND co.id_user = :id_user
+         GROUP BY
+             m.machine_name;
+         
+         ');
+         $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+         $query->execute();
+         $machineStat = $query->fetchAll();
+
+
 
         ob_clean();
         echo json_encode([
             'result' => true,
             'message' => 'Liste et informations des jeux de ma collection ont été récupérée avec succès',
-            'games' => $myCollectionList
-            // 'manufacturers' => $manufacturersList,
-            // 'machines' => $machinesList,
-            // 'models' => $modelsList,
-            // 'dates' => $datesList
+            'games' => $myCollectionList,
+            'categoryStat' => $categoryStat,
+            'mediaStat' => $mediaStat,
+            'machineStat' => $machineStat,
+            // 'manufacturerStat' => $manufacturerStat,
         ]);
     }
     // ------------------------------------------------------------------------------

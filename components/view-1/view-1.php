@@ -70,7 +70,7 @@
         <div class="top-informations">
             <div class="select__bar">
                 <button type="button" class="delete__btn btn" data-set="bin" data-id="$game['id_copie'] ">🗑️</button>
-                <button type="button" class="modify__btn btn" data-set="pen" data-id="pen$game['id_copie'] ">✒️</button>
+                <!-- <button type="button" class="modify__btn btn" data-set="pen" data-id="$game['id_copie'] ">✒️</button> -->
             </div>
             <div class="view2-items__coverimage">
                 <img src="./assets/" alt="$game['game_title']  artwork cover">
@@ -104,14 +104,17 @@
             <div class="select__bar"></div>
             <div class="view2-statesinfos__subcontainer">
                 <div class="view2-items__prices">
-                    <h4>Minimum<span>€100,50</span></h4>
-                    <h4>Moyen<span>€60,78</span></h4>
-                    <h4>Maximum<span>€345,78</span></h4>
+                    <h4>Minimum<span class="view2-items__prices--minprice">€100,50</span></h4>
+                    <h4>Moyen<span class="view2-items__prices--medprice">€60,78</span></h4>
+                    <h4>Maximum<span class="view2-items__prices--maxprice">€345,78</span></h4>
+                </div>
+                <div class="view2-items__category">
+                    <h4>Genre : <span class="view2-items__category--genres">genres</span></h4>
                 </div>
 
                 <div class="view2-items__date-state">
-                    <h5>Ajouté <span>il y a 1 ans et 6 mois</span></h5>
-                    <p class="green-color">Très bon état - presque Mint</p>
+                    <h5>Ajouté le <span></span></h5>
+                    <p class="view2-items__color-state"></p>
                 </div>
                 <div class="view2-items__notes">
                     <h4>Notes <span id="edit-notes" class="edit-notes"> Editer les notes </span></h4>
@@ -129,25 +132,22 @@
             </form>
         </div>
 
-        <section id="pen$game['id_copie'] " class="collection__modify hidden">
+        <!-- <section data-id-pen="" class="collection__modify hidden">
 
-            <form id="pen$game['id_copie'] " class="formModify" method="POST">
-                <input type="hidden" name="token" value="$_SESSION['token'] ">
-                <input type="hidden" name="id_copie" value="$game['id_copie'] ">
+            <form data-id-form="" class="formModify" method="POST">
+                <input type="hidden" name="id_copie" value="">
                 <input type="hidden" name="action" value="modify">
 
                 <label for="new_copie_title"></label>
-                <input type="text" id="new_copie_title" name="new_copie_title" value="$game['game_title'] ">
+                <input type="text" id="new_copie_title" name="new_copie_title" value="">
 
                 <label for="new_copie_subtitle"></label>
-                <input type="text" id="new_copie_subtitle" name="new_copie_subtitle" value="$game['game_subtitle'] ">
+                <input type="text" id="new_copie_subtitle" name="new_copie_subtitle" value="">
 
                 <label for="new_manufacturer_name"></label>
-                <select id="new_manufacturer_name" name="new_manufacturer_name[]">
+                <select id="new_manufacturer_name" name="new_manufacturer_name">
 
-                    <option value="$manufacturer['manufacturer_name'] " ($manufacturer['manufacturer_name']===$game['manufacturer_name']) ? 'selected' : ''>
-                        $manufacturer['manufacturer_name']
-                    </option>
+                    <option value="valaure a mettre"> Vlaveur  </option>
 
                 </select>
 
@@ -184,7 +184,7 @@
 
                 <input type="submit" data-id-form="$game['id_copie'] " value="✒️">
             </form>
-        </section>
+        </section> -->
     </div>
 </template>
 
@@ -199,22 +199,22 @@
                 <input class="checkbox" type="checkbox" name="selected" id="">
             </div>
             <div class="view3-basicinfos__container">
-            <div class="view3-items__title">
+                <div class="view3-items__title">
                     <h3></h3>
                     <span class="view3-items__subtitle">
-                        <h4>subtile</h4>
+                        <h4></h4>
                     </span>
                 </div>
-                <div class="view3-basicinfos__subcontainer view3">
-                    <div class="view3-items__plateform">
-                        <p>$game['manufacturer_name'] $game['machine_name'] $game['machine_model'] </p>
+                <div class="view3-basicinfos__subcontainer">
+                    <div class="view3-items__plateform--editor--year">
+                        <p></p>
                     </div>
-                    <div class="view3-items__editor">
+                    <!-- <div class="view3-items__editor">
                         <p>$game['editor_name'] </p>
                     </div>
                     <div class="view3-items__year">
                         <p>$game['date_year'] </p>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="view3-statesinfos__subcontainer">
                     <div class="view3-items__prices">
@@ -224,13 +224,10 @@
                         <h5>Ajouté le <span>il y a 1 ans et 6 mois</span></h5>
                     </div>
                     <div class="view3-items__state">
-                        <p class="green-color">Très bon état - presque Mint</p>
+                        <p class="view3-items__color-state">Très bon état - presque Mint</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-
-

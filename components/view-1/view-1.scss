@@ -372,11 +372,10 @@ collection view 2
                 .view2-items__subtitle,
                 .view3-items__subtitle,
                 .view2-items__editor,
-                .view3-items__editor,
                 .view2-items__year,
-                .view3-items__year,
-                .view2-items__plateform,
-                .view3-items__plateform {
+                .view3-items__plateform--editor--year,
+                .view2-items__plateform
+                 {
                     padding: 2px;
                     margin-right: 5%;
                     font-size: 12px;

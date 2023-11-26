@@ -10,8 +10,14 @@ body {
 header {
     position: fixed;
     width: 100%;
-    // top: 0px;
-    background-color: transparent;
+height: 90px;    background-color: transparent;
+}
+
+footer {
+    display: flex;
+  flex-direction: column;
+  position: relative;
+  bottom: -337px;
 }
 
 p {
@@ -80,6 +86,15 @@ h6 {
 .green-color {
     color: $green !important;
 }
+.red-color {
+    color: $red !important;
+}
+
+.orange-color {
+    color: $orange !important;
+}
+
+
 
 .main__container {
     position: relative;
