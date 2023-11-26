@@ -85,16 +85,18 @@
         
   }
       #togglePassword {
-        position: fixed;
+        position: relative;
     cursor: pointer;
     font-size: 2rem;
     z-index: 2;
     padding: 2px;
-    left: 485px;
-    top: 319px;
+    // left: 485px;
+    // top: 319px;
     background-color: burlywood;
     border-radius: 20px;
       }
+
+
     }
 
   }
@@ -110,4 +112,16 @@
 
 .invalid-password {
   border: 2px solid red;
+}
+
+#passwordStrength {
+  height: 20px;
+  width: 0;
+  margin-top: 10px;
+  transition: width 0.3s;
+}
+
+#strengthText {
+  font-size: 12px;
+  margin-top: 5px;
 }

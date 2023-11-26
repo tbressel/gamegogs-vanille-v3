@@ -79,6 +79,7 @@ footer {
   flex-direction: column;
   position: relative;
   bottom: -337px;
+  z-index: -1;
 }
 
 p {
@@ -675,6 +676,72 @@ h6 {
 @media screen and (min-width: 744px) {
   .filter__navigation.show {
     top: 50px;
+  }
+}
+.overlay__maincontainer {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  width: 99%;
+  height: -moz-fit-content;
+  height: fit-content;
+  top: -14px;
+  left: -1000px;
+  border: 1px solid #222222;
+  margin: 2px 0;
+  transition: 300ms ease-in-out;
+}
+.overlay__maincontainer.show {
+  left: 0px;
+  transition: 300ms ease-in-out;
+}
+
+.overlay__box--filter {
+  margin-bottom: 40px;
+  padding: 10px;
+}
+.overlay__box--filter .title__filter {
+  margin-bottom: 5px;
+  background-color: #222222;
+  border-radius: 5px;
+  padding: 4px;
+}
+.overlay__box--filter .title__filter > h2 {
+  font-family: "Inter";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 27px;
+  color: #a79300;
+}
+.overlay__box--filter .list__filter--box .filters-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.overlay__box--filter .list__filter--box .filters-box .name_filter > p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 27px;
+  color: #222222;
+}
+.overlay__box--filter .list__filter--box .filters-box .quantity_filter > p {
+  font-size: 12px;
+  color: #222222;
+}
+
+@media screen and (min-width: 744px) {
+  .overlay__maincontainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    top: -78px;
+    left: -2160px;
+  }
+  .overlay__maincontainer .overlay__box--filter {
+    width: 30%;
   }
 }
 .lastarticles__container {
@@ -2068,72 +2135,6 @@ collection modify
   display: none;
 }
 
-.overlay__maincontainer {
-  position: absolute;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  width: 99%;
-  height: -moz-fit-content;
-  height: fit-content;
-  top: -14px;
-  left: -1000px;
-  border: 1px solid #222222;
-  margin: 2px 0;
-  transition: 300ms ease-in-out;
-}
-.overlay__maincontainer.show {
-  left: 0px;
-  transition: 300ms ease-in-out;
-}
-
-.overlay__box--filter {
-  margin-bottom: 40px;
-  padding: 10px;
-}
-.overlay__box--filter .title__filter {
-  margin-bottom: 5px;
-  background-color: #222222;
-  border-radius: 5px;
-  padding: 4px;
-}
-.overlay__box--filter .title__filter > h2 {
-  font-family: "Inter";
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 27px;
-  color: #a79300;
-}
-.overlay__box--filter .list__filter--box .filters-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.overlay__box--filter .list__filter--box .filters-box .name_filter > p {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 27px;
-  color: #222222;
-}
-.overlay__box--filter .list__filter--box .filters-box .quantity_filter > p {
-  font-size: 12px;
-  color: #222222;
-}
-
-@media screen and (min-width: 744px) {
-  .overlay__maincontainer {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: wrap;
-    top: -78px;
-    left: -2160px;
-  }
-  .overlay__maincontainer .overlay__box--filter {
-    width: 30%;
-  }
-}
 .breadcrumb__nav {
   margin-top: 30px;
   margin-left: 10px;
@@ -2235,13 +2236,11 @@ collection modify
 }
 .login__container .login__form .password-container #togglePassword,
 .login__container .signin__form .password-container #togglePassword {
-  position: fixed;
+  position: relative;
   cursor: pointer;
   font-size: 2rem;
   z-index: 2;
   padding: 2px;
-  left: 485px;
-  top: 319px;
   background-color: burlywood;
   border-radius: 20px;
 }
@@ -2256,6 +2255,18 @@ collection modify
 
 .invalid-password {
   border: 2px solid red;
+}
+
+#passwordStrength {
+  height: 20px;
+  width: 0;
+  margin-top: 10px;
+  transition: width 0.3s;
+}
+
+#strengthText {
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 .notif__container {

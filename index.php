@@ -61,11 +61,13 @@ include_once 'includes/_head.php';
 
     <script src="./assets/scripts/functions.js"></script>
     <script src="./assets/scripts/api.js"></script>
-    <script src="./assets/scripts/script.js"></script>
+    
+    <script src="./assets/scripts/index.js"></script>
     <script src="./assets/scripts/navigation.js"></script>
     <script src="./assets/scripts/formulaire.js"></script>
     <script src="./assets/scripts/display.js"></script>
     <script src="./assets/scripts/notifications.js"></script>
+    <script src="./assets/scripts/password.js"></script>
 
 
 

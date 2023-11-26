@@ -11,7 +11,7 @@
  * 
  * @param {*} event 
  */
- function toggleSubMenu(event) {
+function toggleSubMenu(event) {
     document.querySelector(`header .${event.target.getAttribute('data-set')}`).classList.toggle('active');
     reverseProfilArrow();
 }
@@ -157,6 +157,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
             // awaiting for the page content
             insertPageContent("signin.php", "components/login/", "main");
+
+
+
         } else if (event.target.getAttribute("data-id") === 'signout') {
             console.log('désinscription');
             // close submenu
@@ -172,4 +175,26 @@ window.addEventListener('DOMContentLoaded', () => {
             closeSubMenu();
         }
     });
+
+    /**
+ * Listen to each view button in collection user. And switch class to display the right one. 
+ */
+    document.getElementById('filter-nav').addEventListener('click', (event) => {
+
+        if (event.target.getAttribute('alt') === "view1") {
+            closeAllView();
+            document.querySelector('.collection__view1').classList.toggle('hidden__view')
+
+        } else if (event.target.getAttribute('alt') === "view2") {
+            closeAllView();
+            document.querySelector('.collection__view2').classList.toggle('hidden__view')
+
+        } else if (event.target.getAttribute('alt') === "view3") {
+            closeAllView();
+            document.querySelector('.collection__view3').classList.toggle('hidden__view')
+
+        } else if (event.target.getAttribute('data-btn-filter') === "") {
+            document.getElementById('overlay-filter').classList.toggle('show');
+        }
+    })
 })

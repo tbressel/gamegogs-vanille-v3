@@ -46,7 +46,7 @@ async function insertPageContent(fileName, path, id) {
 if (fileName ==="collection.php") {
     currentPage = "collection";
     // document.querySelector('.menu__ul--profil.active').style.top = '125px';
-}
+} 
     } catch (error) {
         console.error(error.message);
     }

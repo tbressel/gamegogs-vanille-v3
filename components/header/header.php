@@ -24,12 +24,12 @@
             </div>
             <div class="header__container--bot">
                 <div class="header__container--searchfield">
-                    <form action="#">
+                    <!-- <form action="#">
                         <label for="search">
                             <input class="field-search white-bg" id="search" type="search"
                                 placeholder="Recherche GameGogs">
                         </label>
-                    </form>
+                    </form> -->
 
                 </div>
                 <div class="header__container--zoom">

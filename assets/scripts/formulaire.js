@@ -8,6 +8,13 @@ document.getElementById('main').addEventListener('click', function (event) {
 
   console.log(event.target)
   
+if (event.target.id === 'password') {
+
+  password();
+
+} 
+
+
   if (event.target.id === 'togglePassword') {
     const passwordInput = document.getElementById('passwordField');
   
@@ -79,3 +86,4 @@ function validatePassword() {
 
   return true;
 }
+
