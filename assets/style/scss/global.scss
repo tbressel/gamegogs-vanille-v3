@@ -17,7 +17,7 @@ footer {
     display: flex;
   flex-direction: column;
   position: relative;
-  bottom: -337px;
+  bottom: -500px;
   z-index: -1;
 }
 
@@ -30,10 +30,11 @@ p {
 
 input {
     height: 30px;
-    background-color: $white;
-    border-radius:  5px;
+    // background-color: $white;
+    // border-radius:  5px;
     transition: 300ms ease-in-out;
     margin-bottom: 10px;
+    border: 0px;
 
     &:focus-visible {
         height: 35px;

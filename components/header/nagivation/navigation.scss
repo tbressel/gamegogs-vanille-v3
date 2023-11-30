@@ -51,6 +51,12 @@
         padding: 10px;
         text-align: center;
         border-bottom: 1px solid $cream;
+        transition: 100ms;
+    }
+    .menu__icon:hover {
+        background-color: #383838;
+        transition: 100ms;
+        border-radius: 10px;
     }
 }
 

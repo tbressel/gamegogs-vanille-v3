@@ -1,0 +1,43 @@
+.collection__add {
+  border: 1px solid black;
+  margin: 20px;
+  padding: 10px;
+  position: relative;
+  top: -100px;
+}
+.collection__add .form__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.collection__add .form__buttons input[type=submit] {
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #a79300, #fbf4a1);
+}
+.collection__add .form__buttons input[type=reset] {
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.collection__add .state__container {
+  max-width: 597px;
+  min-width: 300px;
+}
+.collection__add .state__container .state__note {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.collection__add .state__container .state__note > p {
+  min-width: 50%;
+  max-width: 50%;
+  color: black;
+}
+.collection__add .state__container .state__note > span {
+  min-width: 30%;
+  max-width: 30%;
+}

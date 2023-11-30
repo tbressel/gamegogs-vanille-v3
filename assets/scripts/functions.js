@@ -107,16 +107,10 @@ function findUserGameByUserId(id) {
 }
 
 
-function eraseTextareaContent(target) {
-    target.parentElement.firstElementChild.firstElementChild.value = "";
-    console.log('contenu de <textarea> est effacé')
-}
 
-function closeNotesContainer(element) {
-    // Close the notes container if main section of the item is closed
-    if (element.nextElementSibling.classList.contains('hidden')) {
-        return;
-    } else {
-        element.nextElementSibling.classList.add('hidden');
-    }
-}
+
+
+
+
+
+

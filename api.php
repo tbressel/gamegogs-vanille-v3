@@ -536,7 +536,104 @@ GROUP BY
             ]);
         }
         exit;
+    } else if ($_REQUEST['action'] === "title") {
+        // Récupérez la valeur du paramètre de requête 'query'
+        $userInput = $_REQUEST['input'];
+    
+        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
+        $queryAuto = $connexion->prepare('SELECT game_title FROM `games` WHERE game_title LIKE :input');
+        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
+        $queryAuto->execute();
+        $title = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+    
+        ob_clean();
+        echo json_encode([
+            'result' => true, 
+            'title' => $title
+        ]);
+        exit;
+    } else if ($_REQUEST['action'] === "subtitle") {
+        // Récupérez la valeur du paramètre de requête 'query'
+        $userInput = $_REQUEST['input'];
+    
+        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
+        $queryAuto = $connexion->prepare('SELECT game_subtitle FROM `games` WHERE game_subtitle LIKE :input');
+        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
+        $queryAuto->execute();
+        $subtitle = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+    
+        ob_clean();
+        echo json_encode([
+            'result' => true, 
+            'subtitle' => $subtitle
+        ]);
+        exit;
+    } else if ($_REQUEST['action'] === "genre") {
+        // Récupérez la valeur du paramètre de requête 'query'
+        $userInput = $_REQUEST['input'];
+    
+        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
+        $queryAuto = $connexion->prepare('SELECT * FROM categories WHERE category_name LIKE :input');
+        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
+        $queryAuto->execute();
+        $categories = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+    
+        ob_clean();
+        echo json_encode([
+            'result' => true, 
+            'genre' => $categories
+        ]);
+        exit;
+    } else if ($_REQUEST['action'] === "manufacturer") {
+        // Récupérez la valeur du paramètre de requête 'query'
+        $userInput = $_REQUEST['input'];
+    
+        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
+        $queryAuto = $connexion->prepare('SELECT * FROM manufacturers WHERE manufacturer_name LIKE :input');
+        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
+        $queryAuto->execute();
+        $manufacturer = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+    
+        ob_clean();
+        echo json_encode([
+            'result' => true, 
+            'manufacturer' => $manufacturer
+        ]);
+        exit;
+    } else if ($_REQUEST['action'] === "machine") {
+        // Récupérez la valeur du paramètre de requête 'query'
+        $userInput = $_REQUEST['input'];
+    
+        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
+        $queryAuto = $connexion->prepare('SELECT * FROM machines WHERE machine_name LIKE :input');
+        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
+        $queryAuto->execute();
+        $machine = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+    
+        ob_clean();
+        echo json_encode([
+            'result' => true, 
+            'machine' => $machine
+        ]);
+        exit;
+    } else if ($_REQUEST['action'] === "model") {
+        // Récupérez la valeur du paramètre de requête 'query'
+        $userInput = $_REQUEST['input'];
+    
+        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
+        $queryAuto = $connexion->prepare('SELECT * FROM machines WHERE machine_model LIKE :input');
+        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
+        $queryAuto->execute();
+        $model = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+    
+        ob_clean();
+        echo json_encode([
+            'result' => true, 
+            'model' => $model
+        ]);
+        exit;
     }
+
 } else {
     $_SESSION['error'] = 'Aucune action ne peut être effectuée';
 }

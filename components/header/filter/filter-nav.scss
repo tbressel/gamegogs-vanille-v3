@@ -18,7 +18,13 @@
         align-items: center;
         border: 1px solid $cream;
         border-radius: 5px;
-
+        
+            &:hover {
+                background-color: #383838;
+                transition: 100ms;
+                border-radius: 10px;
+            }
+      
 
         .filter__button {
             cursor: pointer;
@@ -54,6 +60,12 @@
             &>img {
                 width: 35px;
                 height: 35px;
+            }
+
+            &:hover {
+                background-color: #383838;
+                transition: 100ms;
+                border-radius: 10px;
             }
         }
     }

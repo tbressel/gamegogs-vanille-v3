@@ -60,6 +60,12 @@ function closeFilterBar() {
     document.getElementById("filter-nav").classList.remove("show")
 }
 
+function closeAddForm() {
+    document.querySelector(`.submenu__container`).classList.toggle('active');
+}
+
+
+
 /**
  * Closing all collection Views
  */
@@ -184,15 +190,24 @@ window.addEventListener('DOMContentLoaded', () => {
         if (event.target.getAttribute('alt') === "view1") {
             closeAllView();
             document.querySelector('.collection__view1').classList.toggle('hidden__view')
+            document.querySelector('.collection__add').classList.add('hidden__view');
 
         } else if (event.target.getAttribute('alt') === "view2") {
             closeAllView();
             document.querySelector('.collection__view2').classList.toggle('hidden__view')
+            document.querySelector('.collection__add').classList.add('hidden__view');
 
         } else if (event.target.getAttribute('alt') === "view3") {
             closeAllView();
             document.querySelector('.collection__view3').classList.toggle('hidden__view')
+            document.querySelector('.collection__add').classList.add('hidden__view');
+            
+        } else if (event.target.getAttribute("alt") === "add-game") {
+            closeAllView(); 
+            document.querySelector('.collection__add').classList.toggle('hidden__view');
 
+            listenGenreField();
+            
         } else if (event.target.getAttribute('data-btn-filter') === "") {
             document.getElementById('overlay-filter').classList.toggle('show');
         }

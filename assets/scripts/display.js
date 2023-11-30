@@ -70,9 +70,6 @@ function displayMyGames(myGames, templateId, destinationId, classType) {
     // Sorting games from the most recent first
     myGames.sort((a, b) => new Date(b.date_year) - new Date(a.date_year));
 
-    // // select 6 games from index 0
-    // myCollection = myGames.slice(0, 6);
-
     // get template element
     const listItemsTemplate = document.getElementById(templateId);
 

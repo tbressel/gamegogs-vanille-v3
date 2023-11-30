@@ -78,7 +78,7 @@ footer {
   display: flex;
   flex-direction: column;
   position: relative;
-  bottom: -337px;
+  bottom: -500px;
   z-index: -1;
 }
 
@@ -91,10 +91,9 @@ p {
 
 input {
   height: 30px;
-  background-color: #EEEEEE;
-  border-radius: 5px;
   transition: 300ms ease-in-out;
   margin-bottom: 10px;
+  border: 0px;
 }
 input:focus-visible {
   height: 35px;
@@ -383,6 +382,12 @@ h6 {
   padding: 10px;
   text-align: center;
   border-bottom: 1px solid #FBF4A1;
+  transition: 100ms;
+}
+.menu__ul--profil .menu__icon:hover {
+  background-color: #383838;
+  transition: 100ms;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 744px) {
@@ -637,6 +642,11 @@ h6 {
   border: 1px solid #FBF4A1;
   border-radius: 5px;
 }
+.filter__navigation .filter__container:hover {
+  background-color: #383838;
+  transition: 100ms;
+  border-radius: 10px;
+}
 .filter__navigation .filter__container .filter__button {
   cursor: pointer;
 }
@@ -671,6 +681,14 @@ h6 {
 .filter__navigation .views__buttons .addgame > img {
   width: 35px;
   height: 35px;
+}
+.filter__navigation .views__buttons .view1:hover,
+.filter__navigation .views__buttons .view2:hover,
+.filter__navigation .views__buttons .view3:hover,
+.filter__navigation .views__buttons .addgame:hover {
+  background-color: #383838;
+  transition: 100ms;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 744px) {
@@ -2293,4 +2311,48 @@ collection modify
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.collection__add {
+  border: 1px solid black;
+  margin: 20px;
+  padding: 10px;
+  position: relative;
+  top: -100px;
+}
+.collection__add .form__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.collection__add .form__buttons input[type=submit] {
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #a79300, #fbf4a1);
+}
+.collection__add .form__buttons input[type=reset] {
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.collection__add .state__container {
+  max-width: 597px;
+  min-width: 300px;
+}
+.collection__add .state__container .state__note {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.collection__add .state__container .state__note > p {
+  min-width: 50%;
+  max-width: 50%;
+  color: black;
+}
+.collection__add .state__container .state__note > span {
+  min-width: 30%;
+  max-width: 30%;
 }

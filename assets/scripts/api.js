@@ -90,6 +90,7 @@ function getLastGamesJson() {
             // console.log('Full JSON Response:', JSON.stringify(jsonData));
             if (jsonData.result === true) {
                 console.log('Game List OK:', jsonData['games']);
+                listAllGames = jsonData['games'];
                 displayLastGames(jsonData['games']);
             } else {
                 console.error('API returned an error:', jsonData.message);

@@ -1,0 +1,60 @@
+.collection__add {
+    border: 1px solid black;
+    margin: 20px;
+    padding: 10px;
+    position: relative;
+    top: -100px;
+
+
+    .form__buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        input[type="submit"] {
+            width: 30%;
+            border: 1px solid black;
+            border-radius: 5px;
+            background: linear-gradient(45deg, #a79300, #fbf4a1);
+        }
+
+        input[type="reset"] {
+            width: 30%;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+    }
+
+        .state__container {
+            max-width: 597px;
+            min-width: 300px;
+
+
+            .state__note {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+
+            }
+
+            .state__note>p {
+
+                min-width: 50%;
+                max-width: 50%;
+                color: black;
+
+            }
+
+            .state__note>span {
+
+                min-width: 30%;
+                max-width: 30%;
+
+            }
+
+        }
+    }
