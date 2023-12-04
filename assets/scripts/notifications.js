@@ -37,23 +37,13 @@
     dragAndDrop(document.querySelector('.draggable'));
 
 
-
- 
-    document.getElementById("notifications").addEventListener('click', (event) => {
-        if(event.target.getAttribute('data-id') === 'notif-btn') {
-            document.querySelector('.draggable').classList.add('hidden__notif');
-            console.log (msgType);
-            msgType === 'login_success' 
-            || msgType === 'logout_success' 
-            || msgType === 'signin_success' 
-            || msgType === 'signout_success' ? window.location.href = 'index.php' : null;
-        }
-    })
-
-
-
-    function showMessage(userMessage) {
+   async function showMessage(userMessage) {
         document.querySelector('[data-set="notification"]').textContent = userMessage;
         document.querySelector('.draggable').classList.remove('hidden__notif');
+
+        setTimeout(() => {
+            document.querySelector('[data-set="notification"]').textContent = '';
+            document.querySelector('.draggable').classList.add('hidden__notif');
+          }, 2000);
 
     }

@@ -15,8 +15,8 @@
         <div id="view3-btn" class="view3">
             <img src="./assets/svg/view3.svg" alt="view3">
         </div>
-        <div id="addgame-btn" class="addgame">
+        <!-- <div id="addgame-btn" class="addgame">
             <img src="./assets/svg/addgame.svg" alt="add-game">
-        </div>
+        </div> -->
     </div>
 </nav>

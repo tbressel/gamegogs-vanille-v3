@@ -1,17 +1,19 @@
 <?php
 // Notification messages
 $notificationMessages = [
-    'login_success' => 'Toutes mes félicitation, tu es connecté !!',
-    'login_failure' => 'Ooops ... tu t\'es trompé ...',
-    'login_missing' => 'Ah c\'est comme çà ... tu as viré mes attributs required ?? ... petit con !',
-    'logout_success' => 'Ok bah si tu veux pas rester je vais pas te forcer !',
-    'signin_success' => 'Iiiiilll est des noooooOOOOootreuuuuu !!!!',
+    'login_success' => 'Vous êtes à présent connecté à votre compte.',
+    'login_failure' => 'Le mot de passe ou le pseudo est erroné.',
+    'login_missing' => 'Erreur de pseudo ou mot de passe',
+    'logout_success' => 'Vous êtes déconnecté/ A bientôt !',
+    'signin_success' => 'Votre inscription sur le site GameGogs à réussit. Veuillez à présent vous connecter.',
     'signin_failure' => 'L\'inscription ne s\'est pas déroulée correctement',
-    'signout_success' => 'Ce n\'esssssssst qu\'un auuu revoiiiiiirrrr !',
+    'signout_success' => 'Vous êtes définitivement désinscrit du site. Vos données ont été détruite.',
     'invalid_action' => 'Aucune action n\'a été validé .... y\'a une couille dans l\'pâté !',
     'request_error' => 'La requête a échouée',
     'password_bad_format' => 'Attention, le mot de passe doit contenir ces caractères [0-9], [A-Z], [a-z] et !@#$%^&*()_+{}|:;<>,.?~[\]-',
-    'email_bad_format' => 'Attention, le mot de passe n\'est pas au bon format',
+    'email_bad_format' => 'Attention, l\'adresse mail n\'est pas au bon format',
+    'email_empty' => 'Vous devez saisir une adresse mail.',
+    'exist_email' => 'Le mail existe déjà',
     'exist_data' => 'Le pseudo ou le mail existe déjà',
     'email_success' => 'Merci, en fait on va spammer votre boite mail MOUAHAHAHA !'
 ];

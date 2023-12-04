@@ -76,8 +76,6 @@ function closeAllView() {
 }
 
 
-
-
 // --------------------------------------------------------------------------------------------
 // -------------------------------------     LISTENERS      -----------------------------------
 // --------------------------------------------------------------------------------------------
@@ -202,11 +200,12 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.collection__view3').classList.toggle('hidden__view')
             document.querySelector('.collection__add').classList.add('hidden__view');
             
-        } else if (event.target.getAttribute("alt") === "add-game") {
-            closeAllView(); 
-            document.querySelector('.collection__add').classList.toggle('hidden__view');
+        // } else if (event.target.getAttribute("alt") === "add-game") {
+        //     closeAllView(); 
+        //     document.querySelector('.collection__add').classList.toggle('hidden__view');
 
-            listenGenreField();
+        //  listenGenreField();
+        //  listenToSubmitAddForm();
             
         } else if (event.target.getAttribute('data-btn-filter') === "") {
             document.getElementById('overlay-filter').classList.toggle('show');

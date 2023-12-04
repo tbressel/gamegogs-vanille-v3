@@ -106,7 +106,7 @@ function displayMyGames(myGames, templateId, destinationId, classType) {
             templateContent.querySelector('.'+classType+'-items__coverimage img').setAttribute("src", `./assets/${game.game_cover}`);
             templateContent.querySelector('[data-set="bin"]').setAttribute('data-id', `${game.id_copie}`);
             // templateContent.querySelector('[data-set="pen"]').setAttribute('data-id', `${game.id_copie}`);
-            templateContent.querySelector('.'+classType+'-items__plateform p').textContent = `${game.manufacturer_name} ${game.machine_name} ${game.machine_model}`;
+            templateContent.querySelector('.'+classType+'-items__plateform p').textContent = `${game.manufacturer_name} ${game.machine_model}`;
             templateContent.querySelector('.'+classType+'-items__editor p').textContent = `${game.editor_name}`;
             templateContent.querySelector('.'+classType+'-items__year p').textContent = `${game.date_year}`;
             templateContent.querySelector('.'+classType+'-items__date-state h5 span').textContent = `${game.copie_addition_date} à ${game.copie_addition_time}`;
@@ -132,7 +132,7 @@ function displayMyGames(myGames, templateId, destinationId, classType) {
         }
         if (classType === 'view3') {
             // templateContent.querySelector('[data-set="bin"]').setAttribute('data-id', `${game.id_copie}`);
-            templateContent.querySelector('.'+classType+'-items__plateform--editor--year p').textContent = `${game.manufacturer_name} ${game.machine_name} ${game.machine_model} - ${game.editor_name} (${game.date_year})`;
+            templateContent.querySelector('.'+classType+'-items__plateform--editor--year p').textContent = `${game.manufacturer_name} ${game.machine_model} - ${game.editor_name} (${game.date_year})`;
             templateContent.querySelector('.'+classType+'-items__prices h4 span').textContent = `${game.copie_price} €`;
             templateContent.querySelector('.'+classType+'-items__date h5 span').textContent = `${game.copie_addition_date} à ${game.copie_addition_time}`;
             templateContent.querySelector('.'+classType+'-items__state p').textContent = `${game.copie_state_rank} - ${game.copie_state_name}`;

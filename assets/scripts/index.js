@@ -8,22 +8,10 @@ let lastIdElementClicked = "";
 let msgType;
 
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
-
-
-
-
-
-    
+   
     // Loading of the last 6 games recorded in the database 
     getLastGamesJson('display-last-games', 'POST', 'Game List OK:', 'games', displayLastGames, false);
-
-
-
-
-
 
     /**
      * Listen to buttons inside each container
@@ -46,10 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchApi('delete', id, getToken());
 
         }
-        //   else if (clickedElement.getAttribute("data-set") === "pen") {
-        //     const elementValue = clickedElement.getAttribute('data-id');
-        //     document.querySelector('['+`data-id-pen="${elementValue}"`+']').classList.toggle('hidden');
-        //     }
 
         else if (clickedElement.getAttribute('data-id') === "notif-btn") {
 
@@ -59,23 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } 
 
-
-        // Lisen if inside this event the element edit-note is clicked
-        // if (event.target.getAttribute("id") === "edit-notes") {
-
-        //     // The sibling parent element 
-        //     let notesInfoContainer = event.target.closest('.bot-informations').nextElementSibling;
-        //     console.log('Element ciblé : ', notesInfoContainer);
-        //     notesInfoContainer.classList.toggle('hidden');
-        // };
-
-        // if (event.target.getAttribute('id') === 'textarea-erase') {
-        //     event.preventDefault();
-        //     eraseTextareaContent(event.target);
-        //     closeNotesContainer(globalbotInfoContainer);
-        // }
-
     });
-
 
 });

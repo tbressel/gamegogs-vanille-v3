@@ -31,7 +31,7 @@
             <h4>$game['game_subtitle'] </h4>
         </div>
         <div class="view1-maxitem__plateform">
-            <p>$game['manufacturer_name'] $game['machine_name'] $game['machine_model'] </p>
+            <p>$game['manufacturer_name']  $game['machine_model'] </p>
         </div>
         <div class="view1-maxitem__year">
             <p>$game['date_year'] </p>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="view2-basicinfos__subcontainer">
                     <div class="view2-items__plateform">
-                        <p>$game['manufacturer_name'] $game['machine_name'] $game['machine_model'] </p>
+                        <p>$game['manufacturer_name'] $game['machine_model'] </p>
                     </div>
                     <div class="view2-items__editor">
                         <p>$game['editor_name'] </p>
@@ -132,59 +132,7 @@
             </form>
         </div>
 
-        <!-- <section data-id-pen="" class="collection__modify hidden">
-
-            <form data-id-form="" class="formModify" method="POST">
-                <input type="hidden" name="id_copie" value="">
-                <input type="hidden" name="action" value="modify">
-
-                <label for="new_copie_title"></label>
-                <input type="text" id="new_copie_title" name="new_copie_title" value="">
-
-                <label for="new_copie_subtitle"></label>
-                <input type="text" id="new_copie_subtitle" name="new_copie_subtitle" value="">
-
-                <label for="new_manufacturer_name"></label>
-                <select id="new_manufacturer_name" name="new_manufacturer_name">
-
-                    <option value="valaure a mettre"> Vlaveur  </option>
-
-                </select>
-
-                <label for="new_machine_name"></label>
-                <select id="new_machine_name" name="new_machine_name[]">
-
-                    <option value="$machine['machine_name'] " ($machine['machine_name']===$game['machine_name']) ? 'selected' : ''>
-                        $machine['machine_name']
-                    </option>
-
-                </select>
-
-                <label for="new_machine_model"></label>
-
-                <select id="new_machine_model" name="new_machine_model[]">
-
-                    <option value="$model['machine_model'] " ($model['machine_model']===$game['machine_model']) ? 'selected' : ''>
-                        $model['machine_model']
-                    </option>
-
-                </select>
-
-                <label for="new_editor"></label>
-                <input type="text" id="new_editor" name="new_editor" value="$game['editor_name'] ">
-
-                <label for="new_date"></label>
-                <select id="new_date" name="new_date[]">
-
-                    <option value="$date['date_year'] " ($date['date_year']===$game['date_year']) ? 'selected' : ''>
-                        $date['date_year']
-                    </option>
-
-                </select>
-
-                <input type="submit" data-id-form="$game['id_copie'] " value="✒️">
-            </form>
-        </section> -->
+    
     </div>
 </template>
 

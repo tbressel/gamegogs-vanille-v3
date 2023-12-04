@@ -22,20 +22,20 @@
                     <img src="./assets/svg/burger-icon.svg" alt="burger icon" data-set="submenu__container">
                 </div>
             </div>
-            <div class="header__container--bot">
+            <!-- <div class="header__container--bot">
                 <div class="header__container--searchfield">
-                    <!-- <form action="#">
+                    <form action="#">
                         <label for="search">
                             <input class="field-search white-bg" id="search" type="search"
                                 placeholder="Recherche GameGogs">
                         </label>
-                    </form> -->
+                    </form>
 
                 </div>
                 <div class="header__container--zoom">
                     <img src="./assets/svg/zoom-icon.svg" alt="search on gamegogs">
                 </div>
-            </div>
+            </div> -->
             <div class="header__container--menu">
                 <ul class="menu__ul  black-bg">
                     <li class="menu__icon dashboard">

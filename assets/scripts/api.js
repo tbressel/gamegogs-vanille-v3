@@ -221,24 +221,43 @@ function getCollectionJson() {
                 console.log('media Stat:', jsonData.mediaStat);
                 console.log('Manufacturers Stat:', jsonData.manufacturerStat);
                 console.log('machine Stat:', jsonData.machineStat);
-
+                console.log('type de medias', jsonData.medias);
 
                 // Assuming jsonData.games is an array of games
                 const myGames = jsonData.games;
                 const categoryStat = jsonData.categoryStat;
                 const mediaStat = jsonData.mediaStat;
+                
                 // const manufacturerStat = jsonData.manufacturerStat;
                 const machineStat = jsonData.machineStat;
                 displayFilter(categoryStat, 'genre_filter_template', 'genre_filter');
                 displayFilter(mediaStat, 'media_filter_template', 'media_filter');
                 displayFilter(machineStat, 'plateform_filter_template', 'plateform_filter');
 
-
-
                 // Continue display my games
                 displayMyGames(myGames, 'my-items-template1', 'my-item-view1', 'view1');
                 displayMyGames(myGames, 'my-items-template2', 'my-item-view2', 'view2');
                 displayMyGames(myGames, 'my-items-template3', 'my-item-view3', 'view3');
+
+// Sélectionne la balise select par son ID
+let selectBox = document.getElementById("media");
+
+// Parcourt chaque objet dans le tableau "medias" du JSON
+jsonData.medias.forEach(media => {
+    // Crée un élément d'option
+    let option = document.createElement("option");
+
+    // Définit la valeur et le texte de l'option avec l'id et le type de média
+    option.value = media.id_medias;
+    option.text = media.media_type;
+
+    // Ajoute l'option à la select box
+    selectBox.appendChild(option);
+});
+
+
+
+
 
             } else if (jsonData.logscreen === true) {
 
@@ -247,10 +266,8 @@ function getCollectionJson() {
                 insertPageContent("connexion.php", "./pages/connexion/", "main");
                 // toggleConnexionForms();
 
-
             } else {
                 console.error('API returned an error:', jsonData.message);
-
             }
         })
         .catch(error => {
@@ -309,10 +326,10 @@ document.addEventListener('submit', (event) => {
                 token: getToken(),
                 email: event.target.querySelector('input[name="email"]').value
             };
-            console.log(data);
-
             fetchFormApi(data, "newsletter", "POST")
-                .then(response => {
+            
+            
+            .then(response => {
                     if (!response.ok) {
                         throw new Error(`Erreur HTTP! Statut: ${response.status}`);
                     }
@@ -326,7 +343,6 @@ document.addEventListener('submit', (event) => {
                 })
                 .catch(error => {
                     showMessage(error)
-                });
-        
+                });       
     }
 });

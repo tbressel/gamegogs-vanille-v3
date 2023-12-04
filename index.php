@@ -22,30 +22,15 @@ include_once 'includes/_head.php';
         <nav class="submenu__container">
             <?php include('./components/header/nagivation/navigation.php'); ?>
         </nav>
-
     </header>
-
-
-
-
 
     <section id="notifications">
         <?php include('./components/notification/notification.php'); ?>
     </section>
 
-
-    <!-- <div id="breadcrumb" class="breadcrumb__nav">
-        <ul id="breadcrumb__list" class="breadcrumb__list">
-            <li data-set="accueil">
-                Accueil
-            </li>
-        </ul>
-</div> -->
     <main id="main" class="main__container">
         <?php include('./pages/home/home.php'); ?>
     </main>
-
-     <!-- <?php var_dump($_SESSION); ?> -->
 
     <footer class="black-bg">
         <div class="footer__container">
@@ -58,19 +43,15 @@ include_once 'includes/_head.php';
         </div>
     </footer>
 
-
     <script src="./assets/scripts/functions.js"></script>
     <script src="./assets/scripts/api.js"></script>
-    
     <script src="./assets/scripts/index.js"></script>
     <script src="./assets/scripts/navigation.js"></script>
     <script src="./assets/scripts/formulaire.js"></script>
     <script src="./assets/scripts/display.js"></script>
     <script src="./assets/scripts/notifications.js"></script>
     <script src="./assets/scripts/password.js"></script>
-    <script src="./assets/scripts/addgame.js"></script>
-
-
+    <!-- <script src="./assets/scripts/addgame.js"></script> -->
 
 </body>
 

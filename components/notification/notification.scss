@@ -4,22 +4,28 @@
     text-align: center;
     padding: 1rem;
     left: 50%;
+    bottom: 50%;
     transform: translate(-50%);
     border-radius: 10px;
     box-shadow: 2px 2px 10px 0px;
+    background-color: burlywood;
+
+    p {
+        color: $black;
+    }
 }
 
-/* Pour que le bouton soit centré horizontalement */
 .notif__text {
-    margin-bottom: 1rem; /* Ajustez la marge si nécessaire */
+    margin-bottom: 1rem;
+    color: $black;
+    font-weight: 700;
 }
 
-/* Style pour le bouton OK */
 .btn__color-green {
-    background-color: #4caf50;
+    background-color: #9b8a48;
     color: white;
     padding: 0.5rem 1rem;
-    border: none;
+    border: 2px solid black;
     border-radius: 5px;
     cursor: pointer;
 }

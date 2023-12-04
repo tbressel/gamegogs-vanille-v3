@@ -22,6 +22,7 @@ $inputJSON = file_get_contents('php://input');
 $inputData = json_decode($inputJSON, true);
 
 
+
 if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['action']))) {
 
     // ------------------------------------------------------------------------------
@@ -108,7 +109,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:;<>,.?~[\]-])/';
 
 
-        if (!preg_match($regex, $password) || strlen($password) < 8) {
+        if (!preg_match($regex, $password) || strlen($password) < 1) {
             getJsonResponse(false, 'password_bad_format', $notificationMessages);
             exit;
         }
@@ -201,8 +202,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         $queryDeleteCopieReferences->execute();
 
         // Suppression des références à l'utilisateur dans la table to_connect et configuration
-        $queryDeleteToConnectReferences = $connexion->prepare('
-    DELETE to_connect, configuration
+        $queryDeleteToConnectReferences = $connexion->prepare('DELETE to_connect, configuration
     FROM to_connect
     LEFT JOIN configuration ON to_connect.id_configuration = configuration.id_configuration
     WHERE to_connect.id_user = :id_user
@@ -231,45 +231,54 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
     if (isset($inputData['action']) && $inputData['action'] === 'newsletter') {
 
-        $email = htmlspecialchars($inputData['email']);
+        // XSS failure protection.
+        $email = strip_tags($inputData['email']);
 
-        // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
-        $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
-        if (!preg_match($regex, $email)) {
+        // regex rule to check user input
+        $regex = '/^ [a-zA-Z0-9._%+-] + @ [a-zA-Z0-9.-] + \.[a-zA-Z]{2,} $/';
+        
+        // send notification on user input errors 
+        if ($email === '') {
+            getJsonResponse(false, 'email_empty', $notificationMessages);
+            exit;
+        } else if (!preg_match($regex, $email)) {
             getJsonResponse(false, 'email_bad_format', $notificationMessages);
             exit;
-        }
+        } 
 
-        $queryCheck = $connexion->prepare('SELECT COUNT(*) FROM emails WHERE email = :email');
-        $queryCheck->bindValue(':email', $email, PDO::PARAM_STR);
-        $queryCheck->execute();
+        // preparing query with PDO. Is email already exists
+        $queryIsExist = $connexion->prepare('SELECT COUNT(*) FROM emails WHERE email = :email');
+        $queryIsExist->bindValue(':email', $email, PDO::PARAM_STR);
+        $queryIsExist->execute();
+        
         // get the sum of founded entires
-        $emailExists = $queryCheck->fetchColumn();
+        $isEmailExists = $queryIsExist->fetchColumn();
 
-        if ($emailExists) {
-            getJsonResponse(true, 'exist_data', $notificationMessages);
+        // send notification if email already exists.
+        if ($isEmailExists) {
+            getJsonResponse(true, 'exist_email', $notificationMessages);
             exit;
         }
 
+        // If all ok then continu. Get the actual date.
         $email_date = new DateTime();
         $email_date_string = $email_date->format('Y-m-d H:i:s');
 
-
+        // get informations from user 
         $browser =  $_SERVER['HTTP_SEC_CH_UA'];
         $mobile_browser = $_SERVER['HTTP_SEC_CH_UA_MOBILE'];
         $operating_system = $_SERVER['HTTP_SEC_CH_UA_PLATFORM'];
-
         $server_adress = $_SERVER['SERVER_ADDR'];
         $server_name = $_SERVER['SERVER_NAME'];
-
         $remote_adress = $_SERVER['REMOTE_ADDR'];
         $remote_port = $_SERVER['REMOTE_PORT'];
 
 
-
+        // preparing query with PDO
         $queryMail = $connexion->prepare('INSERT INTO emails (email, email_date, browser, mobile_browser, operating_system, server_adress, server_name, remote_adress, remote_port) VALUES (:email, :email_date, :browser, :mobile_browser, :operating_system, :server_adress, :server_name, :remote_adress, :remote_port);
         ');
 
+        // using blindValue against SQL injections
         $queryMail->bindValue(':email', $email, PDO::PARAM_STR);
         $queryMail->bindValue(':email_date', $email_date_string, PDO::PARAM_STR);
         $queryMail->bindValue(':browser', $browser, PDO::PARAM_STR);
@@ -281,6 +290,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         $queryMail->bindValue(':remote_port', $remote_port, PDO::PARAM_STR);
         $isMailOK = $queryMail->execute();
 
+        // send notification when all is ok
         getJsonResponse(true, 'email_success', $notificationMessages);
         exit;
     }
@@ -303,7 +313,6 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         users.user_nikename,
         machine_releasedate,
         manufacturer_name,
-        machine_name,
         machine_model,
         machine_type
     FROM
@@ -372,7 +381,6 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         editor_name,
         country_name,
         manufacturer_name,
-        machine_name,
         machine_model,
         media_type,
         copie_state_rank,
@@ -408,7 +416,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         users.id_user = :id_user
     GROUP BY
         id_game, id_copie, id_state, game_reference, game_title, game_subtitle, date_year, editor_name, country_name,
-        manufacturer_name, machine_name, machine_model, media_type, game_cover, machine_label_picture
+        manufacturer_name, machine_model, media_type, game_cover, machine_label_picture
     ORDER BY
         id_copie;
     
@@ -419,9 +427,9 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
 
 
-    // Query to get statistic information about category 
-    $query = $connexion->prepare('SELECT
-    m.machine_name AS filter_name,
+        // Query to get statistic information about category 
+        $query = $connexion->prepare('SELECT
+    m.machine_model AS filter_name,
     COUNT(DISTINCT g.id_game) AS total_games,
     COUNT(DISTINCT CASE WHEN co.id_user = :id_user THEN g.id_game END) AS games_owned_user
 FROM
@@ -433,7 +441,9 @@ LEFT JOIN
 LEFT JOIN
     copie co ON g.id_game = co.id_game AND co.id_user = :id_user
 GROUP BY
-    m.machine_name;
+    m.machine_model
+    HAVING
+    total_games > 0 AND games_owned_user > 0;
 ');
 
         $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
@@ -442,7 +452,7 @@ GROUP BY
 
 
 
-// Query to get statistic information about media 
+        // Query to get statistic information about media 
         $query = $connexion->prepare('SELECT
         m.media_type AS filter_name,
         COUNT(DISTINCT g.id_game) AS total_games,
@@ -454,7 +464,9 @@ GROUP BY
     LEFT JOIN
         games g USING (id_game)
     GROUP BY
-        m.media_type;');
+        m.media_type
+        HAVING
+        total_games > 0 AND games_owned_user > 0;');
 
         $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
         $query->execute();
@@ -462,8 +474,8 @@ GROUP BY
 
 
         // Query to get statistice information about machine type
-         $query = $connexion->prepare('SELECT 
-            m.machine_name AS filter_name,
+        $query = $connexion->prepare('SELECT 
+            m.machine_model AS filter_name,
             COUNT(DISTINCT g.id_game) AS total_games,
             COUNT(DISTINCT CASE WHEN co.id_user = :id_user THEN g.id_game END) AS games_owned_user
          FROM
@@ -475,14 +487,18 @@ GROUP BY
          LEFT JOIN
              copie co ON g.id_game = co.id_game AND co.id_user = :id_user
          GROUP BY
-             m.machine_name;
-         
+             m.machine_model
+             HAVING
+             total_games > 0 AND games_owned_user > 0;       
          ');
-         $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
-         $query->execute();
-         $machineStat = $query->fetchAll();
+        $query->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        $query->execute();
+        $machineStat = $query->fetchAll();
 
-
+        // Query to get a list of media type  to send into node selected box
+        $queryMedias = $connexion->prepare('SELECT id_medias, media_type FROM `medias`');
+        $queryMedias->execute();
+        $mediaTypes = $queryMedias->fetchAll();
 
         ob_clean();
         echo json_encode([
@@ -492,6 +508,7 @@ GROUP BY
             'categoryStat' => $categoryStat,
             'mediaStat' => $mediaStat,
             'machineStat' => $machineStat,
+            'medias' => $mediaTypes
             // 'manufacturerStat' => $manufacturerStat,
         ]);
     }
@@ -536,104 +553,110 @@ GROUP BY
             ]);
         }
         exit;
-    } else if ($_REQUEST['action'] === "title") {
+    }
+
+    // ------------------------------------------------------------------------------
+    // -------------------     ECOUTE SUR LE CHAMPS DU FORMUALIRE     ---------------
+    // ------------------------------------------------------------------------------
+
+
+    else if ($_REQUEST['action'] === "title") {
         // Récupérez la valeur du paramètre de requête 'query'
         $userInput = $_REQUEST['input'];
-    
+
         // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
-        $queryAuto = $connexion->prepare('SELECT game_title FROM `games` WHERE game_title LIKE :input');
+        $queryAuto = $connexion->prepare('SELECT id_game, game_title, game_subtitle, game_reference FROM `games` WHERE game_title LIKE :input');
         $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
         $queryAuto->execute();
-        $title = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
-    
+        $result = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+
         ob_clean();
         echo json_encode([
-            'result' => true, 
-            'title' => $title
+            'result' => true,
+            'title' => $result
         ]);
         exit;
-    } else if ($_REQUEST['action'] === "subtitle") {
-        // Récupérez la valeur du paramètre de requête 'query'
-        $userInput = $_REQUEST['input'];
     
-        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
-        $queryAuto = $connexion->prepare('SELECT game_subtitle FROM `games` WHERE game_subtitle LIKE :input');
-        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
-        $queryAuto->execute();
-        $subtitle = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
+    } 
+
+
+    // ------------------------------------------------------------------------------
+    // ------------------------- VALIDATION D'AJOUT DE JEUX -------------------------
+    // ------------------------------------------------------------------------------
+
+    else if (isset($_REQUEST['action']) && $_REQUEST['action'] === "addgame" && isset($_SESSION['userId']) && isset($_SESSION['pseudo'])) {
+        
+        $userId = intval(strip_tags($_SESSION['userId']));
+
+        $id_game = 2;
+
+        // ---------------- Récuparation de copie_price
+        $copiePrice = intval(strip_tags($_REQUEST['price']));
+
+        // ---------------- Récupération de la date actuelle
+        $actualDate = new DateTime();
+        $additionDate = $actualDate->format('Y-m-d H:i:s');
+
+        // ----------------- Recupération de l'id de la machine ajouté ----------------------
+        $model = strip_tags($_REQUEST['model']);
     
+        $queryMachine = $connexion->prepare('SELECT id_machine FROM machines WHERE machine_model = :input');
+        $queryMachine->bindValue(':input', $model, PDO::PARAM_STR);
+        $queryMachine->execute();
+        $machineId = $queryMachine->fetch();
+
+        // ---------------- Recupération de id_state
+        $stateId = intval(strip_tags($_REQUEST['note']));
+
+        // ---------------- Récupération de media
+        $mediaId = intval(strip_tags($_REQUEST['media']));
+
+        $title = strip_tags($_REQUEST['title']);
+        $subtitle = strip_tags($_REQUEST['subtitle']);
+
+   
+        $queryAdd = $connexion->prepare('INSERT INTO copie (copie_price, copie_addition_date, id_user, id_machine, id_medias, id_game, id_state) VALUES 
+        ( :copie_price, :copie_date, :id_user, :id_machine, :id_medias, :id_game, :id_state);');
+        $queryAdd->bindValue(':copie_price', $copiePrice, PDO::PARAM_INT);
+        $queryAdd->bindValue(':copie_date', $additionDate, PDO::PARAM_STR);
+        $queryAdd->bindValue(':id_user', $userId, PDO::PARAM_INT);
+        $queryAdd->bindValue(':id_machine', $machineId, PDO::PARAM_INT);
+        $queryAdd->bindValue(':id_medias', $mediaId, PDO::PARAM_INT);
+        $queryAdd->bindValue(':id_game', $id_game, PDO::PARAM_INT);
+        $queryAdd->bindValue(':id_state', $stateId, PDO::PARAM_INT);
+        $queryAdd->execute();
+
+
+
+
+
+
+        // $manufacturer = $_REQUEST['manufacturer'];
+        
+        // 
+        // $country = $_REQUEST['country'];
+        // $editor = $_REQUEST['editor'];
+        // $date_sortie = $_REQUEST['date_sortie'];
+        // $note = $_REQUEST['note'];
+
+
+
+
+
+
         ob_clean();
         echo json_encode([
-            'result' => true, 
-            'subtitle' => $subtitle
-        ]);
-        exit;
-    } else if ($_REQUEST['action'] === "genre") {
-        // Récupérez la valeur du paramètre de requête 'query'
-        $userInput = $_REQUEST['input'];
-    
-        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
-        $queryAuto = $connexion->prepare('SELECT * FROM categories WHERE category_name LIKE :input');
-        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
-        $queryAuto->execute();
-        $categories = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
-    
-        ob_clean();
-        echo json_encode([
-            'result' => true, 
-            'genre' => $categories
-        ]);
-        exit;
-    } else if ($_REQUEST['action'] === "manufacturer") {
-        // Récupérez la valeur du paramètre de requête 'query'
-        $userInput = $_REQUEST['input'];
-    
-        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
-        $queryAuto = $connexion->prepare('SELECT * FROM manufacturers WHERE manufacturer_name LIKE :input');
-        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
-        $queryAuto->execute();
-        $manufacturer = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
-    
-        ob_clean();
-        echo json_encode([
-            'result' => true, 
-            'manufacturer' => $manufacturer
-        ]);
-        exit;
-    } else if ($_REQUEST['action'] === "machine") {
-        // Récupérez la valeur du paramètre de requête 'query'
-        $userInput = $_REQUEST['input'];
-    
-        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
-        $queryAuto = $connexion->prepare('SELECT * FROM machines WHERE machine_name LIKE :input');
-        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
-        $queryAuto->execute();
-        $machine = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
-    
-        ob_clean();
-        echo json_encode([
-            'result' => true, 
-            'machine' => $machine
-        ]);
-        exit;
-    } else if ($_REQUEST['action'] === "model") {
-        // Récupérez la valeur du paramètre de requête 'query'
-        $userInput = $_REQUEST['input'];
-    
-        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
-        $queryAuto = $connexion->prepare('SELECT * FROM machines WHERE machine_model LIKE :input');
-        $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
-        $queryAuto->execute();
-        $model = $queryAuto->fetchAll(PDO::FETCH_ASSOC);
-    
-        ob_clean();
-        echo json_encode([
-            'result' => true, 
-            'model' => $model
+            'result' => true,
+            'id_user' => intval($_SESSION['userId']),
+            'id_game' => $id_game,
+            'copie_price' => $copiePrice,
+            'copie_addiction_date' => $additionDate,
+            'id_machine' => $machineId['id_machine'],
+            'id_state' => $stateId,
+            'id_media' => $mediaId
         ]);
         exit;
     }
-
 } else {
     $_SESSION['error'] = 'Aucune action ne peut être effectuée';
 }
