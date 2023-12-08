@@ -1,7 +1,4 @@
 <?php
-// Dans le contexte d'une requête POST avec un en-tête Content-Type: application/json, 
-// les données ne sont pas automatiquement analysées et placées dans les superglobales PHP telles que $_POST. 
-// Au lieu de cela, elles sont directement lues depuis le flux d'entrée brut.
 include "./includes/_functions.php";
 include "./includes/_notifications.php";
 
@@ -13,14 +10,10 @@ session_start();
 
 header('Content-Type: application/json');
 
-
-// fonction utilisée pour lire le contenu du flux d'entrée. 
-// 'php://input' est une pseudo-url qui permet d'accéder aux données brutes de la requête POST.
 $inputJSON = file_get_contents('php://input');
 
 // pour les convertir en un tableau PHP
 $inputData = json_decode($inputJSON, true);
-
 
 
 if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['action']))) {
@@ -368,25 +361,14 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
         // Query to get all informations games
         $query = $connexion->prepare('SELECT
-        id_game,
-        id_copie,
-        id_user,
-        id_state,
+        id_game, id_copie, id_user, id_state,
         DATE(copie_addition_date) AS copie_addition_date,
         TIME(copie_addition_date) AS copie_addition_time,
-        game_reference,
-        game_title,
-        game_subtitle,
+        game_reference, game_title, game_subtitle,
         GROUP_CONCAT(category_name) AS categories,
-        date_year,
-        editor_name,
-        country_name,
-        manufacturer_name,
-        machine_model,
-        media_type,
-        copie_state_rank,
-        copie_state_name,
-        copie_state_description,
+        date_year, editor_name, country_name,
+        manufacturer_name, machine_model, media_type,
+        copie_state_rank, copie_state_name, copie_state_description,
         ROUND(copie_price, 2) AS copie_price,
         game_cover,
         machine_label_picture,
@@ -416,8 +398,9 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
     WHERE
         users.id_user = :id_user
     GROUP BY
-        id_game, id_copie, id_state, game_reference, game_title, game_subtitle, date_year, editor_name, country_name,
-        manufacturer_name, machine_model, media_type, game_cover, machine_label_picture
+        id_game, id_copie, id_state, game_reference, game_title, game_subtitle, date_year, 
+        editor_name, country_name, manufacturer_name, machine_model, media_type, game_cover, 
+        machine_label_picture
     ORDER BY
         id_copie;
     

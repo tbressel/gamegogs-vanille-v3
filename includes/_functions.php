@@ -100,20 +100,14 @@ function generateToken():void {
  */
 function checkCSRFAsync(): void
 {
-    if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], 'http://localhost/gamegogs-v3/')) {
-        $error = 'error_referer';
-    } else if (
+     if (
         !isset($_SESSION['token']) || !isset($_REQUEST['token'])
         || $_REQUEST['token'] !== $_SESSION['token']
         || $_SESSION['tokenExpire'] < time()
-    ) {
-        $error = 'error_referer';
-    }
-    if (!isset($error)) return;
-    
+    ) 
     echo json_encode([
         'result' => false,
-        'message' => $error
+        'message' => 'Votre session a expirée'
     ]);
     
     exit;
