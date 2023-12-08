@@ -57,15 +57,6 @@ function fetchApi(action, id, token) {
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
-
-/**
- * 
- * Get Last games information from the database in a Json format
- * 
- */
-
-
-
 /**
  * Retrieves the latest games in JSON format.
  *
@@ -81,29 +72,18 @@ function getLastGamesJson() {
     };
     fetchFormApi(dataLastGame, 'display-last-games', 'POST')
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP! Statut: ${response.status}`);
-            }
+           if (!response.ok) {
+               throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+           }
             return response.json();
-        })
+         })
         .then(jsonData => {
-            // console.log('Full JSON Response:', JSON.stringify(jsonData));
-            if (jsonData.result === true) {
-                console.log('Game List OK:', jsonData['games']);
-                listAllGames = jsonData['games'];
-                displayLastGames(jsonData['games']);
-            } else {
-                console.error('API returned an error:', jsonData.message);
-            }
+            jsonData.result ? displayLastGames(jsonData['games']) : console.error('API returned an error:', jsonData.message);
         })
+
         .catch(error => {
             console.error('Some errors during the JSON data response:', error);
         });
-
-
-
-
-
 }
 /**
  * 
@@ -126,11 +106,11 @@ function signoutSession() {
         .then(jsonData => {
             let userMessage = jsonData.message;
             msgType = jsonData.type;
-            showMessage(userMessage)
-            
+            showMessage(jsonData.message, jsonData.redirect, 1500);
+
         })
         .catch(error => {
-            showMessage(error)
+            showMessage(error, jsonData.redirect, 1500);
         });
 }
 /**
@@ -152,16 +132,13 @@ function logoutSession() {
             return response.json();
         })
         .then(jsonData => {
-            let userMessage = jsonData.message;
-            msgType = jsonData.type;
-            showMessage(userMessage)
-            
+            showMessage(jsonData.message, jsonData.redirect, 1500);
+
         })
         .catch(error => {
-            showMessage(error)
+            showMessage(error, jsonData.redirect, 1500);
         });
 }
-
 /**
  *  Login user session
  */
@@ -183,13 +160,11 @@ document.addEventListener('submit', (event) => {
                 }
                 return response.json();
             })
-            .then(jsonData => {               
-                   let userMessage = jsonData.message;
-                    msgType = jsonData.type;
-                   showMessage(userMessage)
+            .then(jsonData => {
+                showMessage(jsonData.message, jsonData.redirect, 1500);
             })
             .catch(error => {
-                showMessage(error)
+                showMessage(error, jsonData.redirect, 1500);
             });
     }
 });
@@ -213,65 +188,34 @@ function getCollectionJson() {
             return response.json();
         })
         .then(jsonData => {
-            // console.log('Full JSON Response:', JSON.stringify(jsonData));
-
-            if (jsonData.result === true) {
-                console.log('My Games List OK:', jsonData.games);
-                console.log('Category Stat:', jsonData.categoryStat);
-                console.log('media Stat:', jsonData.mediaStat);
-                console.log('Manufacturers Stat:', jsonData.manufacturerStat);
-                console.log('machine Stat:', jsonData.machineStat);
-                console.log('type de medias', jsonData.medias);
+            consoleGetCollection(jsonData);
+                if (jsonData.result === true) {
 
                 // Assuming jsonData.games is an array of games
-                const myGames = jsonData.games;
                 const categoryStat = jsonData.categoryStat;
                 const mediaStat = jsonData.mediaStat;
-                
-                // const manufacturerStat = jsonData.manufacturerStat;
                 const machineStat = jsonData.machineStat;
+
+                // display stat result
                 displayFilter(categoryStat, 'genre_filter_template', 'genre_filter');
                 displayFilter(mediaStat, 'media_filter_template', 'media_filter');
                 displayFilter(machineStat, 'plateform_filter_template', 'plateform_filter');
 
                 // Continue display my games
-                displayMyGames(myGames, 'my-items-template1', 'my-item-view1', 'view1');
-                displayMyGames(myGames, 'my-items-template2', 'my-item-view2', 'view2');
-                displayMyGames(myGames, 'my-items-template3', 'my-item-view3', 'view3');
-
-// Sélectionne la balise select par son ID
-let selectBox = document.getElementById("media");
-
-// Parcourt chaque objet dans le tableau "medias" du JSON
-jsonData.medias.forEach(media => {
-    // Crée un élément d'option
-    let option = document.createElement("option");
-
-    // Définit la valeur et le texte de l'option avec l'id et le type de média
-    option.value = media.id_medias;
-    option.text = media.media_type;
-
-    // Ajoute l'option à la select box
-    selectBox.appendChild(option);
-});
-
-
-
-
+                displayMyGames(jsonData.games, 'my-items-template1', 'my-item-view1', 'view1');
+                displayMyGames(jsonData.games, 'my-items-template2', 'my-item-view2', 'view2');
+                displayMyGames(jsonData.games, 'my-items-template3', 'my-item-view3', 'view3');
 
             } else if (jsonData.logscreen === true) {
 
-                console.log('on affiche lemodule de connexion');
                 // awaiting for the page content
                 insertPageContent("connexion.php", "./pages/connexion/", "main");
-                // toggleConnexionForms();
-
             } else {
                 console.error('API returned an error:', jsonData.message);
             }
         })
         .catch(error => {
-            showMessage(error)
+            showMessage(error, jsonData.redirect, 1500);
         });
 }
 
@@ -304,11 +248,11 @@ document.addEventListener('submit', (event) => {
 
                 .then(jsonData => {
                     let userMessage = jsonData.message;
-                    msgType = jsonData.type;
-                   showMessage(userMessage)
+                  
+                    showMessage(jsonData.message, jsonData.redirect, 1500);
                 })
                 .catch(error => {
-                    showMessage(error)
+                    showMessage(error, jsonData.redirect, 1500);
                 });
         }
     }
@@ -319,30 +263,30 @@ document.addEventListener('submit', (event) => {
  */
 document.addEventListener('submit', (event) => {
     if (event.target.id === 'newsletter-form') {
-         event.preventDefault();
+        event.preventDefault();
 
-            const data = {
-                action: 'newsletter',
-                token: getToken(),
-                email: event.target.querySelector('input[name="email"]').value
-            };
-            fetchFormApi(data, "newsletter", "POST")
-            
-            
+        const data = {
+            action: 'newsletter',
+            token: getToken(),
+            email: event.target.querySelector('input[name="email"]').value
+        };
+        fetchFormApi(data, "newsletter", "POST")
+
+
             .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Erreur HTTP! Statut: ${response.status}`);
-                    }
-                    return response.json();
-                })
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+                }
+                return response.json();
+            })
 
-                .then(jsonData => {
-                    let userMessage = jsonData.message;
-                    msgType = jsonData.type;
-                   showMessage(userMessage)
-                })
-                .catch(error => {
-                    showMessage(error)
-                });       
+            .then(jsonData => {
+                let userMessage = jsonData.message;
+              
+                showMessage(jsonData.message, jsonData.redirect, 1500);
+            })
+            .catch(error => {
+                showMessage(error, jsonData.redirect, 1500);
+            });
     }
 });

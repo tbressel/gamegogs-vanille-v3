@@ -28,6 +28,10 @@ include_once 'includes/_head.php';
         <?php include('./components/notification/notification.php'); ?>
     </section>
 
+    <section id="user-infos" class="user__container">
+    <?php include ('./components/userinfos/userinfos.php');?>
+    </section>
+    
     <main id="main" class="main__container">
         <?php include('./pages/home/home.php'); ?>
     </main>
@@ -43,6 +47,7 @@ include_once 'includes/_head.php';
         </div>
     </footer>
 
+    <script src="./assets/scripts/debug.js"></script>
     <script src="./assets/scripts/functions.js"></script>
     <script src="./assets/scripts/api.js"></script>
     <script src="./assets/scripts/index.js"></script>
@@ -51,7 +56,7 @@ include_once 'includes/_head.php';
     <script src="./assets/scripts/display.js"></script>
     <script src="./assets/scripts/notifications.js"></script>
     <script src="./assets/scripts/password.js"></script>
-    <!-- <script src="./assets/scripts/addgame.js"></script> -->
+    <script src="./assets/scripts/addgame.js"></script>
 
 </body>
 

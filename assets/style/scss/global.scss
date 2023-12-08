@@ -24,7 +24,7 @@ p {
     color: $cream;
     font-family: Inter;
     font-size: 16px;
-    font-weight: 200;
+    font-weight: 400;
 }
 
 input {
@@ -110,16 +110,16 @@ h6 {
 .btn {
     cursor: pointer;
     margin: 8px;
-    padding: 2px;
-    background-color: #383838;
+    padding: 5px;
+    background-color: #6b6b6b;
     height: -moz-fit-content;
     height: fit-content;
     border-radius: 5px;
-    font-size: 2rem;
+    font-size: 1rem;
     border: 0px;
   
     &:hover {
-        background-color: #4a4a4a;
+        background-color: #aaaaaa;
     }
 }
 

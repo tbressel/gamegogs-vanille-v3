@@ -11,7 +11,7 @@
  * @param [string] $messageKey
  * @return void
  */
-function getJsonResponse($result, $messageKey, $notificationArray)
+function getJsonResponse($result, $messageKey, $notificationArray, $redirect)
 {
 
     $message = isset($notificationArray[$messageKey]) ? $notificationArray[$messageKey] : 'Message non défini';
@@ -20,6 +20,7 @@ function getJsonResponse($result, $messageKey, $notificationArray)
         'result' => $result,
         'type' => $messageKey,
         'message' => $message,
+        'redirect' => $redirect
     ]);
 }
 

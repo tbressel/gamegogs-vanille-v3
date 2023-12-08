@@ -1,0 +1,17 @@
+.user__container {
+    position: relative;
+    top: 140px;
+    margin-left: 30px;
+    z-index: -1;
+    
+    .user__container--green {
+        color: $green;
+        font-weight: 400;
+    }
+
+    .user__container--red {
+        color: $red;
+        font-weight: 400;
+    }
+    
+}

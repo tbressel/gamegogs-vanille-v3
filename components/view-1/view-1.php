@@ -116,23 +116,8 @@
                     <h5>Ajouté le <span></span></h5>
                     <p class="view2-items__color-state"></p>
                 </div>
-                <div class="view2-items__notes">
-                    <h4>Notes <span id="edit-notes" class="edit-notes"> Editer les notes </span></h4>
-                </div>
             </div>
         </div>
-        <div id="view2-notes" class="note-informations hidden">
-            <div class="select__bar"></div>
-            <form class="form-notes" method="get" action="#" name="text-notes">
-                <label htmlfor="input-notes">
-                    <textarea id="input-notes" class="input-notes" name="notes" rows="10" cols="50"></textarea>
-                </label>
-                <button class="btn__view2 btn__color-green" type="submit" formaction="#">Enregistrer</button>
-                <button id="textarea-erase" class="btn__view2 btn__color-empty">Annuler</button>
-            </form>
-        </div>
-
-    
     </div>
 </template>
 
@@ -143,8 +128,9 @@
 <template id="my-items-template3">
     <div data-id-copie="$game['id_copie'] " class="view3-items__maincontainer">
         <div class="top-informations">
-            <div class="select__bar">
-                <input class="checkbox" type="checkbox" name="selected" id="">
+        <div class="select__bar">
+                <button type="button" class="delete__btn btn" data-set="bin" data-id="$game['id_copie'] ">🗑️</button>
+                <!-- <button type="button" class="modify__btn btn" data-set="pen" data-id="$game['id_copie'] ">✒️</button> -->
             </div>
             <div class="view3-basicinfos__container">
                 <div class="view3-items__title">

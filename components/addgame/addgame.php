@@ -18,7 +18,7 @@
         </label> -->
 
 
-        <div class="form__plateform">
+        <!-- <div class="form__plateform">
             <label for="model">
                 <input type="text" id="model" name="model" placeholder="modèle" list="autocomplete-model">
                 <datalist id="autocomplete-model"></datalist>
@@ -28,7 +28,7 @@
                     <option value="" disabled selected hidden>support</option>
                 </select>
             </label>
-        </div>
+        </div> -->
 
 
 
@@ -71,7 +71,7 @@
             </div>
 
         </div> -->
-
+<!-- 
 
         <div class="form__origin">
             <label for="country">
@@ -85,7 +85,7 @@
 
             <label for="date_sortie"></label>
             <input type="date" id="date_sortie" name="date_sortie" required><br><br>
-        </div>
+        </div> -->
 
         <label for="price">
             <input type="text" id="price" name="price" placeholder="price">

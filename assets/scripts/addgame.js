@@ -8,31 +8,31 @@ function listenGenreField() {
         if (event.target.id === 'title') {
             fetchField(event.target.id, 'game_title', 'game_subtitle', 'game_reference', 'game');
         }
-
     });
-
 }
 
 
 function listenToSubmitAddForm() {
     
-  // Ajoute l'écouteur de clic sur le bouton "Valider"
+  // Listen to validate button
 document.getElementById('submit-button').addEventListener('click', function(event) {
 
-    // Empêche le comportement par défaut du bouton (envoi du formulaire)
+    // avoid default form statement
     event.preventDefault();
  
-    // Récupère les valeurs du formulaire avec FormData
+    const titleId = document.getElementById('title').value;
+
+
+    // get form datas with FormData Object
     const formData = new FormData(document.getElementById('add-form'));
  
-    // Exemple : Envoi des données avec Fetch API
-    fetch('api.php?action=addgame', {
+    // Fetch API
+    fetch(`api.php?action=addgame&id=${titleId}`, {
        method: 'POST',
        body: formData
     })
     .then(response => response.json())
     .then(data => {
-       // Fais quelque chose avec la réponse si nécessaire
        console.log(data);
     })
     .catch(error => console.error('Erreur lors de l\'envoi des données :', error));

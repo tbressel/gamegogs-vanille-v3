@@ -16,7 +16,7 @@
       <div class="password-container">
           <label for="passwordField">Mot de passe* :
           <input id="passwordField" name="password" type="password" placeholder="Votre mot de passe" required autocomplete="current-password" />
-          <span id="togglePassword">👀</span>
+          <span ><img id="togglePassword" class="password__eye" src="./assets/svg/eye.svg" alt=""></span>
         </div>
       </label>
       <ul>

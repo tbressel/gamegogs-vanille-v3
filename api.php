@@ -57,18 +57,18 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
                     $_SESSION['pseudo'] = $user_nikename;
                     $_SESSION['userId'] = $userResult['id_user'];
-                    getJsonResponse(true, 'login_success', $notificationMessages);
+                    getJsonResponse(true, 'login_success', $notificationMessages, true);
                     exit;
                 } else {
-                    getJsonResponse(false, 'login_failure', $notificationMessages);
+                    getJsonResponse(false, 'login_failure', $notificationMessages, false);
                     exit;
                 }
             } else {
-                getJsonResponse(false, 'request_error', $notificationMessages);
+                getJsonResponse(false, 'request_error', $notificationMessages, false);
                 exit;
             }
         } else {
-            getJsonResponse(false, 'login_missing', $notificationMessages);
+            getJsonResponse(false, 'login_missing', $notificationMessages, true);
             exit;
         }
     }
@@ -85,7 +85,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         session_unset();
         session_write_close();
 
-        getJsonResponse(true, 'logout_success', $notificationMessages);
+        getJsonResponse(true, 'logout_success', $notificationMessages, true);
         exit;
     }
     // ------------------------------------------------------------------------------
@@ -110,14 +110,14 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
 
         if (!preg_match($regex, $password) || strlen($password) < 1) {
-            getJsonResponse(false, 'password_bad_format', $notificationMessages);
+            getJsonResponse(false, 'password_bad_format', $notificationMessages, true);
             exit;
         }
 
         // [a-z] [A-Z] [0-9] !@#$%^&*()_+{}|:;<>.?~[]-
         $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
         if (!preg_match($regex, $email)) {
-            getJsonResponse(false, 'email_bad_format', $notificationMessages);
+            getJsonResponse(false, 'email_bad_format', $notificationMessages, true);
             exit;
         }
 
@@ -135,7 +135,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         $userExists = $queryCheck->fetchColumn();
 
         if ($userExists) {
-            getJsonResponse(true, 'exist_data', $notificationMessages);
+            getJsonResponse(true, 'exist_data', $notificationMessages, true);
             exit;
         }
 
@@ -185,7 +185,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
 
 
-        getJsonResponse(true, 'signin_success', $notificationMessages);
+        getJsonResponse(true, 'signin_success', $notificationMessages, true);
         exit;
     }
     // ------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         session_unset();
         session_write_close();
 
-        getJsonResponse(true, 'signout_success', $notificationMessages);
+        getJsonResponse(true, 'signout_success', $notificationMessages, true);
         exit;
     }
     // ------------------------------------------------------------------------------
@@ -235,16 +235,17 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         $email = strip_tags($inputData['email']);
 
         // regex rule to check user input
-        $regex = '/^ [a-zA-Z0-9._%+-] + @ [a-zA-Z0-9.-] + \.[a-zA-Z]{2,} $/';
+        $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
         
         // send notification on user input errors 
         if ($email === '') {
-            getJsonResponse(false, 'email_empty', $notificationMessages);
+            getJsonResponse(false, 'email_empty', $notificationMessages, false);
             exit;
         } else if (!preg_match($regex, $email)) {
-            getJsonResponse(false, 'email_bad_format', $notificationMessages);
+            getJsonResponse(false, 'email_bad_format', $notificationMessages, false);
             exit;
         } 
+
 
         // preparing query with PDO. Is email already exists
         $queryIsExist = $connexion->prepare('SELECT COUNT(*) FROM emails WHERE email = :email');
@@ -256,7 +257,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
 
         // send notification if email already exists.
         if ($isEmailExists) {
-            getJsonResponse(true, 'exist_email', $notificationMessages);
+            getJsonResponse(true, 'exist_email', $notificationMessages, true);
             exit;
         }
 
@@ -291,7 +292,7 @@ if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['acti
         $isMailOK = $queryMail->execute();
 
         // send notification when all is ok
-        getJsonResponse(true, 'email_success', $notificationMessages);
+        getJsonResponse(true, 'email_success', $notificationMessages, true);
         exit;
     }
 
@@ -561,10 +562,10 @@ GROUP BY
 
 
     else if ($_REQUEST['action'] === "title") {
-        // Récupérez la valeur du paramètre de requête 'query'
+        // Récupérez la valeur du paramètre de requête
         $userInput = $_REQUEST['input'];
 
-        // Effectuez la requête SQL pour récupérer les catégories en fonction de la saisie de l'utilisateur
+        // Effectuez la requête SQL pour récupérer les catégorie en fonction de la saisie
         $queryAuto = $connexion->prepare('SELECT id_game, game_title, game_subtitle, game_reference FROM `games` WHERE game_title LIKE :input');
         $queryAuto->bindValue(':input', $userInput . '%', PDO::PARAM_STR);
         $queryAuto->execute();
@@ -585,11 +586,10 @@ GROUP BY
     // ------------------------------------------------------------------------------
 
     else if (isset($_REQUEST['action']) && $_REQUEST['action'] === "addgame" && isset($_SESSION['userId']) && isset($_SESSION['pseudo'])) {
-        
+ 
         $userId = intval(strip_tags($_SESSION['userId']));
 
         $id_game = 2;
-
         // ---------------- Récuparation de copie_price
         $copiePrice = intval(strip_tags($_REQUEST['price']));
 
@@ -626,23 +626,12 @@ GROUP BY
         $queryAdd->bindValue(':id_state', $stateId, PDO::PARAM_INT);
         $queryAdd->execute();
 
-
-
-
-
-
-        // $manufacturer = $_REQUEST['manufacturer'];
-        
+        // $manufacturer = $_REQUEST['manufacturer'];     
         // 
         // $country = $_REQUEST['country'];
         // $editor = $_REQUEST['editor'];
         // $date_sortie = $_REQUEST['date_sortie'];
         // $note = $_REQUEST['note'];
-
-
-
-
-
 
         ob_clean();
         echo json_encode([

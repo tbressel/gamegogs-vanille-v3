@@ -37,13 +37,23 @@
     dragAndDrop(document.querySelector('.draggable'));
 
 
-   async function showMessage(userMessage) {
-        document.querySelector('[data-set="notification"]').textContent = userMessage;
-        document.querySelector('.draggable').classList.remove('hidden__notif');
+    async function showMessage(userMessage, redirect, time) {
+        // create a new promise to wait
+        const promise = new Promise((resolve, reject) => {
+          setTimeout(() => {
+              document.querySelector('[data-set="notification"]').textContent = '';
+              document.querySelector('.draggable').classList.add('hidden__notif');
+              if (redirect === true) {
+                window.location.href = 'index.php';
+              }
+        }, time);
+    });
+    
+    // show massage during 2 seconds
+    document.querySelector('[data-set="notification"]').textContent = userMessage;
+    document.querySelector('.draggable').classList.remove('hidden__notif');
 
-        setTimeout(() => {
-            document.querySelector('[data-set="notification"]').textContent = '';
-            document.querySelector('.draggable').classList.add('hidden__notif');
-          }, 2000);
-
-    }
+    // execute promise when promise is done
+    await promise;
+      
+      }

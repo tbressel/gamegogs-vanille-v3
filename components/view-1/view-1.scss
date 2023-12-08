@@ -374,8 +374,7 @@ collection view 2
                 .view2-items__editor,
                 .view2-items__year,
                 .view3-items__plateform--editor--year,
-                .view2-items__plateform
-                 {
+                .view2-items__plateform {
                     padding: 2px;
                     margin-right: 5%;
                     font-size: 12px;
@@ -405,7 +404,12 @@ collection view 2
 
                     span {
                         font-weight: 600;
-                    };
+
+                        font-size: .9rem;
+                        margin-left: 1rem;
+                    }
+
+                    ;
                 }
 
                 .view2-items__prices {
@@ -433,11 +437,12 @@ collection view 2
                 }
 
                 .view2-items__date-state {
+                    font-family: 'PTSans-Bold';
 
                     &>h5 {
                         margin: 5px;
                         font-size: 12px;
-                        font-family: 'PTSans-Bold';
+
                     }
                 }
             }
@@ -506,10 +511,19 @@ collection modify
 -----------------
 */
 
-.collection__modify{
+.collection__modify {
     display: flex;
 
     &.hidden {
         display: none;
     }
+}
+
+.delete__btn {
+    background-color: whitesmoke;
+}
+
+.arrow_change {
+    transition: 300ms ease-in-out;
+    rotate: 180deg;
 }

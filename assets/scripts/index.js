@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const botInfoContainer = clickedElement.closest(".top-informations").nextElementSibling;
             botInfoContainer.classList.toggle('hidden');
             globalbotInfoContainer = botInfoContainer;
-            closeNotesContainer(botInfoContainer);
+            // closeNotesContainer(botInfoContainer);
 
         } else if (clickedElement.getAttribute("data-set") === "bin") {
             const id = clickedElement.getAttribute("data-id")

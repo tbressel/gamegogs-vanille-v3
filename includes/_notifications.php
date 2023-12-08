@@ -15,6 +15,6 @@ $notificationMessages = [
     'email_empty' => 'Vous devez saisir une adresse mail.',
     'exist_email' => 'Le mail existe déjà',
     'exist_data' => 'Le pseudo ou le mail existe déjà',
-    'email_success' => 'Merci, en fait on va spammer votre boite mail MOUAHAHAHA !'
+    'email_success' => 'Merci, nous avons bien enregistré votre adresse mail'
 ];
 ?>

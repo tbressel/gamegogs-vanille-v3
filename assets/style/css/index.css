@@ -86,7 +86,7 @@ p {
   color: #FBF4A1;
   font-family: Inter;
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 input {
@@ -170,16 +170,16 @@ h6 {
 .btn {
   cursor: pointer;
   margin: 8px;
-  padding: 2px;
-  background-color: #383838;
+  padding: 5px;
+  background-color: #6b6b6b;
   height: -moz-fit-content;
   height: fit-content;
   border-radius: 5px;
-  font-size: 2rem;
+  font-size: 1rem;
   border: 0px;
 }
 .btn:hover {
-  background-color: #4a4a4a;
+  background-color: #aaaaaa;
 }
 
 #logState {
@@ -859,13 +859,13 @@ h6 {
 }
 .newsletter__container .newsletter__subcontainer > .btn {
   border: 0;
-  color: #222222;
   width: -moz-fit-content;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
   font-weight: 600;
   font-size: 16px;
+  color: #222222;
   border-radius: 10px;
   padding: 10px;
   background: linear-gradient(90deg, #a79300, #FFFFFF, #b87700);
@@ -1971,6 +1971,8 @@ collection view 2
 .collection__view3 .view3-items__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__date span,
 .collection__view3 .view3-items__maincontainer .bot-informations .view3-statesinfos__subcontainer .view3-items__state span {
   font-weight: 600;
+  font-size: 0.9rem;
+  margin-left: 1rem;
 }
 .collection__view2 .view2-items__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__prices > h4,
 .collection__view2 .view2-items__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__prices > h4,
@@ -2047,6 +2049,24 @@ collection view 2
   font-size: 12px;
   font-family: "PTSans-Italic";
 }
+.collection__view2 .view2-items__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view2-items__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view2-items__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view2-items__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-items__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-items__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-items__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view2 .view3-items__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-items__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-items__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-items__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view2-items__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-items__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-items__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-items__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state,
+.collection__view3 .view3-items__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state {
+  font-family: "PTSans-Bold";
+}
 .collection__view2 .view2-items__maincontainer .top-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
 .collection__view2 .view2-items__maincontainer .top-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5,
 .collection__view2 .view2-items__maincontainer .bot-informations .view2-statesinfos__subcontainer .view2-items__date-state > h5,
@@ -2065,7 +2085,6 @@ collection view 2
 .collection__view3 .view3-items__maincontainer .bot-informations .view3-statesinfos__subcontainer .view2-items__date-state > h5 {
   margin: 5px;
   font-size: 12px;
-  font-family: "PTSans-Bold";
 }
 .collection__view2 .view2-items__maincontainer .top-informations .bot-informations,
 .collection__view2 .view2-items__maincontainer .bot-informations .bot-informations,
@@ -2157,6 +2176,15 @@ collection modify
   display: none;
 }
 
+.delete__btn {
+  background-color: whitesmoke;
+}
+
+.arrow_change {
+  transition: 300ms ease-in-out;
+  rotate: 180deg;
+}
+
 .breadcrumb__nav {
   margin-top: 30px;
   margin-left: 10px;
@@ -2237,6 +2265,7 @@ collection modify
   margin-right: auto;
   font-weight: 600;
   font-size: 16px;
+  color: #222222;
   border-radius: 10px;
   padding: 10px;
   background: linear-gradient(90deg, #a79300, #FFFFFF, #b87700);
@@ -2256,15 +2285,15 @@ collection modify
   margin: 15px auto 15px auto;
   width: 70%;
 }
-.login__container .login__form .password-container #togglePassword,
-.login__container .signin__form .password-container #togglePassword {
+.login__container .login__form .password-container .password__eye,
+.login__container .signin__form .password-container .password__eye {
   position: relative;
   cursor: pointer;
   font-size: 2rem;
   z-index: 2;
   padding: 2px;
-  background-color: burlywood;
   border-radius: 20px;
+  width: 30px;
 }
 
 .rgpd {
@@ -2412,4 +2441,19 @@ collection modify
 .state__container .state__container--comment > p {
   font-size: 0.8rem;
   color: #222222;
+}
+
+.user__container {
+  position: relative;
+  top: 140px;
+  margin-left: 30px;
+  z-index: -1;
+}
+.user__container .user__container--green {
+  color: #289800;
+  font-weight: 400;
+}
+.user__container .user__container--red {
+  color: #9e0000;
+  font-weight: 400;
 }

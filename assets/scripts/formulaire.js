@@ -82,3 +82,29 @@ function validatePassword() {
   return true;
 }
 
+
+/**
+ * 
+ * Create a list of all media type in select input form (back office)
+ * 
+ * @param {*} jsonData 
+ */
+function selectBoxMediaTypeForm(jsonData) {
+  // Sélectionne la balise select par son ID
+  let selectBox = document.getElementById("media");
+
+  // Parcourt chaque objet dans le tableau "medias" du JSON
+  jsonData.medias.forEach(media => {
+      // Crée un élément d'option
+      let option = document.createElement("option");
+
+      // Définit la valeur et le texte de l'option avec l'id et le type de média
+      option.value = media.id_medias;
+      option.text = media.media_type;
+
+      // Ajoute l'option à la select box
+      selectBox.appendChild(option);
+  });
+}
+
+
