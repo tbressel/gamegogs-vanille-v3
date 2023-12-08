@@ -15,6 +15,7 @@ $inputJSON = file_get_contents('php://input');
 // pour les convertir en un tableau PHP
 $inputData = json_decode($inputJSON, true);
 
+checkCSRFAsync();
 
 if (isset($_GET['action']) || isset($_POST['action']) || (isset($inputData['action']))) {
 
